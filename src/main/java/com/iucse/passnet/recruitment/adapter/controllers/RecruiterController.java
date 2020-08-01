@@ -26,7 +26,8 @@ public class RecruiterController {
         command.execute();
     }
 
-    public void acceptApplicants(String studentId){
-        
+    public void acceptApplicants(String studentId, String jobId){
+        ActionCommand command = interactorFactory.getTeacherAcceptStudentApplicationCommand(studentId, jobId);
+        command.execute();
     }
 }

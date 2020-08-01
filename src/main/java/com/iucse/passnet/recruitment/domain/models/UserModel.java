@@ -27,4 +27,7 @@ public class UserModel {
     @ManyToMany(mappedBy = "studentApplications")
     private List<JobModel> jobApplications = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "acceptedStudents")
+    private List<JobModel> acceptedJobApplications = new ArrayList<>();
+
 }

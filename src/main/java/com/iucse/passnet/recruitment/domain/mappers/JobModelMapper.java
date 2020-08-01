@@ -36,6 +36,7 @@ public class JobModelMapper implements ModelMapper<JobModel, Job, String>{
                 .description(job.getDescription())
                 .recruiter(userRepository.findFirstById(job.getRecruiterId()))
                 .studentApplications(Optional.ofNullable(job.getStudentApplicationsId()).orElse(Collections.emptyList()).stream().map(userRepository::findFirstById).collect(Collectors.toList()))
+                .acceptedStudents(Optional.ofNullable(job.getAcceptedStudentApplicationsId()).orElse(Collections.emptyList()).stream().map(userRepository::findFirstById).collect(Collectors.toList()))
                 .build();
     }
 
@@ -53,6 +54,7 @@ public class JobModelMapper implements ModelMapper<JobModel, Job, String>{
                 .description(jobModel.getDescription())
                 .recruiterId(jobModel.getRecruiter().getId())
                 .studentApplicationsId(Optional.ofNullable(jobModel.getStudentApplications()).orElse(Collections.emptyList()).stream().map(UserModel::getId).collect(Collectors.toList()))
+                .acceptedStudentApplicationsId(Optional.ofNullable(jobModel.getAcceptedStudents()).orElse(Collections.emptyList()).stream().map(UserModel::getId).collect(Collectors.toList()))
                 .build();
     }
 

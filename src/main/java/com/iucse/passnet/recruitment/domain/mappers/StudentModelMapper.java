@@ -32,6 +32,7 @@ public class StudentModelMapper implements ModelMapper<UserModel, Student, Strin
         return UserModel.builder()
                 .id(student.getId())
                 .jobApplications(Optional.ofNullable(student.getJobApplicationIds()).orElse(Collections.emptyList()).stream().map(jobRepository::findFirstById).collect(Collectors.toList()))
+                .acceptedJobApplications(Optional.ofNullable(student.getAcceptedJobApplicationsId()).orElse(Collections.emptyList()).stream().map(jobRepository::findFirstById).collect(Collectors.toList()))
                 .build();
     }
 
@@ -45,6 +46,7 @@ public class StudentModelMapper implements ModelMapper<UserModel, Student, Strin
         return Student.builder()
                 .id(userModel.getId())
                 .jobApplicationIds(Optional.ofNullable(userModel.getJobApplications()).orElse(Collections.emptyList()).stream().map(JobModel::getId).collect(Collectors.toList()))
+                .acceptedJobApplicationsId(Optional.ofNullable(userModel.getAcceptedJobApplications()).orElse(Collections.emptyList()).stream().map(JobModel::getId).collect(Collectors.toList()))
                 .build();
     }
 

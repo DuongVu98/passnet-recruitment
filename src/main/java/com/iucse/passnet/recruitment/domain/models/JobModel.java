@@ -29,6 +29,7 @@ public class JobModel {
     @JoinColumn(name = "recruiter_id")
     private UserModel recruiter;
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(
             name = "jobs_students",
@@ -36,4 +37,13 @@ public class JobModel {
             inverseJoinColumns = @JoinColumn(name = "student_application_id")
     )
     private List<UserModel> studentApplications = new ArrayList<>();
+
+    @Builder.Default
+    @ManyToMany
+    @JoinTable(
+            name = "accepted_jobs_students",
+            joinColumns = @JoinColumn(name = "job_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_application_id")
+    )
+    private List<UserModel> acceptedStudents = new ArrayList<>();
 }

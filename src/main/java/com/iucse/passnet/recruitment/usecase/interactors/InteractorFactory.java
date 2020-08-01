@@ -9,6 +9,7 @@ import com.iucse.passnet.recruitment.domain.repositories.JobRepository;
 import com.iucse.passnet.recruitment.domain.repositories.UserRepository;
 import com.iucse.passnet.recruitment.usecase.interactors.commands.ActionCommand;
 import com.iucse.passnet.recruitment.usecase.interactors.commands.StudentApplyJobCommand;
+import com.iucse.passnet.recruitment.usecase.interactors.commands.TeacherAcceptApplicationCommand;
 import com.iucse.passnet.recruitment.usecase.interactors.commands.TeacherPostJobCommand;
 
 import com.iucse.passnet.recruitment.domain.mappers.ModelMapper;
@@ -56,6 +57,17 @@ public class InteractorFactory {
                 .studentModelMapper(studentModelMapper)
                 .jobRepository(jobRepository)
                 .userRepository(userRepository)
+                .build();
+    }
+
+    public ActionCommand getTeacherAcceptStudentApplicationCommand(String studentId, String jobId){
+        return TeacherAcceptApplicationCommand.builder()
+                .jobId(jobId)
+                .studentId(studentId)
+                .userRepository(userRepository)
+                .jobRepository(jobRepository)
+                .jobModelMapper(jobModelMapper)
+                .studentModelMapper(studentModelMapper)
                 .build();
     }
 
