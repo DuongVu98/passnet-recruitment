@@ -25,10 +25,8 @@ public class RecruiterController {
         ActionCommand command = interactorFactory.getTeacherPostJobCommand(teacherId, newJob);
         command.execute();
     }
-    public void getTeacherProfile(String teacherId){
 
-    }
     public void acceptApplicants(String studentId){
-
+        
     }
 }
