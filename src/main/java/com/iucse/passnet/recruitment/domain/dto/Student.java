@@ -1,7 +1,5 @@
 package com.iucse.passnet.recruitment.domain.dto;
 
-import com.iucse.passnet.recruitment.domain.helpers.CollectionAdders;
-import com.iucse.passnet.recruitment.domain.helpers.ListGetters;
 import lombok.*;
 
 import java.util.*;
@@ -25,7 +23,7 @@ public class Student extends User {
     }
 
     public void addAcceptedJobApplicationsId(String jobId){
-
+        acceptedJobApplicationsId.add(jobId);
     }
 
 }
