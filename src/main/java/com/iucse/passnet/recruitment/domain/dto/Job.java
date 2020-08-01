@@ -24,7 +24,7 @@ public class Job {
         this.getStudentApplicationsId().add(studentId);
     }
 
-    public void addAcceptedStudentApplicationId(String studentId){
+    public void addAcceptedStudentApplicationId(String studentId) {
         this.acceptedStudentApplicationsId.add(studentId);
     }
 }
