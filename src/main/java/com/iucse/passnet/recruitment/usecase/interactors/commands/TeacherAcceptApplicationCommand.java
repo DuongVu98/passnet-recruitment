@@ -15,11 +15,11 @@ import lombok.Builder;
 public class TeacherAcceptApplicationCommand implements ActionCommand {
 
     private final String studentId;
-    private String jobId;
-    private UserRepository userRepository;
-    private JobRepository jobRepository;
-    private ModelMapper<JobModel, Job, String> jobModelMapper;
-    private ModelMapper<UserModel, Student, String> studentModelMapper;
+    private final String jobId;
+    private final UserRepository userRepository;
+    private final JobRepository jobRepository;
+    private final ModelMapper<JobModel, Job, String> jobModelMapper;
+    private final ModelMapper<UserModel, Student, String> studentModelMapper;
 
     private void teacherAcceptStudentApplication(){
         UserModel userModel = userRepository.findFirstById(studentId);

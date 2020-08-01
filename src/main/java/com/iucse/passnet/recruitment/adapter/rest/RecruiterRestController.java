@@ -19,6 +19,7 @@ public class RecruiterRestController {
         this.recruiterController = recruiterController;
     }
 
+    @ResponseBody
     @GetMapping(value = "/posted-jobs")
     public List<Job> getAllPostedJobs(){
         return this.recruiterController.getAllPostedJobs();
@@ -38,7 +39,7 @@ public class RecruiterRestController {
     }
 
     @GetMapping(value = "/accept")
-    public void acceptApplicants(String studentId){
-        this.recruiterController.acceptApplicants(studentId);
+    public void acceptApplicants(@RequestParam("studentId") String studentId, @RequestParam("jobId") String jobId){
+        this.recruiterController.acceptApplicants(studentId, jobId);
     }
 }

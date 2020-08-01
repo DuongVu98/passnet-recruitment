@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Job {
+
     private String id;
     private String title;
     private String description;
