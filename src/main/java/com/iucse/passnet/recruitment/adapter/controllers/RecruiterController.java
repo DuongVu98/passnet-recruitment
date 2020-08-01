@@ -27,6 +27,6 @@ public class RecruiterController {
     }
 
     public void acceptApplicants(String studentId){
-        
+
     }
 }

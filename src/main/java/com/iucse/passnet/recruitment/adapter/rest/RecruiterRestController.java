@@ -37,11 +37,6 @@ public class RecruiterRestController {
         this.recruiterController.postJob(teacherId, job);
     }
 
-    @GetMapping(value = "/profile/{id}")
-    public void getTeacherProfile(@PathVariable("id") String teacherId){
-        this.recruiterController.getTeacherProfile(teacherId);
-    }
-
     @GetMapping(value = "/accept")
     public void acceptApplicants(String studentId){
         this.recruiterController.acceptApplicants(studentId);
