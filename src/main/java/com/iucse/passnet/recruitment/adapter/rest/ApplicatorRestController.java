@@ -4,13 +4,11 @@ import com.iucse.passnet.recruitment.adapter.controllers.ApplicatorController;
 import com.iucse.passnet.recruitment.domain.dto.Job;
 import com.iucse.passnet.recruitment.domain.dto.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/applicator")
+@CrossOrigin(origins = "*")
 public class ApplicatorRestController {
 
     private final ApplicatorController applicatorController;
