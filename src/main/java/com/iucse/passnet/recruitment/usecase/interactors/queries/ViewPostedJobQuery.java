@@ -7,7 +7,7 @@ import com.iucse.passnet.recruitment.domain.repositories.JobRepository;
 import lombok.Builder;
 
 @Builder
-public class ViewPostedJob implements ActionQuery<Job> {
+public class ViewPostedJobQuery implements ActionQuery<Job> {
 
     private final String jobId;
     private final JobRepository jobRepository;

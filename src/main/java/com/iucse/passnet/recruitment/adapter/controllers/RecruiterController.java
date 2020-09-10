@@ -18,15 +18,16 @@ public class RecruiterController {
         this.interactorFactory = interactorFactory;
     }
 
-    public List<Job> getAllPostedJobs(){
+    public List<Job> getAllPostedJobs() {
         return null;
     }
-    public void postJob(String teacherId, Job newJob){
+
+    public void postJob(String teacherId, Job newJob) {
         ActionCommand command = interactorFactory.getTeacherPostJobCommand(teacherId, newJob);
         command.execute();
     }
 
-    public void acceptApplicants(String studentId, String jobId){
+    public void acceptApplicants(String studentId, String jobId) {
         ActionCommand command = interactorFactory.getTeacherAcceptStudentApplicationCommand(studentId, jobId);
         command.execute();
     }

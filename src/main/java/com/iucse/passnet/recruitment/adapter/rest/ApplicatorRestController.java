@@ -21,7 +21,7 @@ public class ApplicatorRestController {
     }
 
     @GetMapping(value = "/apply-job")
-    public void studentApplyJob(){
+    public void studentApplyJob() {
 
         // Draft data
         String studentId = "student-id";
@@ -31,12 +31,12 @@ public class ApplicatorRestController {
     }
 
     @GetMapping(value = "/teacher-profile/{teacherId}")
-    public Teacher viewTeacherProfile(@PathVariable("teacherId") String teacherId){
+    public Teacher viewTeacherProfile(@PathVariable("teacherId") String teacherId) {
         return this.applicatorController.viewTeacherProfile(teacherId);
     }
 
     @GetMapping(value = "/job/{jobId}")
-    public Job viewPostedJob(@PathVariable("jobId") String jobId){
+    public Job viewPostedJob(@PathVariable("jobId") String jobId) {
         return this.applicatorController.viewPostedJob(jobId);
     }
 }

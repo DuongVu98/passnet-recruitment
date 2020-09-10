@@ -22,7 +22,7 @@ public class StudentApplyJobCommand implements ActionCommand {
     private final ModelMapper<UserModel, Student, String> studentModelMapper;
     private final ModelMapper<JobModel, Job, String> jobModelMapper;
 
-    private void studentApplyJob(){
+    private void studentApplyJob() {
         UserModel userModel = userRepository.findFirstById(studentId);
         JobModel jobModel = jobRepository.findFirstById(jobId);
 

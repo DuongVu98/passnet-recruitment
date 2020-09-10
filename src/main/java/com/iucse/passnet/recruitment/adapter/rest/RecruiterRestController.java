@@ -5,6 +5,7 @@ import com.iucse.passnet.recruitment.domain.dto.Job;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -21,12 +22,12 @@ public class RecruiterRestController {
 
     @ResponseBody
     @GetMapping(value = "/posted-jobs")
-    public List<Job> getAllPostedJobs(){
+    public List<Job> getAllPostedJobs() {
         return this.recruiterController.getAllPostedJobs();
     }
 
     @PostMapping(value = "/post-job/{teacherId}")
-    public void postJob(@PathVariable("teacherId") String teacherId){
+    public void postJob(@PathVariable("teacherId") String teacherId) {
 
         log.info("Teacher Id: {}", teacherId);
         // draft data
@@ -39,7 +40,7 @@ public class RecruiterRestController {
     }
 
     @GetMapping(value = "/accept")
-    public void acceptApplicants(@RequestParam("studentId") String studentId, @RequestParam("jobId") String jobId){
+    public void acceptApplicants(@RequestParam("studentId") String studentId, @RequestParam("jobId") String jobId) {
         this.recruiterController.acceptApplicants(studentId, jobId);
     }
 }

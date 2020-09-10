@@ -22,7 +22,7 @@ public class Student extends User {
         this.jobApplicationIds.add(jobId);
     }
 
-    public void addAcceptedJobApplicationsId(String jobId){
+    public void addAcceptedJobApplicationsId(String jobId) {
         acceptedJobApplicationsId.add(jobId);
     }
 

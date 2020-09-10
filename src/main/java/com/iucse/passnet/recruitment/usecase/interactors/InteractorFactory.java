@@ -14,7 +14,7 @@ import com.iucse.passnet.recruitment.usecase.interactors.commands.TeacherPostJob
 
 import com.iucse.passnet.recruitment.domain.mappers.ModelMapper;
 import com.iucse.passnet.recruitment.usecase.interactors.queries.ActionQuery;
-import com.iucse.passnet.recruitment.usecase.interactors.queries.ViewPostedJob;
+import com.iucse.passnet.recruitment.usecase.interactors.queries.ViewPostedJobQuery;
 import com.iucse.passnet.recruitment.usecase.interactors.queries.ViewTeacherProfileQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,7 @@ public class InteractorFactory {
         this.studentModelMapper = studentModelMapper;
     }
 
-    public ActionCommand getTeacherPostJobCommand(String teacherId, Job newJob){
+    public ActionCommand getTeacherPostJobCommand(String teacherId, Job newJob) {
         return TeacherPostJobCommand.builder()
                 .teacherId(teacherId)
                 .newJob(newJob)
@@ -49,7 +49,7 @@ public class InteractorFactory {
                 .build();
     }
 
-    public ActionCommand getStudentApplyJobCommand(String studentId, String jobId){
+    public ActionCommand getStudentApplyJobCommand(String studentId, String jobId) {
         return StudentApplyJobCommand.builder()
                 .jobId(jobId)
                 .studentId(studentId)
@@ -60,7 +60,7 @@ public class InteractorFactory {
                 .build();
     }
 
-    public ActionCommand getTeacherAcceptStudentApplicationCommand(String studentId, String jobId){
+    public ActionCommand getTeacherAcceptStudentApplicationCommand(String studentId, String jobId) {
         return TeacherAcceptApplicationCommand.builder()
                 .jobId(jobId)
                 .studentId(studentId)
@@ -71,7 +71,7 @@ public class InteractorFactory {
                 .build();
     }
 
-    public ActionQuery<Teacher> getViewTeacherProfile(String teacherId){
+    public ActionQuery<Teacher> getViewTeacherProfile(String teacherId) {
         return ViewTeacherProfileQuery.builder()
                 .teacherId(teacherId)
                 .userRepository(userRepository)
@@ -79,8 +79,8 @@ public class InteractorFactory {
                 .build();
     }
 
-    public ActionQuery<Job> getViewPostedJob(String jobId){
-        return ViewPostedJob.builder()
+    public ActionQuery<Job> getViewPostedJob(String jobId) {
+        return ViewPostedJobQuery.builder()
                 .jobId(jobId)
                 .jobModelMapper(jobModelMapper)
                 .jobRepository(jobRepository)
