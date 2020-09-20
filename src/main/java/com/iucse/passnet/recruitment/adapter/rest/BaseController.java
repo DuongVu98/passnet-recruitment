@@ -19,7 +19,7 @@ public class BaseController {
         return new ResponseEntity<>(
            ErrorObject.builder()
               .errorCode(HttpStatus.BAD_REQUEST.toString())
-              .errorDescription("Not Found")
+              .errorDescription(throwable.getMessage())
               .build(),
            HttpStatus.BAD_REQUEST
         );

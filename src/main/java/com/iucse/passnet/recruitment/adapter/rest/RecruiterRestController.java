@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequestMapping(value = "/recruiter")
 @Tag(name = "Recruiter API")
 @Slf4j(topic = "[RecruiterRestController]")
-public class RecruiterRestController extends BaseController{
+public class RecruiterRestController extends BaseController {
 
     private final RecruiterController recruiterController;
 
@@ -26,24 +26,16 @@ public class RecruiterRestController extends BaseController{
 
     @ResponseBody
     @GetMapping(value = "/posted-jobs")
-    public List<Job> getAllPostedJobs() {
-        return this.recruiterController.getAllPostedJobs();
-    }
-
-    @ResponseBody
-    @GetMapping(value = "/posted-jobs-test")
     public ResponseEntity<?> getAllPostedJobsTest() {
         try {
             Optional<List<Job>> opt = Optional.ofNullable(this.recruiterController.getAllPostedJobs());
-            //                return notFound();
-            if(opt.isPresent()){
+            if (opt.isPresent()) {
                 return ResponseEntity.ok(opt.get());
-            }else {
-                return null;
+            } else {
+                return notFound();
             }
         } catch (Exception exception) {
-//            return badRequest()
-            return null;
+            return badRequest(exception);
         }
     }
 
@@ -53,10 +45,10 @@ public class RecruiterRestController extends BaseController{
         log.info("Teacher Id: {}", teacherId);
         // draft data
         Job job = Job.builder()
-                .department("CSE")
-                .title("Physics 4")
-                .description("blah blah")
-                .build();
+           .department("CSE")
+           .title("Physics 4")
+           .description("blah blah")
+           .build();
         this.recruiterController.postJob(teacherId, job);
     }
 
