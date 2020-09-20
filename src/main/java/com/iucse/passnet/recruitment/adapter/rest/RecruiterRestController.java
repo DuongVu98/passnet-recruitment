@@ -2,6 +2,7 @@ package com.iucse.passnet.recruitment.adapter.rest;
 
 import com.iucse.passnet.recruitment.adapter.controllers.RecruiterController;
 import com.iucse.passnet.recruitment.domain.dto.Job;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +13,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/recruiter")
+@Tag(name = "Recruiter API")
 @Slf4j(topic = "[RecruiterRestController]")
-public class RecruiterRestController {
+public class RecruiterRestController extends BaseController{
 
     private final RecruiterController recruiterController;
 

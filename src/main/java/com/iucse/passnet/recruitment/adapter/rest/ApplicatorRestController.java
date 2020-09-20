@@ -3,6 +3,7 @@ package com.iucse.passnet.recruitment.adapter.rest;
 import com.iucse.passnet.recruitment.adapter.controllers.ApplicatorController;
 import com.iucse.passnet.recruitment.domain.dto.Job;
 import com.iucse.passnet.recruitment.domain.dto.Teacher;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/applicator")
 @CrossOrigin(origins = "*")
-public class ApplicatorRestController extends HomeRestController{
+@Tag(name = "Applicator API")
+public class ApplicatorRestController extends BaseController{
 
     private final ApplicatorController applicatorController;
 
@@ -41,7 +43,7 @@ public class ApplicatorRestController extends HomeRestController{
                 return notFound();
             }
         } catch (Exception e){
-            return badRequest();
+            return badRequest(e);
         }
     }
 
@@ -55,7 +57,7 @@ public class ApplicatorRestController extends HomeRestController{
                 return notFound();
             }
         } catch (Exception e){
-            return badRequest();
+            return badRequest(e);
         }
     }
 }
