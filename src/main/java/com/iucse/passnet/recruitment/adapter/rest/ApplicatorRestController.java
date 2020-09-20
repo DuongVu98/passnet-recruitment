@@ -12,7 +12,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/applicator")
 @CrossOrigin(origins = "*")
-public class ApplicatorRestController {
+public class ApplicatorRestController extends HomeRestController{
 
     private final ApplicatorController applicatorController;
 
@@ -31,23 +31,31 @@ public class ApplicatorRestController {
         this.applicatorController.studentApplyJob(studentId, jobId);
     }
 
-//    @GetMapping(value = "/teacher-profile/{teacherId}")
-//    public Teacher viewTeacherProfile(@PathVariable("teacherId") String teacherId) {
-//        return this.applicatorController.viewTeacherProfile(teacherId);
-//    }
-
     @GetMapping(value = "/teacher-profile/{teacherId}")
     public ResponseEntity<?> viewTeacherProfile(@PathVariable("teacherId") String teacherId) {
         try{
             Optional<Teacher> opt = Optional.ofNullable(this.applicatorController.viewTeacherProfile(teacherId));
-            return opt.map(ResponseEntity::ok).orElse(null);
+            if(opt.isPresent()){
+                return ResponseEntity.ok(opt.get());
+            }else {
+                return notFound();
+            }
         } catch (Exception e){
-            return null;
+            return badRequest();
         }
     }
 
     @GetMapping(value = "/job/{jobId}")
-    public Job viewPostedJob(@PathVariable("jobId") String jobId) {
-        return this.applicatorController.viewPostedJob(jobId);
+    public ResponseEntity<?> viewPostedJob(@PathVariable("jobId") String jobId) {
+        try {
+            Optional<Job> opt = Optional.ofNullable(this.applicatorController.viewPostedJob(jobId));
+            if(opt.isPresent()){
+                return ResponseEntity.ok(opt.get());
+            }else {
+                return notFound();
+            }
+        } catch (Exception e){
+            return badRequest();
+        }
     }
 }
