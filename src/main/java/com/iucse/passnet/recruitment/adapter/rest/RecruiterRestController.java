@@ -15,6 +15,7 @@ import java.util.Optional;
 @RequestMapping(value = "/recruiter")
 @Tag(name = "Recruiter API")
 @Slf4j(topic = "[RecruiterRestController]")
+@CrossOrigin(origins = "*")
 public class RecruiterRestController extends BaseController {
 
     private final RecruiterController recruiterController;
@@ -39,6 +40,12 @@ public class RecruiterRestController extends BaseController {
         }
     }
 
+//    @PostMapping(value = "/post-job/{teacherId}")
+//    public void postJob(@PathVariable("teacherId") String teacherId, @RequestBody Job newJob) {
+//
+//        log.info("Teacher Id: {} - jobName: {}", teacherId, newJob.getTitle());
+//        this.recruiterController.postJob(teacherId, newJob);
+//    }
     @PostMapping(value = "/post-job/{teacherId}")
     public void postJob(@PathVariable("teacherId") String teacherId) {
 
@@ -49,6 +56,7 @@ public class RecruiterRestController extends BaseController {
            .title("Physics 4")
            .description("blah blah")
            .build();
+        log.info("uid: {}, jobName: {}", teacherId, job.getTitle());
         this.recruiterController.postJob(teacherId, job);
     }
 

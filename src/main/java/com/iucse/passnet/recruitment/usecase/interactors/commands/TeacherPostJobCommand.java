@@ -28,16 +28,11 @@ public class TeacherPostJobCommand implements ActionCommand {
     @Override
     public void execute() {
 
-        log.info("userId from request: {}", teacherId);
-
-
         UserModel userModel = userRepository.findFirstById(teacherId);
-        log.info("usermodel: {}", userModel.getId());
         Teacher teacher = teacherModelMapper.mapToDto(userModel);
 
         newJob.setRecruiterId(teacherId);
         teacher.addNewPostJob(newJob);
-
         /**
          * When saving one-to-many or many-to-one, we just save only the owning side (the "many" side)
          */
