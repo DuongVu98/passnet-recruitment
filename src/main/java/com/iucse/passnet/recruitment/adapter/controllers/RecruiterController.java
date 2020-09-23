@@ -1,5 +1,6 @@
 package com.iucse.passnet.recruitment.adapter.controllers;
 
+import com.iucse.passnet.recruitment.adapter.grpc.CommandGateway;
 import com.iucse.passnet.recruitment.domain.dto.Job;
 import com.iucse.passnet.recruitment.usecase.interactors.InteractorFactory;
 import com.iucse.passnet.recruitment.usecase.interactors.commands.ActionCommand;
@@ -12,13 +13,16 @@ import java.util.List;
 public class RecruiterController {
 
     private final InteractorFactory interactorFactory;
+    private final CommandGateway commandGateway;
 
     @Autowired
-    public RecruiterController(InteractorFactory interactorFactory) {
+    public RecruiterController(InteractorFactory interactorFactory, CommandGateway commandGateway) {
         this.interactorFactory = interactorFactory;
+        this.commandGateway = commandGateway;
     }
 
     public List<Job> getAllPostedJobs() {
+        this.commandGateway.sendRequest();
         return null;
     }
 
