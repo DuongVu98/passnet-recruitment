@@ -26,3 +26,10 @@ springdoc:
   pathsToMatch: /**
   swagger-ui:
     path: /swagger-ui.html
+grpc:
+  port: 9090
+
+saga:
+  grpc:
+    host: 6565
+    port: localhost
