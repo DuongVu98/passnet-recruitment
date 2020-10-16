@@ -1,4 +1,4 @@
-package com.iucse.passnet.recruitment.configuration;
+package com.iucse.passnet.recruitment.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

@@ -1,4 +1,4 @@
-package com.iucse.passnet.recruitment.configuration;
+package com.iucse.passnet.recruitment.config;
 
 import com.iucse.passnet.recruitment.adapter.channel.EventBus;
 import com.iucse.passnet.recruitment.domain.annotation.Subscriber;

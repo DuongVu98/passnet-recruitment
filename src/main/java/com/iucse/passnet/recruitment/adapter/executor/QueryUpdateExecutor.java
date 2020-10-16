@@ -1,9 +1,9 @@
-package com.iucse.passnet.recruitment.adapter.task;
+package com.iucse.passnet.recruitment.adapter.executor;
 
 import com.iucse.passnet.recruitment.domain.events.Event;
 import rx.Observer;
 
-public class QuerySubscriber implements Observer<Event> {
+public class QueryUpdateExecutor implements Observer<Event> {
     @Override
     public void onCompleted() {
 

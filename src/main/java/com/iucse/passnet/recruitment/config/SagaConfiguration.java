@@ -1,4 +1,4 @@
-package com.iucse.passnet.recruitment.configuration;
+package com.iucse.passnet.recruitment.config;
 
 import com.cseiu.passnet.saga.recruitmentsaga.GreetingGrpc;
 import io.grpc.ManagedChannel;
