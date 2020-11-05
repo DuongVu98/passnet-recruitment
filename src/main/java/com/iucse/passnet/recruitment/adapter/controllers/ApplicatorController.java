@@ -4,7 +4,9 @@ import com.iucse.passnet.recruitment.domain.dto.Job;
 import com.iucse.passnet.recruitment.domain.dto.Teacher;
 import com.iucse.passnet.recruitment.usecase.interactors.InteractorFactory;
 import com.iucse.passnet.recruitment.usecase.interactors.commands.ActionCommand;
+import com.iucse.passnet.recruitment.usecase.interactors.commands.StudentApplyJobCommand;
 import com.iucse.passnet.recruitment.usecase.interactors.queries.ActionQuery;
+import com.iucse.passnet.recruitment.usecase.task.CommandActionTaskRunner;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,8 @@ public class ApplicatorController {
 
     public void studentApplyJob(String studentId, String jobId){
         ActionCommand command = this.interactorFactory.getStudentApplyJobCommand(studentId, jobId);
-        command.execute();
+        new Thread(new CommandActionTaskRunner(command)).start();
+//        command.execute();
     }
 
     public Teacher viewTeacherProfile(String teacherId){
