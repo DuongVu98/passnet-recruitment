@@ -1,11 +1,13 @@
 package com.iucse.passnet.recruitment.domain.aggregate.job.entities;
 
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
 @Table(name = "jobs")
 public class Job {
 
@@ -13,29 +15,29 @@ public class Job {
     private JobId id;
 
     @Embedded
-    @Column(name = "job_owner")
+    @AttributeOverride(name = "value", column = @Column(name = "job_owner"))
     private UserId jobOwner;
 
     @Embedded
-    @Column(name = "job_name")
+    @AttributeOverride(name = "value", column = @Column(name = "job_name"))
     private JobName jobName;
 
     @Embedded
-    @Column(name = "course_name")
+    @AttributeOverride(name = "value", column = @Column(name = "course_name"))
     private CourseName courseName;
 
     @Embedded
-    @Column(name = "semester")
+    @AttributeOverride(name = "value", column = @Column(name = "semester"))
     private Semester semester;
 
     @Embedded
-    @Column(name = "job_requirement")
+    @AttributeOverride(name = "value", column = @Column(name = "job_requirement"))
     private JobRequirement jobRequirement;
 
     @Embedded
-    @Column(name = "job_content")
+    @AttributeOverride(name = "value", column = @Column(name = "job_content"))
     private Content content;
 
-    @OneToMany
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
     private List<JobApplication> jobApplications;
 }
