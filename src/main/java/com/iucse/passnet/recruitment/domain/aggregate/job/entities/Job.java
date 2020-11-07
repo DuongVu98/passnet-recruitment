@@ -40,4 +40,16 @@ public class Job {
 
     @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
     private List<JobApplication> jobApplications;
+
+    public void receiveJobApplication(JobApplication application){
+        this.jobApplications.add(application);
+    }
+    public void acceptJobApplication(JobApplicationId applicationId){
+        this.jobApplications.stream().map(application -> {
+            if(application.getId().equal(applicationId)){
+                application.accepted();
+            }
+            return application;
+        });
+    }
 }
