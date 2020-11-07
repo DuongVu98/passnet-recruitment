@@ -1,14 +1,22 @@
 package com.iucse.passnet.recruitment.domain.aggregate.job.entities;
 
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
-import lombok.NoArgsConstructor;
+import com.iucse.passnet.recruitment.domain.exceptions.JobApplicationNotFound;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Entity
+@Builder
+@Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Entity
 @Table(name = "jobs")
+@NamedQuery(name = "Job.findByIdWithJobApplications", query = "SELECT j from Job j LEFT JOIN FETCH j.jobApplications ja WHERE j.id = :id")
 public class Job {
 
     @EmbeddedId
@@ -38,18 +46,24 @@ public class Job {
     @AttributeOverride(name = "value", column = @Column(name = "job_content"))
     private Content content;
 
-    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
-    private List<JobApplication> jobApplications;
+    @Builder.Default
+    @OneToMany(mappedBy = "job", cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch=FetchType.EAGER)
+    private List<JobApplication> jobApplications = new ArrayList<>();
 
     public void receiveJobApplication(JobApplication application){
+        application.applyJob(this);
         this.jobApplications.add(application);
     }
-    public void acceptJobApplication(JobApplicationId applicationId){
-        this.jobApplications.stream().map(application -> {
-            if(application.getId().equal(applicationId)){
-                application.accepted();
-            }
-            return application;
-        });
+    public void acceptJobApplication(JobApplication application){
+        if(this.jobApplications.contains(application)){
+            this.jobApplications = this.jobApplications.stream().map(currentApplication -> {
+                if(currentApplication.getId().equal(application.getId())){
+                    currentApplication.accepted();
+                }
+                return currentApplication;
+            }).collect(Collectors.toList());
+        } else {
+            throw new JobApplicationNotFound(String.format("job application with id: %s not found in this job", application.getId()));
+        }
     }
 }

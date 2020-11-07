@@ -1,16 +1,20 @@
 package com.iucse.passnet.recruitment.domain.aggregate.job.entities;
 
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 
 @Getter
-@Entity
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Entity
 @Table(name = "job_applications")
-public class JobApplication{
+@Slf4j(topic = "[JobApplication]")
+public class JobApplication {
 
     @EmbeddedId
     private JobApplicationId id;
@@ -35,7 +39,13 @@ public class JobApplication{
     @AttributeOverride(name = "value", column = @Column(name = "application_owner"))
     private UserId applicationOwner;
 
-    public void accepted(){
-        this.applicationState = new ApplicationState(ApplicationStates.ACCEPTED);
+    public void applyJob(Job job){
+        this.job = job;
+    }
+
+    public void accepted() {
+        if (this.applicationState.getValue().equals(ApplicationStates.PENDING)) {
+            this.applicationState = new ApplicationState(ApplicationStates.ACCEPTED);
+        }
     }
 }
