@@ -21,14 +21,12 @@ public class RecruiterController {
     private final CommandGateway commandGateway;
     private final EventBus<Event> domainEventBus;
 
+    @Autowired
     public RecruiterController(InteractorFactory interactorFactory, CommandGateway commandGateway, @Qualifier("domain-event") EventBus<Event> domainEventBus) {
         this.interactorFactory = interactorFactory;
         this.commandGateway = commandGateway;
         this.domainEventBus = domainEventBus;
     }
-
-    @Autowired
-
 
     public List<Job> getAllPostedJobs() {
         this.commandGateway.sendRequest();
