@@ -12,6 +12,7 @@ spring:
       hibernate:
         format_sql: false
         generate_statistics: false
+        enable_lazy_load_no_trans: true
     show-sql: false
   h2:
     console:

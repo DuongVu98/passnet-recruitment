@@ -47,7 +47,7 @@ public class Job {
     private Content content;
 
     @Builder.Default
-    @OneToMany(mappedBy = "job", cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "job", cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch=FetchType.LAZY)
     private List<JobApplication> jobApplications = new ArrayList<>();
 
     public void receiveJobApplication(JobApplication application){
