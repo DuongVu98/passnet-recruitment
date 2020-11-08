@@ -1,7 +1,6 @@
 package com.iucse.passnet.recruitment.domain.aggregate.job.entities;
 
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
-import com.iucse.passnet.recruitment.domain.annotation.DomainFunction;
 import com.iucse.passnet.recruitment.domain.exceptions.JobApplicationNotFound;
 import lombok.*;
 
@@ -51,13 +50,11 @@ public class Job {
     @OneToMany(mappedBy = "job", cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch=FetchType.LAZY)
     private List<JobApplication> jobApplications = new ArrayList<>();
 
-    @DomainFunction
     public void receiveJobApplication(JobApplication application){
         application.applyJob(this);
         this.jobApplications.add(application);
     }
 
-    @DomainFunction
     public void acceptJobApplication(JobApplication application){
         if(this.jobApplications.contains(application)){
             this.jobApplications = this.jobApplications.stream().map(currentApplication -> {

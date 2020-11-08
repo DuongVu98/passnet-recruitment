@@ -40,7 +40,7 @@ public class PassnetRecruitmentApplication implements CommandLineRunner {
            .courseName(new CourseName("Object-oriented programming"))
            .jobName(new JobName("Find teacher assistance for OOP course"))
            .jobOwner(new UserId("userFromOutside"))
-           .semester(new Semester())
+           .semester(new Semester("học kỳ 1 năm học 2020-2021"))
            .content(new Content("need a student who have passed OOP with score > 90"))
            .jobRequirement(new JobRequirement("score > 90"))
            .build();
