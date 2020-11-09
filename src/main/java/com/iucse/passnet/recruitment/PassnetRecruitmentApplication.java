@@ -8,6 +8,10 @@ import com.iucse.passnet.recruitment.domain.models.UserModel;
 import com.iucse.passnet.recruitment.domain.repositories.JobRepository;
 import com.iucse.passnet.recruitment.domain.repositories.TestRepository;
 import com.iucse.passnet.recruitment.domain.repositories.UserRepository;
+import com.iucse.passnet.recruitment.usecase.commands.CommandHandlerFactory;
+import com.iucse.passnet.recruitment.usecase.commands.handlers.AbstractJobAggregateCommandHandler;
+import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherPostJobCommand;
+import com.iucse.passnet.recruitment.usecase.task.CommandExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -29,6 +33,8 @@ public class PassnetRecruitmentApplication implements CommandLineRunner {
     private JobRepository jobRepository;
     @Autowired
     private TestRepository testRepository;
+    @Autowired
+    private CommandHandlerFactory commandHandlerFactory;
 
     public static void main(String[] args) {
         SpringApplication.run(PassnetRecruitmentApplication.class, args);
@@ -133,5 +139,11 @@ public class PassnetRecruitmentApplication implements CommandLineRunner {
         testRepositoryFind();
         testAcceptJobApplication();
         testRepositoryFind();
+    }
+
+    public void testRunCommand(){
+        TeacherPostJobCommand command = TeacherPostJobCommand.builder().build();
+        AbstractJobAggregateCommandHandler<Job> commandHandler = this.commandHandlerFactory.getJobAggregateCommandHandler(command);
+        new Thread(new CommandExecutor(commandHandler)).start();
     }
 }
