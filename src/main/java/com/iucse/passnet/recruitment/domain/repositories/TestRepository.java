@@ -12,5 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface TestRepository extends JpaRepository<Job, JobId>, CrudRepository<Job, JobId> {
 
     Job findAllById(JobId id);
+
+    @Query("SELECT j from Job j LEFT JOIN FETCH j.jobApplications ja WHERE j.id = :id")
     Job findByIdWithJobApplications(@Param("id") JobId id);
 }

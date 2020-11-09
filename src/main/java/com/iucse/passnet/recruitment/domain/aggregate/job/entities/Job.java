@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @ToString
 @Entity
 @Table(name = "jobs")
-@NamedQuery(name = "Job.findByIdWithJobApplications", query = "SELECT j from Job j LEFT JOIN FETCH j.jobApplications ja WHERE j.id = :id")
 public class Job {
 
     @EmbeddedId
