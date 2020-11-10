@@ -22,9 +22,10 @@ public class CommandHandlerFactory {
     }
 
     public AbstractJobAggregateCommandHandler<Job> getJobAggregateCommandHandler(BaseCommand command) {
-
-        if (command instanceof TeacherPostJobCommand){
+        if (command instanceof TeacherPostJobCommand) {
             return this.getTeacherPostJobCommandHandler((TeacherPostJobCommand) command);
+        } else if (command instanceof StudentApplyJobCommand) {
+            return this.getStudentApplyJobCommandHandler((StudentApplyJobCommand) command);
         } else {
             return null;
         }
@@ -37,7 +38,7 @@ public class CommandHandlerFactory {
            .build();
     }
 
-    private AbstractJobAggregateCommandHandler<Job> getStudentApplyJobCommandHandler(StudentApplyJobCommand command){
+    private AbstractJobAggregateCommandHandler<Job> getStudentApplyJobCommandHandler(StudentApplyJobCommand command) {
         return StudentApplyJobCommandHandler.builder()
            .aggregateRepository(this.jobAggregateRepository)
            .command(command)

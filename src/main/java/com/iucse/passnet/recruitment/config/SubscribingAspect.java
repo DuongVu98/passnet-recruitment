@@ -18,7 +18,7 @@ import rx.Observer;
 public class SubscribingAspect {
     @Autowired
     private ApplicationContext context;
-    EventBus eventBus;
+    private EventBus eventBus;
 
     @Pointcut("@annotation(com.iucse.passnet.recruitment.domain.annotation.Subscriber)")
     public void getSubscriberFromAnnotation() {
