@@ -1,6 +1,7 @@
 package com.iucse.passnet.recruitment.adapter.rest;
 
 import com.iucse.passnet.recruitment.adapter.controllers.ApplicatorController;
+import com.iucse.passnet.recruitment.adapter.forms.JobApplicationForm;
 import com.iucse.passnet.recruitment.domain.dto.Job;
 import com.iucse.passnet.recruitment.domain.dto.Teacher;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -14,7 +15,7 @@ import java.util.Optional;
 @RequestMapping(value = "/applicator")
 @CrossOrigin(origins = "*")
 @Tag(name = "Applicator API")
-public class ApplicatorRestController extends BaseController{
+public class ApplicatorRestController extends BaseController {
 
     private final ApplicatorController applicatorController;
 
@@ -24,25 +25,20 @@ public class ApplicatorRestController extends BaseController{
     }
 
     @GetMapping(value = "/apply-job")
-    public void studentApplyJob() {
-
-        // Draft data
-        String studentId = "student-id";
-        String jobId = "2";
-
-        this.applicatorController.studentApplyJob(studentId, jobId);
+    public void studentApplyJob(@RequestBody JobApplicationForm form, @RequestParam("studentId") String studentId, @RequestParam("jobId") String jobId) {
+        this.applicatorController.studentApplyJob(form, studentId, jobId);
     }
 
     @GetMapping(value = "/teacher-profile/{teacherId}")
     public ResponseEntity<?> viewTeacherProfile(@PathVariable("teacherId") String teacherId) {
-        try{
+        try {
             Optional<Teacher> opt = Optional.ofNullable(this.applicatorController.viewTeacherProfile(teacherId));
-            if(opt.isPresent()){
+            if (opt.isPresent()) {
                 return ResponseEntity.ok(opt.get());
-            }else {
+            } else {
                 return notFound();
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             return badRequest(e);
         }
     }
@@ -51,12 +47,12 @@ public class ApplicatorRestController extends BaseController{
     public ResponseEntity<?> viewPostedJob(@PathVariable("jobId") String jobId) {
         try {
             Optional<Job> opt = Optional.ofNullable(this.applicatorController.viewPostedJob(jobId));
-            if(opt.isPresent()){
+            if (opt.isPresent()) {
                 return ResponseEntity.ok(opt.get());
-            }else {
+            } else {
                 return notFound();
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             return badRequest(e);
         }
     }

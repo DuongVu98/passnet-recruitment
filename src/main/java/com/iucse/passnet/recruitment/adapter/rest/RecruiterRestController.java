@@ -1,6 +1,7 @@
 package com.iucse.passnet.recruitment.adapter.rest;
 
 import com.iucse.passnet.recruitment.adapter.controllers.RecruiterController;
+import com.iucse.passnet.recruitment.adapter.forms.JobCreationForm;
 import com.iucse.passnet.recruitment.domain.dto.Job;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -28,36 +29,22 @@ public class RecruiterRestController extends BaseController {
     @ResponseBody
     @GetMapping(value = "/posted-jobs")
     public ResponseEntity<?> getAllPostedJobsTest() {
-        try {
-            Optional<List<Job>> opt = Optional.ofNullable(this.recruiterController.getAllPostedJobs());
-            if (opt.isPresent()) {
-                return ResponseEntity.ok(opt.get());
-            } else {
-                return notFound();
-            }
-        } catch (Exception exception) {
-            return badRequest(exception);
-        }
+//        try {
+//            Optional<List<Job>> opt = Optional.ofNullable(this.recruiterController.getAllPostedJobs());
+//            if (opt.isPresent()) {
+//                return ResponseEntity.ok(opt.get());
+//            } else {
+//                return notFound();
+//            }
+//        } catch (Exception exception) {
+//            return badRequest(exception);
+//        }
+        return null;
     }
 
-//    @PostMapping(value = "/post-job/{teacherId}")
-//    public void postJob(@PathVariable("teacherId") String teacherId, @RequestBody Job newJob) {
-//
-//        log.info("Teacher Id: {} - jobName: {}", teacherId, newJob.getTitle());
-//        this.recruiterController.postJob(teacherId, newJob);
-//    }
-    @PostMapping(value = "/post-job/{teacherId}")
-    public void postJob(@PathVariable("teacherId") String teacherId) {
-
-        log.info("Teacher Id: {}", teacherId);
-        // draft data
-        Job job = Job.builder()
-           .department("CSE")
-           .title("Physics 4")
-           .description("blah blah")
-           .build();
-        log.info("uid: {}, jobName: {}", teacherId, job.getTitle());
-        this.recruiterController.postJob(teacherId, job);
+    @PostMapping(value = "/post-job")
+    public void postNewJob(@RequestBody JobCreationForm form, @RequestParam("teacherId") String teacherId) {
+        this.recruiterController.postJob(form, teacherId);
     }
 
     @GetMapping(value = "/accept")

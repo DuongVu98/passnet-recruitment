@@ -1,10 +1,14 @@
 package com.iucse.passnet.recruitment.adapter.controllers;
 
+import com.iucse.passnet.recruitment.adapter.channel.CommandGateway;
 import com.iucse.passnet.recruitment.adapter.channel.DomainEventBus;
 import com.iucse.passnet.recruitment.adapter.channel.EventBus;
-import com.iucse.passnet.recruitment.adapter.grpc.CommandGateway;
+import com.iucse.passnet.recruitment.adapter.forms.JobCreationForm;
+import com.iucse.passnet.recruitment.domain.aggregate.job.vos.UserId;
 import com.iucse.passnet.recruitment.domain.dto.Job;
 import com.iucse.passnet.recruitment.domain.events.Event;
+import com.iucse.passnet.recruitment.usecase.commands.requests.BaseCommand;
+import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherPostJobCommand;
 import com.iucse.passnet.recruitment.usecase.interactors.InteractorFactory;
 import com.iucse.passnet.recruitment.usecase.interactors.commands.ActionCommand;
 import com.iucse.passnet.recruitment.usecase.task.CommandActionTaskRunner;
@@ -18,25 +22,26 @@ import java.util.List;
 public class RecruiterController {
 
     private final InteractorFactory interactorFactory;
-    private final CommandGateway commandGateway;
     private final EventBus<Event> domainEventBus;
+    private final CommandGateway commandGateway;
 
     @Autowired
-    public RecruiterController(InteractorFactory interactorFactory, CommandGateway commandGateway, @Qualifier("domain-event") EventBus<Event> domainEventBus) {
+    public RecruiterController(InteractorFactory interactorFactory, EventBus<Event> domainEventBus, CommandGateway commandGateway) {
         this.interactorFactory = interactorFactory;
-        this.commandGateway = commandGateway;
         this.domainEventBus = domainEventBus;
+        this.commandGateway = commandGateway;
     }
 
-    public List<Job> getAllPostedJobs() {
-        this.commandGateway.sendRequest();
-        return null;
-    }
-
-    public void postJob(String teacherId, Job newJob) {
-        ActionCommand command = interactorFactory.getTeacherPostJobCommand(teacherId, newJob);
-        new Thread(new CommandActionTaskRunner(command)).start();
-//        command.execute();
+    public void postJob(JobCreationForm form, String teacherId) {
+        BaseCommand command = TeacherPostJobCommand.builder()
+           .jobOwnerId(teacherId)
+           .content(form.getContent())
+           .jobName(form.getJobTitle())
+           .courseName(form.getCourseName())
+           .requirement(form.getRequirement())
+           .semester(form.getSemester())
+           .build();
+        this.commandGateway.send(command);
     }
 
     public void acceptApplicants(String studentId, String jobId) {
