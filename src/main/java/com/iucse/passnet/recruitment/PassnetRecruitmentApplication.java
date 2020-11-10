@@ -1,5 +1,6 @@
 package com.iucse.passnet.recruitment;
 
+import com.iucse.passnet.recruitment.adapter.channel.CommandGateway;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplication;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
@@ -35,6 +36,9 @@ public class PassnetRecruitmentApplication implements CommandLineRunner {
     private TestRepository testRepository;
     @Autowired
     private CommandHandlerFactory commandHandlerFactory;
+
+    @Autowired
+    private CommandGateway commandGateway;
 
     public static void main(String[] args) {
         SpringApplication.run(PassnetRecruitmentApplication.class, args);
@@ -143,7 +147,6 @@ public class PassnetRecruitmentApplication implements CommandLineRunner {
 
     public void testRunCommand(){
         TeacherPostJobCommand command = TeacherPostJobCommand.builder().build();
-        AbstractJobAggregateCommandHandler<Job> commandHandler = this.commandHandlerFactory.getJobAggregateCommandHandler(command);
-        new Thread(new CommandExecutor(commandHandler)).start();
+        this.commandGateway.send(command);
     }
 }
