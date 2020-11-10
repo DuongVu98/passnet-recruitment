@@ -2,7 +2,7 @@ package com.iucse.passnet.recruitment.usecase.commands.handlers;
 
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
-import com.iucse.passnet.recruitment.domain.repositories.TestRepository;
+import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherPostJobCommand;
 import lombok.Builder;
 
@@ -11,7 +11,7 @@ public class TeacherPostJobCommandHandler extends AbstractJobAggregateCommandHan
     private final TeacherPostJobCommand command;
 
     @Builder
-    public TeacherPostJobCommandHandler(TestRepository aggregateRepository, TeacherPostJobCommand command) {
+    public TeacherPostJobCommandHandler(JobAggregateRepository aggregateRepository, TeacherPostJobCommand command) {
         super(aggregateRepository);
         this.command = command;
     }

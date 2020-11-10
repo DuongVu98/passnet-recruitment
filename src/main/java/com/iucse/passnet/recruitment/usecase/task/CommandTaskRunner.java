@@ -5,7 +5,7 @@ import com.iucse.passnet.recruitment.usecase.commands.handlers.AbstractJobAggreg
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class CommandExecutor implements Runnable{
+public class CommandTaskRunner implements Runnable{
 
     private final AbstractJobAggregateCommandHandler<Job> jobAbstractCommand;
 

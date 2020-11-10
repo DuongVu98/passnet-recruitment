@@ -2,7 +2,6 @@ package com.iucse.passnet.recruitment.adapter.rest;
 
 import com.iucse.passnet.recruitment.adapter.controllers.RecruiterController;
 import com.iucse.passnet.recruitment.adapter.forms.JobCreationForm;
-import com.iucse.passnet.recruitment.domain.dto.Job;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +44,5 @@ public class RecruiterRestController extends BaseController {
     @PostMapping(value = "/post-job")
     public void postNewJob(@RequestBody JobCreationForm form, @RequestParam("teacherId") String teacherId) {
         this.recruiterController.postJob(form, teacherId);
-    }
-
-    @GetMapping(value = "/accept")
-    public void acceptApplicants(@RequestParam("studentId") String studentId, @RequestParam("jobId") String jobId) {
-        this.recruiterController.acceptApplicants(studentId, jobId);
     }
 }

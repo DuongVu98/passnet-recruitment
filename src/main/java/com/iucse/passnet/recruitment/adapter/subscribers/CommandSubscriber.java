@@ -4,7 +4,7 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.usecase.commands.CommandHandlerFactory;
 import com.iucse.passnet.recruitment.usecase.commands.handlers.AbstractJobAggregateCommandHandler;
 import com.iucse.passnet.recruitment.usecase.commands.requests.BaseCommand;
-import com.iucse.passnet.recruitment.usecase.task.CommandExecutor;
+import com.iucse.passnet.recruitment.usecase.task.CommandTaskRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import rx.Observer;
 
@@ -26,6 +26,6 @@ public class CommandSubscriber implements Observer<BaseCommand> {
     @Override
     public void onNext(BaseCommand command) {
         AbstractJobAggregateCommandHandler<Job> commandHandler = this.commandHandlerFactory.getJobAggregateCommandHandler(command);
-        new Thread(new CommandExecutor(commandHandler)).start();
+        new Thread(new CommandTaskRunner(commandHandler)).start();
     }
 }

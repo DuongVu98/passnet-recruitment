@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TestRepository extends JpaRepository<Job, JobId>, CrudRepository<Job, JobId> {
+public interface JobAggregateRepository extends JpaRepository<Job, JobId>, CrudRepository<Job, JobId> {
 
     Job findAllById(JobId id);
 

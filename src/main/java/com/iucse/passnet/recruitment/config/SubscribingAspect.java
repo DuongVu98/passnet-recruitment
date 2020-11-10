@@ -2,7 +2,7 @@ package com.iucse.passnet.recruitment.config;
 
 import com.iucse.passnet.recruitment.adapter.channel.EventBus;
 import com.iucse.passnet.recruitment.domain.annotation.Subscriber;
-import com.iucse.passnet.recruitment.domain.events.Event;
+import com.iucse.passnet.recruitment.usecase.events.IEvent;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,9 +16,13 @@ import rx.Observer;
 @Aspect
 @Component
 public class SubscribingAspect {
-    @Autowired
     private ApplicationContext context;
     private EventBus eventBus;
+
+    @Autowired
+    public SubscribingAspect(ApplicationContext context) {
+        this.context = context;
+    }
 
     @Pointcut("@annotation(com.iucse.passnet.recruitment.domain.annotation.Subscriber)")
     public void getSubscriberFromAnnotation() {
@@ -34,7 +38,7 @@ public class SubscribingAspect {
 
         Object proceed = joinPoint.proceed();
         if (proceed instanceof Observer) {
-            this.eventBus.subscribe((Observer<Event>) proceed);
+            this.eventBus.subscribe((Observer<IEvent>) proceed);
         }
         return proceed;
     }

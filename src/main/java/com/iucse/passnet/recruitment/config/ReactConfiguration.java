@@ -8,8 +8,8 @@ import com.iucse.passnet.recruitment.adapter.executor.QueryUpdateExecutor;
 import com.iucse.passnet.recruitment.adapter.subscribers.CommandSubscriber;
 import com.iucse.passnet.recruitment.domain.annotation.Publisher;
 import com.iucse.passnet.recruitment.domain.annotation.Subscriber;
-import com.iucse.passnet.recruitment.domain.events.Event;
 import com.iucse.passnet.recruitment.usecase.commands.requests.BaseCommand;
+import com.iucse.passnet.recruitment.usecase.events.IEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import rx.Observer;
@@ -18,19 +18,19 @@ import rx.Observer;
 public class ReactConfiguration {
 
     @Publisher(topic = "domain-event")
-    public EventBus<Event> getEventBus(){
+    public EventBus<IEvent> getEventBus(){
         return new DomainEventBus();
     }
 
     @Bean
     @Subscriber(topic = "domain-event")
-    public Observer<Event> getQueryUpdateExecutor() {
+    public Observer<IEvent> getQueryUpdateExecutor() {
         return new QueryUpdateExecutor();
     }
 
     @Bean
     @Subscriber(topic = "domain-event")
-    public Observer<Event> getSagaExecutor() {
+    public Observer<IEvent> getSagaExecutor() {
         return new SagaExecutor();
     }
 

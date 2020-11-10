@@ -1,7 +1,7 @@
 package com.iucse.passnet.recruitment.usecase.commands;
 
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
-import com.iucse.passnet.recruitment.domain.repositories.TestRepository;
+import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.commands.handlers.AbstractJobAggregateCommandHandler;
 import com.iucse.passnet.recruitment.usecase.commands.handlers.StudentApplyJobCommandHandler;
 import com.iucse.passnet.recruitment.usecase.commands.handlers.TeacherPostJobCommandHandler;
@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommandHandlerFactory {
 
-    private final TestRepository jobAggregateRepository;
+    private final JobAggregateRepository jobAggregateRepository;
 
     @Autowired
-    public CommandHandlerFactory(TestRepository jobAggregateRepository) {
+    public CommandHandlerFactory(JobAggregateRepository jobAggregateRepository) {
         this.jobAggregateRepository = jobAggregateRepository;
     }
 
