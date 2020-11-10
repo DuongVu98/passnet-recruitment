@@ -8,5 +8,8 @@ import lombok.Getter;
 public class TeacherPostJobCommand extends BaseCommand {
     private String courseName;
     private String jobName;
+    private String jobOwnerId;
     private String requirement;
+    private String semester;
+    private String content;
 }
