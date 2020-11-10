@@ -4,9 +4,11 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.commands.handlers.AbstractJobAggregateCommandHandler;
 import com.iucse.passnet.recruitment.usecase.commands.handlers.StudentApplyJobCommandHandler;
+import com.iucse.passnet.recruitment.usecase.commands.handlers.TeacherAcceptStudentApplicationCommandHandler;
 import com.iucse.passnet.recruitment.usecase.commands.handlers.TeacherPostJobCommandHandler;
 import com.iucse.passnet.recruitment.usecase.commands.requests.BaseCommand;
 import com.iucse.passnet.recruitment.usecase.commands.requests.StudentApplyJobCommand;
+import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherAcceptStudentJobApplicationCommand;
 import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherPostJobCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,9 @@ public class CommandHandlerFactory {
             return this.getTeacherPostJobCommandHandler((TeacherPostJobCommand) command);
         } else if (command instanceof StudentApplyJobCommand) {
             return this.getStudentApplyJobCommandHandler((StudentApplyJobCommand) command);
-        } else {
+        } else if (command instanceof TeacherAcceptStudentJobApplicationCommand) {
+            return this.getTeacherAcceptStudentJobApplicationCommandHandler((TeacherAcceptStudentJobApplicationCommand) command);
+        }else {
             return null;
         }
     }
@@ -40,6 +44,13 @@ public class CommandHandlerFactory {
 
     private AbstractJobAggregateCommandHandler<Job> getStudentApplyJobCommandHandler(StudentApplyJobCommand command) {
         return StudentApplyJobCommandHandler.builder()
+           .aggregateRepository(this.jobAggregateRepository)
+           .command(command)
+           .build();
+    }
+
+    private AbstractJobAggregateCommandHandler<Job> getTeacherAcceptStudentJobApplicationCommandHandler(TeacherAcceptStudentJobApplicationCommand command){
+        return TeacherAcceptStudentApplicationCommandHandler.builder()
            .aggregateRepository(this.jobAggregateRepository)
            .command(command)
            .build();
