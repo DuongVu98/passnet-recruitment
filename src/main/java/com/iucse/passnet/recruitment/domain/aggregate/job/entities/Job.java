@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class Job {
 
     @EmbeddedId
+    @AttributeOverride(name = "value", column = @Column(name = "id"))
     private JobId id;
 
     @Embedded

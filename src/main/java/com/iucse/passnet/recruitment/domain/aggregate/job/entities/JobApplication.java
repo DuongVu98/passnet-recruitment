@@ -17,6 +17,7 @@ import javax.persistence.*;
 public class JobApplication {
 
     @EmbeddedId
+    @AttributeOverride(name = "value", column = @Column(name = "id"))
     private JobApplicationId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
