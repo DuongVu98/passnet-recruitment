@@ -10,6 +10,7 @@ import com.iucse.passnet.recruitment.usecase.commands.requests.BaseCommand;
 import com.iucse.passnet.recruitment.usecase.commands.requests.StudentApplyJobCommand;
 import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherAcceptStudentJobApplicationCommand;
 import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherPostJobCommand;
+import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,12 @@ import org.springframework.stereotype.Service;
 public class CommandHandlerFactory {
 
     private final JobAggregateRepository jobAggregateRepository;
+    private final UUIDGeneratorService uuidGeneratorService;
 
     @Autowired
-    public CommandHandlerFactory(JobAggregateRepository jobAggregateRepository) {
+    public CommandHandlerFactory(JobAggregateRepository jobAggregateRepository, UUIDGeneratorService uuidGeneratorService) {
         this.jobAggregateRepository = jobAggregateRepository;
+        this.uuidGeneratorService = uuidGeneratorService;
     }
 
     public AbstractJobAggregateCommandHandler<Job> getJobAggregateCommandHandler(BaseCommand command) {
@@ -39,12 +42,14 @@ public class CommandHandlerFactory {
         return TeacherPostJobCommandHandler.builder()
            .command(command)
            .aggregateRepository(this.jobAggregateRepository)
+           .uuidGeneratorService(this.uuidGeneratorService)
            .build();
     }
 
     private AbstractJobAggregateCommandHandler<Job> getStudentApplyJobCommandHandler(StudentApplyJobCommand command) {
         return StudentApplyJobCommandHandler.builder()
            .aggregateRepository(this.jobAggregateRepository)
+           .uuidGeneratorService(this.uuidGeneratorService)
            .command(command)
            .build();
     }

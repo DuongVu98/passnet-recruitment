@@ -19,10 +19,12 @@ public class ApplicatorController {
         this.commandGateway = commandGateway;
     }
 
-    public void studentApplyJob(JobApplicationForm formString, String studentId, String jobId){
+    public void studentApplyJob(JobApplicationForm jobApplicationForm, String studentId, String jobId){
         BaseCommand command = StudentApplyJobCommand.builder()
            .jobId(jobId)
            .studentId(studentId)
+           .content(jobApplicationForm.getContent())
+           .letter(jobApplicationForm.getLetter())
            .build();
 
         this.commandGateway.send(command);
