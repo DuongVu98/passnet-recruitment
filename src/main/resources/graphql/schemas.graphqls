@@ -14,4 +14,5 @@ type JobApplicationView {
     studentId: String!
     letter: String
     content: String
+    state: String
 }

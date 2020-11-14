@@ -10,4 +10,5 @@ public class JobApplicationView {
     private String studentId;
     private String letter;
     private String content;
+    private String state;
 }

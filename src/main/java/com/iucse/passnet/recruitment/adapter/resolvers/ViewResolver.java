@@ -6,13 +6,16 @@ import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.domain.views.JobApplicationView;
 import com.iucse.passnet.recruitment.domain.views.JobView;
 import graphql.kickstart.tools.GraphQLQueryResolver;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
+@Slf4j(topic = "[ViewResolver]")
 public class ViewResolver implements GraphQLQueryResolver {
 
     private final JobAggregateRepository viewRepository;
@@ -23,16 +26,20 @@ public class ViewResolver implements GraphQLQueryResolver {
     }
 
     public JobView jobView(String id) {
-//        JobApplicationView jobApplicationView = JobApplicationView.builder()
-//           .content("hello teacher")
-//           .letter("hello teacher again")
-//           .build();
-//        return JobView.builder()
-//           .id(id)
-//           .jobApplications(List.of(jobApplicationView))
-//           .jobTitle("TA for OOP")
-//           .build();
         Job job = this.viewRepository.findByIdWithJobApplications(new JobId(id));
+
+        List<JobApplicationView> applicationViews = job.getJobApplications().stream().map(
+           application -> {
+               return JobApplicationView.builder()
+                  .id(application.getId().getValue())
+                  .studentId(application.getApplicationOwner().getValue())
+                  .letter(application.getLetter().getValue())
+                  .content(application.getContent().getValue())
+                  .state(application.getApplicationState().getValue().name())
+                  .build();
+           }
+        ).collect(Collectors.toList());
+
         return JobView.builder()
            .id(job.getId().getValue())
            .jobTitle(job.getJobName().getValue())
@@ -41,11 +48,11 @@ public class ViewResolver implements GraphQLQueryResolver {
            .requirement(job.getJobRequirement().getValue())
            .teacherId(job.getJobOwner().getValue())
            .semester(job.getSemester().getValue())
-           .jobApplications(new ArrayList<>())
+           .jobApplications(applicationViews)
            .build();
     }
 
-    public JobApplicationView jobApplicationView(String id){
+    public JobApplicationView jobApplicationView(String id) {
         return JobApplicationView.builder().build();
     }
 }
