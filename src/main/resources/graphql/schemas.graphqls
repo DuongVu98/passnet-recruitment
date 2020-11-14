@@ -1,7 +1,3 @@
-type Query {
-    job: JobView!
-}
-
 type JobView {
     id: ID!
     teacherId: String!

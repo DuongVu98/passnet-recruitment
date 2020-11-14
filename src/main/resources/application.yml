@@ -30,3 +30,14 @@ springdoc:
     path: /swagger-ui.html
 grpc:
   port: 9090
+
+graphql:
+  servlet:
+    mapping: /graphql
+    enabled: true
+    maxQueryDepth: 5
+
+graphql.playground:
+  mapping: /playground
+  endpoint: /graphql
+
