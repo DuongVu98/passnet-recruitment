@@ -10,10 +10,10 @@ type JobView {
     content: String
     requirement: String
     semester: String!
-    jobApplications: [JobApplication]
+    jobApplications: [JobApplicationView]
 }
 
-type JobApplication {
+type JobApplicationView {
     id: ID!
     studentId: String!
     letter: String
