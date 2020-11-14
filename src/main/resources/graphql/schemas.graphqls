@@ -9,6 +9,10 @@ type JobView {
     jobApplications: [JobApplicationView]
 }
 
+type PostedJobsView {
+    postedJobs: [JobView]
+}
+
 type JobApplicationView {
     id: ID!
     studentId: String!
