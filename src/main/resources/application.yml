@@ -33,7 +33,7 @@ grpc:
 
 graphql:
   servlet:
-    mapping: /graphql
+    mapping: /query
     enabled: true
     maxQueryDepth: 5
 
