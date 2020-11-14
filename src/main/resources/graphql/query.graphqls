@@ -1,6 +1,6 @@
 type Query {
     jobView(id: ID): JobView
     jobApplicationView(id: ID): JobApplicationView
-    postedJobs: PostedJobsView
-    postedJobsByTeacherId(teacherId: ID): PostedJobsView
+    postedJobsView: PostedJobsView
+    postedJobsByTeacherIdView(teacherId: ID): PostedJobsView
 }
