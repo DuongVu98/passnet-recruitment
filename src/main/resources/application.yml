@@ -6,7 +6,6 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
-    initialize: true
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     properties:
