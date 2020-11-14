@@ -1,0 +1,21 @@
+type Query {
+    job: JobView!
+}
+
+type JobView {
+    id: ID!
+    teacherId: String!
+    jobTitle: String!
+    courseName: String!
+    content: String
+    requirement: String
+    semester: String!
+    jobApplications: [JobApplication]
+}
+
+type JobApplication {
+    id: ID!
+    studentId: String!
+    letter: String
+    content: String
+}
