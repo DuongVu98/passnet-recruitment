@@ -73,7 +73,7 @@ test {
 bootJar {
     manifest {
         attributes(
-                'Start-Class': 'com.cseiu.passnet.recruitment.PassnetRecruitmentApplication'
+                'Start-Class': 'com.iucse.passnet.recruitment.PassnetRecruitmentApplication'
         )
     }
 }
