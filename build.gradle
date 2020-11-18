@@ -49,6 +49,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.kafka:spring-kafka'
     compile group: 'com.graphql-java-kickstart', name: 'graphql-spring-boot-starter', version: '8.0.0'
     compile group: 'com.graphql-java-kickstart', name: 'playground-spring-boot-starter', version: '8.0.0'
