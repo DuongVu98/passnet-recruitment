@@ -36,7 +36,11 @@ graphql:
     mapping: /query
     enabled: true
     maxQueryDepth: 5
-
+#    cors:
+#      allowed-origins: "*"
+#      allowed-headers: "Access-Control-Allow-Origin, access-control-allow-origin, access-control-allow-headers, Origin, X-Requested-With, Content-Type, Accept, Authorization"
+#      allowed-methods: "GET,HEAD,OPTIONS,POST,PUT"
+#    corsEnabled: false
 graphql.playground:
   mapping: /playground
   endpoint: /graphql

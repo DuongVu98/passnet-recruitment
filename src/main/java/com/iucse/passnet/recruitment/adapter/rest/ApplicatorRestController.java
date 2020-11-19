@@ -6,9 +6,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+//@CrossOrigin
 @RestController
-@RequestMapping(value = "/applicator")
+@RequestMapping(value = "/command/applicator")
 @Tag(name = "Applicator API")
 public class ApplicatorRestController extends BaseController {
 
