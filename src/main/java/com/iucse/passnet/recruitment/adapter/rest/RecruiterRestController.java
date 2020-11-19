@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequestMapping(value = "/recruiter")
 @Tag(name = "Recruiter API")
 @Slf4j(topic = "[RecruiterRestController]")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*")
 public class RecruiterRestController extends BaseController {
 
     private final RecruiterController recruiterController;
