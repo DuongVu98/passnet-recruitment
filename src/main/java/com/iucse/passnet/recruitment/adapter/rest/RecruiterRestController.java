@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/recruiter")
 @Tag(name = "Recruiter API")
 @Slf4j(topic = "[RecruiterRestController]")
-@CrossOrigin(origins = "*")
 public class RecruiterRestController extends BaseController {
 
     private final RecruiterController recruiterController;
