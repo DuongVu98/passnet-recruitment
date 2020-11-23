@@ -15,5 +15,12 @@ public class JobView {
     private String content;
     private String requirement;
     private String semester;
-    private List<JobApplicationView> jobApplications;
+    private List<LiteJobApplicationView> jobApplicationsView;
+}
+
+@Builder
+@AllArgsConstructor
+class LiteJobApplicationView {
+    private String studentId;
+    private String applicationState;
 }

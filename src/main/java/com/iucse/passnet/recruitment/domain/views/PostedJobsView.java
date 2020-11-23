@@ -8,5 +8,14 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class PostedJobsView {
-    private List<JobView> postedJobs;
+    private List<LiteJobView> litePostedJobs;
+}
+
+@Builder
+@AllArgsConstructor
+class LiteJobView {
+    String courseName;
+    String jobTitle;
+    String semester;
+    String department;
 }
