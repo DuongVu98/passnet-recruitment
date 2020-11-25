@@ -1,9 +1,19 @@
 package com.iucse.passnet.recruitment.adapter.subscribers;
 
-import com.iucse.passnet.recruitment.usecase.events.events.EventPayload;
+import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
+import com.iucse.passnet.recruitment.usecase.events.handlers.JobViewUpdateHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import rx.Observer;
 
-public class ViewUpdateSubscriber implements Observer<EventPayload> {
+public class ViewUpdateSubscriber implements Observer<DomainEvent> {
+
+    private JobViewUpdateHandler jobViewUpdateHandler;
+
+
+    public ViewUpdateSubscriber(@Autowired JobViewUpdateHandler jobViewRepository) {
+        this.jobViewUpdateHandler = jobViewRepository;
+    }
+
     @Override
     public void onCompleted() {
 
@@ -15,7 +25,7 @@ public class ViewUpdateSubscriber implements Observer<EventPayload> {
     }
 
     @Override
-    public void onNext(EventPayload iEvent) {
-
+    public void onNext(DomainEvent event) {
+        this.jobViewUpdateHandler.handle(event);
     }
 }

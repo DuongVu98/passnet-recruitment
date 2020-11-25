@@ -1,33 +1,39 @@
 package com.iucse.passnet.recruitment.usecase.events.handlers;
 
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
+import com.iucse.passnet.recruitment.domain.viewrepos.JobViewRepository;
 import com.iucse.passnet.recruitment.domain.views.JobView;
 import com.iucse.passnet.recruitment.domain.views.LiteJobApplicationView;
 import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
-import com.iucse.passnet.recruitment.usecase.events.events.TeacherPostedJobEventPayload;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
-public class JobViewUpdateHandler extends AbstractEventHandler {
+@Service
+public class JobViewUpdateHandler implements IEventHandler {
 
-    private DomainEvent event;
+    private JobViewRepository jobViewRepository;
+
+    @Autowired
+    public JobViewUpdateHandler(JobViewRepository jobViewRepository) {
+        this.jobViewRepository = jobViewRepository;
+    }
 
     @Override
-    public void handle() {
+    public void handle(DomainEvent event) {
         switch (event.getEventTypes()) {
             case TeacherPostedJob:
-                this.updateFromJob(((TeacherPostedJobEventPayload) event.getEventPayload()).getJob());
+                this.updateFromJob(event.getAggregate());
             case StudentAppliedJob:
             case TeacherAcceptedJob:
         }
     }
 
-    private void updateFromJob(Job job) {
+    private void updateFromJob(Job aggregate) {
 
-        List<LiteJobApplicationView> liteJobApplicationViews = job.getJobApplications().stream().map(
+        List<LiteJobApplicationView> liteJobApplicationViews = aggregate.getJobApplications().stream().map(
            application ->
               LiteJobApplicationView.builder()
                  .studentId(application.getApplicationOwner().getValue())
@@ -36,13 +42,13 @@ public class JobViewUpdateHandler extends AbstractEventHandler {
         ).collect(Collectors.toList());
 
         JobView newJobView = JobView.builder()
-           .id(job.getId().getValue())
-           .teacherId(job.getJobOwner().getValue())
-           .courseName(job.getCourseName().getValue())
-           .jobTitle(job.getJobName().getValue())
-           .requirement(job.getJobRequirement().getValue())
-           .content(job.getContent().getValue())
-           .semester(job.getSemester().getValue())
+           .id(aggregate.getId().getValue())
+           .teacherId(aggregate.getJobOwner().getValue())
+           .courseName(aggregate.getCourseName().getValue())
+           .jobTitle(aggregate.getJobName().getValue())
+           .requirement(aggregate.getJobRequirement().getValue())
+           .content(aggregate.getContent().getValue())
+           .semester(aggregate.getSemester().getValue())
            .jobApplicationsView(liteJobApplicationViews)
            .build();
 

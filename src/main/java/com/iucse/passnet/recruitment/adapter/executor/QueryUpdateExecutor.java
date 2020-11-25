@@ -1,6 +1,5 @@
 package com.iucse.passnet.recruitment.adapter.executor;
 
-import com.iucse.passnet.recruitment.usecase.events.events.EventPayload;
 import rx.Observer;
 
 public class QueryUpdateExecutor implements Observer<EventPayload> {
