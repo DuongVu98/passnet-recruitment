@@ -1,9 +1,9 @@
 package com.iucse.passnet.recruitment.adapter.subscribers;
 
-import com.iucse.passnet.recruitment.usecase.events.IEvent;
+import com.iucse.passnet.recruitment.usecase.events.events.EventPayload;
 import rx.Observer;
 
-public class ViewUpdateSubscriber implements Observer<IEvent> {
+public class ViewUpdateSubscriber implements Observer<EventPayload> {
     @Override
     public void onCompleted() {
 
@@ -15,7 +15,7 @@ public class ViewUpdateSubscriber implements Observer<IEvent> {
     }
 
     @Override
-    public void onNext(IEvent iEvent) {
+    public void onNext(EventPayload iEvent) {
 
     }
 }

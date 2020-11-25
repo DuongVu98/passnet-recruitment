@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class CacheableView {
 
     @Id

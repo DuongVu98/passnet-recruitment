@@ -1,9 +1,9 @@
 package com.iucse.passnet.recruitment.adapter.executor;
 
-import com.iucse.passnet.recruitment.usecase.events.IEvent;
+import com.iucse.passnet.recruitment.usecase.events.events.EventPayload;
 import rx.Observer;
 
-public class QueryUpdateExecutor implements Observer<IEvent> {
+public class QueryUpdateExecutor implements Observer<EventPayload> {
     @Override
     public void onCompleted() {
 
@@ -15,7 +15,7 @@ public class QueryUpdateExecutor implements Observer<IEvent> {
     }
 
     @Override
-    public void onNext(IEvent event) {
+    public void onNext(EventPayload event) {
 
     }
 }

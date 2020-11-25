@@ -1,15 +1,27 @@
 package com.iucse.passnet.recruitment.domain.views;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import org.springframework.data.redis.core.RedisHash;
 
 import java.util.List;
 
-@Builder
-@AllArgsConstructor
-@RedisHash("job_view")
+@Getter
+@RedisHash(value = "job_view", timeToLive = 10000)
 public class JobView extends CacheableView{
+
+    @Builder
+    public JobView(String id, Long timeToLive, String jobTitle, String teacherId, String courseName, String content, String requirement, String semester, List<LiteJobApplicationView> jobApplicationsView) {
+        super(id, timeToLive);
+        this.jobTitle = jobTitle;
+        this.teacherId = teacherId;
+        this.courseName = courseName;
+        this.content = content;
+        this.requirement = requirement;
+        this.semester = semester;
+        this.jobApplicationsView = jobApplicationsView;
+    }
+
     private String jobTitle;
     private String teacherId;
     private String courseName;
@@ -17,11 +29,4 @@ public class JobView extends CacheableView{
     private String requirement;
     private String semester;
     private List<LiteJobApplicationView> jobApplicationsView;
-}
-
-@Builder
-@AllArgsConstructor
-class LiteJobApplicationView {
-    private String studentId;
-    private String applicationState;
 }
