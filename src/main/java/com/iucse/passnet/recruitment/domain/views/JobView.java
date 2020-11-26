@@ -43,7 +43,7 @@ public class JobView extends CacheableView {
         aggregate.getJobApplications().forEach(jobApplication -> {
             this.jobApplicationsView.add(
                     LiteJobApplicationView.builder()
-                            .studentId(jobApplication.getId().getValue())
+                            .studentId(jobApplication.getApplicationOwner().getValue())
                             .applicationState(jobApplication.getApplicationState().getValue().name())
                             .build()
             );
