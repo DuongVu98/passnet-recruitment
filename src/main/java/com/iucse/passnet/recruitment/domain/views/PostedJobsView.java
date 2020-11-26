@@ -6,10 +6,15 @@ import org.springframework.data.redis.core.RedisHash;
 
 import java.util.List;
 
-@Builder
 @RedisHash("posted_jobs_view")
 public class PostedJobsView extends CacheableView{
     private List<LiteJobView> litePostedJobs;
+
+    @Builder
+    public PostedJobsView(String id, Long timeToLive, List<LiteJobView> litePostedJobs) {
+        super(id, timeToLive);
+        this.litePostedJobs = litePostedJobs;
+    }
 }
 
 @Builder

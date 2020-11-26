@@ -40,7 +40,7 @@ public class ReactConfiguration {
 
     // Domain event handler
     @Publisher(topic = "domain-event")
-    public EventBus<DomainEvent> getEventBus() {
+    public DomainEventBus getEventBus() {
         return new DomainEventBus();
     }
 

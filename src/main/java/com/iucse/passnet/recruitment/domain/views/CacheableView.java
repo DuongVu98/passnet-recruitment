@@ -14,8 +14,8 @@ import java.util.concurrent.TimeUnit;
 public class CacheableView {
 
     @Id
-    protected String id;
+    private String id;
 
     @TimeToLive(unit = TimeUnit.SECONDS)
-    protected Long timeToLive;
+    private Long timeToLive;
 }

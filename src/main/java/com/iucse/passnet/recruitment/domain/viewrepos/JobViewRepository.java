@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JobViewRepository extends CrudRepository<JobView, String> {
-    JobView findFirstById(String id);
 }
