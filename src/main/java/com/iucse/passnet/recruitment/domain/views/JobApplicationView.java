@@ -12,8 +12,8 @@ public class JobApplicationView extends CacheableView {
     private String state;
 
     @Builder
-    public JobApplicationView(String id, Long timeToLive, String studentId, String letter, String content, String state) {
-        super(id, timeToLive);
+    public JobApplicationView(String id, String studentId, String letter, String content, String state) {
+        super(id);
         this.studentId = studentId;
         this.letter = letter;
         this.content = content;

@@ -11,8 +11,8 @@ public class PostedJobsView extends CacheableView{
     private List<LiteJobView> litePostedJobs;
 
     @Builder
-    public PostedJobsView(String id, Long timeToLive, List<LiteJobView> litePostedJobs) {
-        super(id, timeToLive);
+    public PostedJobsView(String id, List<LiteJobView> litePostedJobs) {
+        super(id);
         this.litePostedJobs = litePostedJobs;
     }
 }
