@@ -1,5 +1,6 @@
 package com.iucse.passnet.recruitment.usecase.commands.handlers;
 
+import com.iucse.passnet.recruitment.adapter.channel.DomainEventBus;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplication;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
@@ -14,8 +15,8 @@ public class StudentApplyJobCommandHandler extends AbstractJobAggregateCommandHa
     private final UUIDGeneratorService uuidGeneratorService;
 
     @Builder
-    public StudentApplyJobCommandHandler(JobAggregateRepository aggregateRepository, StudentApplyJobCommand command, UUIDGeneratorService uuidGeneratorService) {
-        super(aggregateRepository);
+    public StudentApplyJobCommandHandler(JobAggregateRepository aggregateRepository, DomainEventBus eventBus, StudentApplyJobCommand command, UUIDGeneratorService uuidGeneratorService) {
+        super(aggregateRepository, eventBus);
         this.command = command;
         this.uuidGeneratorService = uuidGeneratorService;
     }

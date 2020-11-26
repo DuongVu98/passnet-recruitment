@@ -1,9 +1,9 @@
 package com.iucse.passnet.recruitment.adapter.executor;
 
-import com.iucse.passnet.recruitment.usecase.events.IEvent;
+import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
 import rx.Observer;
 
-public class SagaExecutor implements Observer<IEvent> {
+public class SagaExecutor implements Observer<DomainEvent> {
     @Override
     public void onCompleted() {
 
@@ -15,7 +15,7 @@ public class SagaExecutor implements Observer<IEvent> {
     }
 
     @Override
-    public void onNext(IEvent event) {
+    public void onNext(DomainEvent event) {
 
     }
 }

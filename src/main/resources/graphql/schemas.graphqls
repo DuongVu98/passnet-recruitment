@@ -1,0 +1,22 @@
+type JobView {
+    id: ID!
+    teacherId: String!
+    jobTitle: String!
+    courseName: String!
+    content: String
+    requirement: String
+    semester: String!
+    jobApplications: [JobApplicationView]
+}
+
+type PostedJobsView {
+    postedJobs: [JobView]
+}
+
+type JobApplicationView {
+    id: ID!
+    studentId: String!
+    letter: String
+    content: String
+    state: String
+}

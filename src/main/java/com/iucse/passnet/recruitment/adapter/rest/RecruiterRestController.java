@@ -45,4 +45,9 @@ public class RecruiterRestController extends BaseController {
     public void postNewJob(@RequestBody JobCreationForm form, @RequestParam("teacherId") String teacherId) {
         this.recruiterController.postJob(form, teacherId);
     }
+
+    @PostMapping(value = "/accept-application")
+        public void acceptJobApplication(@RequestParam("jobApplicationId") String jobApplicationId, @RequestParam("jobId") String jobId){
+        this.recruiterController.acceptJobApplication(jobApplicationId, jobId);
+    }
 }

@@ -3,13 +3,15 @@ package com.iucse.passnet.recruitment.config;
 import com.iucse.passnet.recruitment.adapter.channel.CommandGateway;
 import com.iucse.passnet.recruitment.adapter.channel.DomainEventBus;
 import com.iucse.passnet.recruitment.adapter.channel.EventBus;
-import com.iucse.passnet.recruitment.adapter.executor.SagaExecutor;
-import com.iucse.passnet.recruitment.adapter.executor.QueryUpdateExecutor;
 import com.iucse.passnet.recruitment.adapter.subscribers.CommandSubscriber;
+import com.iucse.passnet.recruitment.adapter.subscribers.ViewUpdateSubscriber;
 import com.iucse.passnet.recruitment.domain.annotation.Publisher;
 import com.iucse.passnet.recruitment.domain.annotation.Subscriber;
+import com.iucse.passnet.recruitment.domain.viewrepos.JobViewRepository;
 import com.iucse.passnet.recruitment.usecase.commands.requests.BaseCommand;
-import com.iucse.passnet.recruitment.usecase.events.IEvent;
+import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
+import com.iucse.passnet.recruitment.usecase.events.handlers.JobViewUpdateHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import rx.Observer;
@@ -17,23 +19,14 @@ import rx.Observer;
 @Configuration
 public class ReactConfiguration {
 
-    @Publisher(topic = "domain-event")
-    public EventBus<IEvent> getEventBus(){
-        return new DomainEventBus();
+    private JobViewUpdateHandler jobViewUpdateHandler;
+
+    @Autowired
+    public ReactConfiguration(JobViewUpdateHandler jobViewRepository) {
+        this.jobViewUpdateHandler = jobViewRepository;
     }
 
-    @Bean
-    @Subscriber(topic = "domain-event")
-    public Observer<IEvent> getQueryUpdateExecutor() {
-        return new QueryUpdateExecutor();
-    }
-
-    @Bean
-    @Subscriber(topic = "domain-event")
-    public Observer<IEvent> getSagaExecutor() {
-        return new SagaExecutor();
-    }
-
+    // Command gateway
     @Publisher(topic = "command-gateway")
     public CommandGateway getCommandGateway() {
         return new CommandGateway();
@@ -41,7 +34,19 @@ public class ReactConfiguration {
 
     @Bean
     @Subscriber(topic = "command-gateway")
-    public Observer<BaseCommand> getCommandSubscriber(){
+    public Observer<BaseCommand> getCommandSubscriber() {
         return new CommandSubscriber();
+    }
+
+    // Domain event handler
+    @Publisher(topic = "domain-event")
+    public DomainEventBus getEventBus() {
+        return new DomainEventBus();
+    }
+
+    @Bean
+    @Subscriber(topic = "domain-event")
+    public Observer<DomainEvent> getViewUpdateSubscriber() {
+        return new ViewUpdateSubscriber(this.jobViewUpdateHandler);
     }
 }

@@ -1,20 +1,20 @@
 package com.iucse.passnet.recruitment.adapter.channel;
 
-import com.iucse.passnet.recruitment.usecase.events.IEvent;
+import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
 import rx.Observer;
 import rx.subjects.PublishSubject;
 
-public class DomainEventBus implements EventBus<IEvent> {
+public class DomainEventBus implements EventBus<DomainEvent> {
 
-    private final PublishSubject<IEvent> bus = PublishSubject.create();
+    private final PublishSubject<DomainEvent> bus = PublishSubject.create();
 
     @Override
-    public void send(IEvent event) {
+    public void send(DomainEvent event) {
         this.bus.onNext(event);
     }
 
     @Override
-    public void subscribe(Observer<IEvent> observer) {
+    public void subscribe(Observer<DomainEvent> observer) {
         this.bus.subscribe(observer);
     }
 }
