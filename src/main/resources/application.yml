@@ -21,6 +21,9 @@ spring:
       settings:
         trace: false
         web-allow-others: false
+  redis:
+    host: 192.168.99.100
+    port: 6379
 springdoc:
   api-docs:
     path: /api-docs
@@ -29,3 +32,14 @@ springdoc:
     path: /swagger-ui.html
 grpc:
   port: 9090
+
+graphql:
+  servlet:
+    mapping: /query
+    enabled: true
+    maxQueryDepth: 5
+
+graphql.playground:
+  mapping: /playground
+  endpoint: /graphql
+

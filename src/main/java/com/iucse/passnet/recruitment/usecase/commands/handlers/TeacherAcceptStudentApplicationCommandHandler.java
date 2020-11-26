@@ -1,5 +1,6 @@
 package com.iucse.passnet.recruitment.usecase.commands.handlers;
 
+import com.iucse.passnet.recruitment.adapter.channel.DomainEventBus;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplication;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobApplicationId;
@@ -16,8 +17,8 @@ public class TeacherAcceptStudentApplicationCommandHandler extends AbstractJobAg
     private final TeacherAcceptStudentJobApplicationCommand command;
 
     @Builder
-    public TeacherAcceptStudentApplicationCommandHandler(JobAggregateRepository aggregateRepository, TeacherAcceptStudentJobApplicationCommand command) {
-        super(aggregateRepository);
+    public TeacherAcceptStudentApplicationCommandHandler(JobAggregateRepository aggregateRepository, DomainEventBus eventBus, TeacherAcceptStudentJobApplicationCommand command) {
+        super(aggregateRepository, eventBus);
         this.command = command;
     }
 
