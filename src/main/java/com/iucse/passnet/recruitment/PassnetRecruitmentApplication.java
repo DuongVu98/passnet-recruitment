@@ -5,8 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@Slf4j(topic = "[PassnetRecruitmentApplication]")
 @SpringBootApplication
+@Slf4j(topic = "[PassnetRecruitmentApplication]")
 public class PassnetRecruitmentApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
