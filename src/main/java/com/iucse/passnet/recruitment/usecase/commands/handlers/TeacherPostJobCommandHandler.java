@@ -3,6 +3,7 @@ package com.iucse.passnet.recruitment.usecase.commands.handlers;
 import com.iucse.passnet.recruitment.adapter.channel.DomainEventBus;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
+import com.iucse.passnet.recruitment.domain.annotation.ApplyDomainEvent;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherPostJobCommand;
 import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
@@ -23,6 +24,7 @@ public class TeacherPostJobCommandHandler extends AbstractJobAggregateCommandHan
     }
 
     @Override
+    @ApplyDomainEvent(EventTypes.TeacherPostedJob)
     public Job execute() {
         Job newJob = Job.builder()
            .id(new JobId(uuidGeneratorService.generate().toString()))
@@ -34,12 +36,6 @@ public class TeacherPostJobCommandHandler extends AbstractJobAggregateCommandHan
            .jobOwner(new UserId(command.getJobOwnerId()))
            .build();
 
-        Job savedJob = this.aggregateRepository.save(newJob);
-        this.sendEvent(savedJob);
-        return savedJob;
-    }
-
-    private void sendEvent(Job job){
-        this.eventBus.send(new DomainEvent(EventTypes.TeacherPostedJob, job));
+        return this.aggregateRepository.save(newJob);
     }
 }
