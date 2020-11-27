@@ -7,7 +7,6 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
 import com.iucse.passnet.recruitment.domain.annotation.ToCache;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.domain.repositories.JobApplicationRepository;
-import com.iucse.passnet.recruitment.domain.viewrepos.JobViewRepository;
 import com.iucse.passnet.recruitment.domain.views.JobApplicationView;
 import com.iucse.passnet.recruitment.domain.views.JobView;
 import org.springframework.beans.factory.annotation.Autowired;

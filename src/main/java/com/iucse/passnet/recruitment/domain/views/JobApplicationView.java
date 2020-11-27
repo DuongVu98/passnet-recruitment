@@ -10,7 +10,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 import java.util.Optional;
 
-@RedisHash("job_application_view")
+@RedisHash(value = "job_application_view", timeToLive = 20)
 public class JobApplicationView extends CacheableView {
     private String studentId;
     private String letter;

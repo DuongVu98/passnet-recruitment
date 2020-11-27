@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@RedisHash(value = "job_view", timeToLive = 10)
+@RedisHash(value = "job_view", timeToLive = 20)
 public class JobView extends CacheableView {
     private String jobTitle;
     private String teacherId;
