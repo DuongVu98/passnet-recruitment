@@ -19,7 +19,7 @@ import rx.Observer;
 @Configuration
 public class ReactConfiguration {
 
-    private JobViewUpdateHandler jobViewUpdateHandler;
+    private final JobViewUpdateHandler jobViewUpdateHandler;
 
     @Autowired
     public ReactConfiguration(JobViewUpdateHandler jobViewRepository) {
@@ -34,7 +34,7 @@ public class ReactConfiguration {
 
     @Bean
     @Subscriber(topic = "command-gateway")
-    public Observer<BaseCommand> getCommandSubscriber() {
+    public CommandSubscriber getCommandSubscriber() {
         return new CommandSubscriber();
     }
 
