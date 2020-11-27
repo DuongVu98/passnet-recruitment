@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ApplyDomainEvent {
+public @interface PrepareDomainEvent {
     EventTypes value();
 }

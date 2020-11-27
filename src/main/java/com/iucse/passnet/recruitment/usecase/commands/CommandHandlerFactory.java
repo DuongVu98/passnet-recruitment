@@ -3,6 +3,8 @@ package com.iucse.passnet.recruitment.usecase.commands;
 import com.iucse.passnet.recruitment.adapter.channel.DomainEventBus;
 import com.iucse.passnet.recruitment.adapter.channel.EventBus;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
+import com.iucse.passnet.recruitment.domain.annotation.PrepareCommandHandler;
+import com.iucse.passnet.recruitment.domain.annotation.PrepareDomainEvent;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.commands.handlers.AbstractJobAggregateCommandHandler;
 import com.iucse.passnet.recruitment.usecase.commands.handlers.StudentApplyJobCommandHandler;
@@ -13,6 +15,7 @@ import com.iucse.passnet.recruitment.usecase.commands.requests.StudentApplyJobCo
 import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherAcceptStudentJobApplicationCommand;
 import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherPostJobCommand;
 import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
+import com.iucse.passnet.recruitment.usecase.events.events.EventTypes;
 import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,27 +46,34 @@ public class CommandHandlerFactory {
         }
     }
 
+    @PrepareCommandHandler
+    @PrepareDomainEvent(EventTypes.TeacherPostedJob)
     private AbstractJobAggregateCommandHandler<Job> getTeacherPostJobCommandHandler(TeacherPostJobCommand command) {
         return TeacherPostJobCommandHandler.builder()
                 .command(command)
-                .aggregateRepository(this.jobAggregateRepository)
                 .uuidGeneratorService(this.uuidGeneratorService)
-                .domainEventBus(this.eventBus)
+                .aggregateRepository(this.jobAggregateRepository)
+                .eventBus(this.eventBus)
                 .build();
     }
 
+    @PrepareCommandHandler
+    @PrepareDomainEvent(EventTypes.StudentAppliedJob)
     private AbstractJobAggregateCommandHandler<Job> getStudentApplyJobCommandHandler(StudentApplyJobCommand command) {
         return StudentApplyJobCommandHandler.builder()
-                .aggregateRepository(this.jobAggregateRepository)
                 .uuidGeneratorService(this.uuidGeneratorService)
                 .command(command)
+//                .eventBus(this.eventBus)
+//                .aggregateRepository(this.jobAggregateRepository)
                 .build();
     }
 
+    @PrepareCommandHandler
     private AbstractJobAggregateCommandHandler<Job> getTeacherAcceptStudentJobApplicationCommandHandler(TeacherAcceptStudentJobApplicationCommand command) {
         return TeacherAcceptStudentApplicationCommandHandler.builder()
-                .aggregateRepository(this.jobAggregateRepository)
                 .command(command)
+//                .aggregateRepository(this.jobAggregateRepository)
+//                .eventBus(this.eventBus)
                 .build();
     }
 }
