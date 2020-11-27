@@ -1,8 +1,14 @@
 package com.iucse.passnet.recruitment.domain.views;
 
+import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
+import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplication;
+import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobApplicationId;
+import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
 import lombok.Builder;
 import lombok.AllArgsConstructor;
 import org.springframework.data.redis.core.RedisHash;
+
+import java.util.Optional;
 
 @RedisHash("job_application_view")
 public class JobApplicationView extends CacheableView {
@@ -18,5 +24,18 @@ public class JobApplicationView extends CacheableView {
         this.letter = letter;
         this.content = content;
         this.state = state;
+    }
+
+    public JobApplicationView(Job aggregate, String id) {
+        Optional<JobApplication> optional = aggregate.getJobApplications().stream().filter(jobApplication -> jobApplication.getId().equal(new JobApplicationId(id))).findAny();
+        if (optional.isPresent()) {
+            JobApplication jobApplication = optional.get();
+
+            this.studentId = jobApplication.getApplicationOwner().getValue();
+            this.content = jobApplication.getContent().getValue();
+            this.letter = jobApplication.getLetter().getValue();
+            this.state = jobApplication.getApplicationState().getValue().name();
+            this.id = id;
+        }
     }
 }
