@@ -3,13 +3,15 @@ package com.iucse.passnet.recruitment.domain.views;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplication;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobApplicationId;
-import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
 import lombok.Builder;
-import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.redis.core.RedisHash;
 
 import java.util.Optional;
 
+@Getter
+@NoArgsConstructor
 @RedisHash(value = "job_application_view", timeToLive = 20)
 public class JobApplicationView extends CacheableView {
     private String studentId;

@@ -36,11 +36,13 @@ public class CacheAspect {
 
         Object proceed = joinPoint.proceed();
 
-        switch (cachedAnnotation.value()){
+        switch (cachedAnnotation.value()) {
             case JOB_VIEW:
                 this.jobViewRepository.save((JobView) proceed);
+                break;
             case JOB_APPLICATION_VIEW:
                 this.jobApplicationViewRepository.save((JobApplicationView) proceed);
+                break;
         }
         return proceed;
     }

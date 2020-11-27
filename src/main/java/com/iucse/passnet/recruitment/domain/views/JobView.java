@@ -3,12 +3,14 @@ package com.iucse.passnet.recruitment.domain.views;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.redis.core.RedisHash;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 @RedisHash(value = "job_view", timeToLive = 20)
 public class JobView extends CacheableView {
     private String jobTitle;
