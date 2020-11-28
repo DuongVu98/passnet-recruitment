@@ -2,13 +2,14 @@ package com.iucse.passnet.recruitment.adapter.subscribers;
 
 import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
 import com.iucse.passnet.recruitment.usecase.events.handlers.JobViewUpdateHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import rx.Observer;
 
+@Slf4j(topic = "[ViewUpdateSubscriber]")
 public class ViewUpdateSubscriber implements Observer<DomainEvent> {
 
-    private JobViewUpdateHandler jobViewUpdateHandler;
-
+    private final JobViewUpdateHandler jobViewUpdateHandler;
 
     public ViewUpdateSubscriber(@Autowired JobViewUpdateHandler jobViewRepository) {
         this.jobViewUpdateHandler = jobViewRepository;

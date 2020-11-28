@@ -15,7 +15,7 @@ import rx.Observer;
 @Aspect
 @Component
 public class SubscribingAspect {
-    private ApplicationContext context;
+    private final ApplicationContext context;
     private EventBus eventBus;
 
     @Autowired

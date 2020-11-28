@@ -78,3 +78,9 @@ bootJar {
         )
     }
 }
+
+task bootRunDev(dependsOn:bootRun) {
+    bootRun {
+        args = ["--spring.profiles.active=dev"]
+    }
+}

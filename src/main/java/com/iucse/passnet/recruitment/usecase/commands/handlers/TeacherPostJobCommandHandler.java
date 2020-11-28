@@ -11,15 +11,14 @@ import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
 import lombok.Builder;
 
 public class TeacherPostJobCommandHandler extends AbstractJobAggregateCommandHandler<Job> {
-
-    private final TeacherPostJobCommand command;
     private final UUIDGeneratorService uuidGeneratorService;
+    private final TeacherPostJobCommand command;
 
     @Builder
-    public TeacherPostJobCommandHandler(JobAggregateRepository aggregateRepository, DomainEventBus domainEventBus, TeacherPostJobCommand command, UUIDGeneratorService uuidGeneratorService) {
-        super(aggregateRepository, domainEventBus);
-        this.command = command;
+    public TeacherPostJobCommandHandler(JobAggregateRepository aggregateRepository, EventTypes eventToApply, DomainEventBus eventBus, DomainEvent domainEvent, UUIDGeneratorService uuidGeneratorService, TeacherPostJobCommand command) {
+        super(aggregateRepository, eventToApply, eventBus, domainEvent);
         this.uuidGeneratorService = uuidGeneratorService;
+        this.command = command;
     }
 
     @Override
@@ -34,12 +33,9 @@ public class TeacherPostJobCommandHandler extends AbstractJobAggregateCommandHan
            .jobOwner(new UserId(command.getJobOwnerId()))
            .build();
 
-        Job savedJob = this.aggregateRepository.save(newJob);
-        this.sendEvent(savedJob);
-        return savedJob;
-    }
+        Job aggregate = this.aggregateRepository.save(newJob);
+        this.domainEvent = new DomainEvent(this.getEventToApply(), aggregate, aggregate.getId());
 
-    private void sendEvent(Job job){
-        this.eventBus.send(new DomainEvent(EventTypes.TeacherPostedJob, job));
+        return aggregate;
     }
 }

@@ -7,6 +7,8 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobApplicationId;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherAcceptStudentJobApplicationCommand;
+import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
+import com.iucse.passnet.recruitment.usecase.events.events.EventTypes;
 import lombok.Builder;
 
 import java.util.List;
@@ -17,8 +19,8 @@ public class TeacherAcceptStudentApplicationCommandHandler extends AbstractJobAg
     private final TeacherAcceptStudentJobApplicationCommand command;
 
     @Builder
-    public TeacherAcceptStudentApplicationCommandHandler(JobAggregateRepository aggregateRepository, DomainEventBus eventBus, TeacherAcceptStudentJobApplicationCommand command) {
-        super(aggregateRepository, eventBus);
+    public TeacherAcceptStudentApplicationCommandHandler(JobAggregateRepository aggregateRepository, EventTypes eventToApply, DomainEventBus eventBus, DomainEvent domainEvent, TeacherAcceptStudentJobApplicationCommand command) {
+        super(aggregateRepository, eventToApply, eventBus, domainEvent);
         this.command = command;
     }
 
@@ -33,6 +35,8 @@ public class TeacherAcceptStudentApplicationCommandHandler extends AbstractJobAg
             JobApplication jobApplication = jobApplicationList.get(0);
             jobAggregate.acceptJobApplication(jobApplication);
 
+            Job aggregate = this.aggregateRepository.save(jobAggregate);
+            this.domainEvent = new DomainEvent(this.getEventToApply(), aggregate, jobAggregate.getId());
             return this.aggregateRepository.save(jobAggregate);
         }
     }
