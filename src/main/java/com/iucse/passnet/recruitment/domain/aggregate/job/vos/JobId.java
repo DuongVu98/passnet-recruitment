@@ -11,6 +11,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class JobId implements Serializable {
+public class JobId implements Serializable, ValueObject<JobApplicationId> {
     private String value;
+
+    @Override
+    public boolean equal(JobApplicationId jobApplicationId) {
+        return false;
+    }
 }

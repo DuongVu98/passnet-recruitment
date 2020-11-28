@@ -6,6 +6,7 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplicatio
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.commands.requests.StudentApplyJobCommand;
+import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
 import com.iucse.passnet.recruitment.usecase.events.events.EventTypes;
 import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
 import lombok.Builder;
@@ -16,8 +17,8 @@ public class StudentApplyJobCommandHandler extends AbstractJobAggregateCommandHa
     private final UUIDGeneratorService uuidGeneratorService;
 
     @Builder
-    public StudentApplyJobCommandHandler(JobAggregateRepository aggregateRepository, EventTypes eventToApply, DomainEventBus eventBus, StudentApplyJobCommand command, UUIDGeneratorService uuidGeneratorService) {
-        super(aggregateRepository, eventToApply, eventBus);
+    public StudentApplyJobCommandHandler(JobAggregateRepository aggregateRepository, EventTypes eventToApply, DomainEventBus eventBus, DomainEvent domainEvent, StudentApplyJobCommand command, UUIDGeneratorService uuidGeneratorService) {
+        super(aggregateRepository, eventToApply, eventBus, domainEvent);
         this.command = command;
         this.uuidGeneratorService = uuidGeneratorService;
     }
@@ -35,6 +36,9 @@ public class StudentApplyJobCommandHandler extends AbstractJobAggregateCommandHa
            .build();
 
         job.receiveJobApplication(newJobApplication);
-        return this.aggregateRepository.save(job);
+        Job aggregate = this.aggregateRepository.save(job);
+        this.domainEvent = new DomainEvent(this.getEventToApply(), aggregate, newJobApplication.getId());
+
+        return aggregate;
     }
 }
