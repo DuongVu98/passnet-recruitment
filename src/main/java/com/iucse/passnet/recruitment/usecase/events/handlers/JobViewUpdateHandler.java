@@ -5,6 +5,7 @@ import com.iucse.passnet.recruitment.domain.viewrepos.JobViewRepository;
 import com.iucse.passnet.recruitment.domain.views.JobView;
 import com.iucse.passnet.recruitment.domain.views.LiteJobApplicationView;
 import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j(topic = "[JobViewUpdateHandler]")
 public class JobViewUpdateHandler implements IEventHandler {
 
-    private JobViewRepository jobViewRepository;
+    private final JobViewRepository jobViewRepository;
 
     @Autowired
     public JobViewUpdateHandler(JobViewRepository jobViewRepository) {

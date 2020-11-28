@@ -46,7 +46,7 @@ public class ReactConfiguration {
 
     @Bean
     @Subscriber(topic = "domain-event")
-    public Observer<DomainEvent> getViewUpdateSubscriber() {
+    public ViewUpdateSubscriber getViewUpdateSubscriber() {
         return new ViewUpdateSubscriber(this.jobViewUpdateHandler);
     }
 }
