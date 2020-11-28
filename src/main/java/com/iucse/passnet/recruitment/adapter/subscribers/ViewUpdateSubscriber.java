@@ -7,7 +7,7 @@ import rx.Observer;
 
 public class ViewUpdateSubscriber implements Observer<DomainEvent> {
 
-    private JobViewUpdateHandler jobViewUpdateHandler;
+    private final JobViewUpdateHandler jobViewUpdateHandler;
 
 
     public ViewUpdateSubscriber(@Autowired JobViewUpdateHandler jobViewRepository) {
