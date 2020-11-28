@@ -34,32 +34,32 @@ public class CommandHandlerFactory {
         this.eventBus = eventBus;
     }
 
-    public AbstractJobAggregateCommandHandler<Job> getJobAggregateCommandHandler(BaseCommand command) {
-        if (command instanceof TeacherPostJobCommand) {
-            return this.getTeacherPostJobCommandHandler((TeacherPostJobCommand) command);
-        } else if (command instanceof StudentApplyJobCommand) {
-            return this.getStudentApplyJobCommandHandler((StudentApplyJobCommand) command);
-        } else if (command instanceof TeacherAcceptStudentJobApplicationCommand) {
-            return this.getTeacherAcceptStudentJobApplicationCommandHandler((TeacherAcceptStudentJobApplicationCommand) command);
-        } else {
-            return null;
-        }
-    }
+//    public AbstractJobAggregateCommandHandler<Job> getJobAggregateCommandHandler(BaseCommand command) {
+//        if (command instanceof TeacherPostJobCommand) {
+//            return this.getTeacherPostJobCommandHandler((TeacherPostJobCommand) command);
+//        } else if (command instanceof StudentApplyJobCommand) {
+//            return this.getStudentApplyJobCommandHandler((StudentApplyJobCommand) command);
+//        } else if (command instanceof TeacherAcceptStudentJobApplicationCommand) {
+//            return this.getTeacherAcceptStudentJobApplicationCommandHandler((TeacherAcceptStudentJobApplicationCommand) command);
+//        } else {
+//            return null;
+//        }
+//    }
 
     @PrepareCommandHandler
     @PrepareDomainEvent(EventTypes.TeacherPostedJob)
-    private AbstractJobAggregateCommandHandler<Job> getTeacherPostJobCommandHandler(TeacherPostJobCommand command) {
+    public AbstractJobAggregateCommandHandler<Job> getTeacherPostJobCommandHandler(TeacherPostJobCommand command) {
         return TeacherPostJobCommandHandler.builder()
                 .command(command)
                 .uuidGeneratorService(this.uuidGeneratorService)
-                .aggregateRepository(this.jobAggregateRepository)
-                .eventBus(this.eventBus)
+//                .aggregateRepository(this.jobAggregateRepository)
+//                .eventBus(this.eventBus)
                 .build();
     }
 
     @PrepareCommandHandler
     @PrepareDomainEvent(EventTypes.StudentAppliedJob)
-    private AbstractJobAggregateCommandHandler<Job> getStudentApplyJobCommandHandler(StudentApplyJobCommand command) {
+    public AbstractJobAggregateCommandHandler<Job> getStudentApplyJobCommandHandler(StudentApplyJobCommand command) {
         return StudentApplyJobCommandHandler.builder()
                 .uuidGeneratorService(this.uuidGeneratorService)
                 .command(command)
@@ -69,7 +69,7 @@ public class CommandHandlerFactory {
     }
 
     @PrepareCommandHandler
-    private AbstractJobAggregateCommandHandler<Job> getTeacherAcceptStudentJobApplicationCommandHandler(TeacherAcceptStudentJobApplicationCommand command) {
+    public AbstractJobAggregateCommandHandler<Job> getTeacherAcceptStudentJobApplicationCommandHandler(TeacherAcceptStudentJobApplicationCommand command) {
         return TeacherAcceptStudentApplicationCommandHandler.builder()
                 .command(command)
 //                .aggregateRepository(this.jobAggregateRepository)
