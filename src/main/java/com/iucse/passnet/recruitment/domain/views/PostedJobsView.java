@@ -11,12 +11,3 @@ import java.util.List;
 public class PostedJobsView extends CacheableView{
     private List<LiteJobView> litePostedJobs;
 }
-
-@Builder
-@AllArgsConstructor
-class LiteJobView {
-    String courseName;
-    String jobTitle;
-    String semester;
-    String department;
-}
