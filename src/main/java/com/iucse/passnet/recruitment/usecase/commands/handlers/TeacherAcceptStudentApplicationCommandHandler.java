@@ -44,8 +44,14 @@ public class TeacherAcceptStudentApplicationCommandHandler extends AbstractJobAg
 			JobApplication jobApplication = jobApplicationList.get(0);
 			jobAggregate.acceptJobApplication(jobApplication);
 
-			Job aggregate = this.aggregateRepository.save(jobAggregate);
-			return new DomainEvent(this.getEventToApply(), aggregate, jobAggregate.getId());
-		}
-	}
+        if (jobApplicationList.isEmpty()) {
+            return null;
+        } else {
+            JobApplication jobApplication = jobApplicationList.get(0);
+            jobAggregate.acceptJobApplication(jobApplication);
+
+            Job aggregate = this.aggregateRepository.save(jobAggregate);
+            return new DomainEvent(this.getEventToApply(), aggregate, jobApplication.getId());
+        }
+    }
 }

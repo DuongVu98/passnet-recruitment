@@ -36,19 +36,20 @@ public class JobViewUpdateHandler implements IEventHandler {
 		}
 	}
 
-	private void updateFromJob(Job aggregate) {
-		List<LiteJobApplicationView> liteJobApplicationViews = aggregate
-			.getJobApplications()
-			.stream()
-			.map(
-				application ->
-					LiteJobApplicationView
-						.builder()
-						.studentId(application.getApplicationOwner().getValue())
-						.applicationState(application.getApplicationState().getValue().name())
-						.build()
-			)
-			.collect(Collectors.toList());
+    @Override
+    public void handle(DomainEvent event) {
+        switch (event.getEventTypes()) {
+            case TeacherPostedJob:
+                this.updateFromJob(event.getAggregate());
+                break;
+            case StudentAppliedJob:
+                break;
+            case TeacherAcceptedJobApplication:
+                break;
+            default:
+                break;
+        }
+    }
 
 		JobView newJobView = JobView
 			.builder()
