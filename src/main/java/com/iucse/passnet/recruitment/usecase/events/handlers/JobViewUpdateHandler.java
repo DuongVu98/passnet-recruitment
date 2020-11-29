@@ -1,7 +1,9 @@
 package com.iucse.passnet.recruitment.usecase.events.handlers;
 
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
+import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplication;
 import com.iucse.passnet.recruitment.domain.viewrepos.JobViewRepository;
+import com.iucse.passnet.recruitment.domain.views.JobApplicationView;
 import com.iucse.passnet.recruitment.domain.views.JobView;
 import com.iucse.passnet.recruitment.domain.views.LiteJobApplicationView;
 import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
@@ -29,27 +31,26 @@ public class JobViewUpdateHandler implements IEventHandler {
 				break;
 			case StudentAppliedJob:
 				break;
-			case TeacherAcceptedJob:
+			case TeacherAcceptedJobApplication:
 				break;
 			default:
 				break;
 		}
 	}
 
-    @Override
-    public void handle(DomainEvent event) {
-        switch (event.getEventTypes()) {
-            case TeacherPostedJob:
-                this.updateFromJob(event.getAggregate());
-                break;
-            case StudentAppliedJob:
-                break;
-            case TeacherAcceptedJobApplication:
-                break;
-            default:
-                break;
-        }
-    }
+	private void updateFromJob(Job aggregate) {
+		List<LiteJobApplicationView> liteJobApplicationViews = aggregate
+			.getJobApplications()
+			.stream()
+			.map(
+				jobApplication ->
+					LiteJobApplicationView
+						.builder()
+						.studentId(jobApplication.getApplicationOwner().getValue())
+						.applicationState(jobApplication.getApplicationState().getValue().name())
+						.build()
+			)
+			.collect(Collectors.toList());
 
 		JobView newJobView = JobView
 			.builder()

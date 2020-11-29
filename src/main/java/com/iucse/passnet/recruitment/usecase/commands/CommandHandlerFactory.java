@@ -44,11 +44,11 @@ public class CommandHandlerFactory {
 			.build();
 	}
 
-    @PrepareCommandHandler
-    @PrepareDomainEvent(EventTypes.TeacherAcceptedJobApplication)
-    public AbstractJobAggregateCommandHandler<Job> getTeacherAcceptStudentJobApplicationCommandHandler(TeacherAcceptStudentJobApplicationCommand command) {
-        return TeacherAcceptStudentApplicationCommandHandler.builder()
-                .command(command)
-                .build();
-    }
+	@PrepareCommandHandler
+	@PrepareDomainEvent(EventTypes.TeacherAcceptedJobApplication)
+	public AbstractJobAggregateCommandHandler<Job> getTeacherAcceptStudentJobApplicationCommandHandler(
+		TeacherAcceptStudentJobApplicationCommand command
+	) {
+		return TeacherAcceptStudentApplicationCommandHandler.builder().command(command).build();
+	}
 }
