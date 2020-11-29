@@ -16,34 +16,33 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class CacheAspect {
-    private final JobViewRepository jobViewRepository;
-    private final JobApplicationViewRepository jobApplicationViewRepository;
+	private final JobViewRepository jobViewRepository;
+	private final JobApplicationViewRepository jobApplicationViewRepository;
 
-    @Autowired
-    public CacheAspect(JobViewRepository jobViewRepository, JobApplicationViewRepository jobApplicationViewRepository) {
-        this.jobViewRepository = jobViewRepository;
-        this.jobApplicationViewRepository = jobApplicationViewRepository;
-    }
+	@Autowired
+	public CacheAspect(JobViewRepository jobViewRepository, JobApplicationViewRepository jobApplicationViewRepository) {
+		this.jobViewRepository = jobViewRepository;
+		this.jobApplicationViewRepository = jobApplicationViewRepository;
+	}
 
-    @Pointcut("@annotation(com.iucse.passnet.recruitment.domain.annotation.Cached)")
-    public void getToCacheAnnotation() {
-    }
+	@Pointcut("@annotation(com.iucse.passnet.recruitment.domain.annotation.Cached)")
+	public void getToCacheAnnotation() {}
 
-    @Around("getToCacheAnnotation()")
-    public Object toCache(ProceedingJoinPoint joinPoint) throws Throwable {
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        Cached cachedAnnotation = methodSignature.getMethod().getAnnotation(Cached.class);
+	@Around("getToCacheAnnotation()")
+	public Object toCache(ProceedingJoinPoint joinPoint) throws Throwable {
+		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+		Cached cachedAnnotation = methodSignature.getMethod().getAnnotation(Cached.class);
 
-        Object proceed = joinPoint.proceed();
+		Object proceed = joinPoint.proceed();
 
-        switch (cachedAnnotation.value()) {
-            case JOB_VIEW:
-                this.jobViewRepository.save((JobView) proceed);
-                break;
-            case JOB_APPLICATION_VIEW:
-                this.jobApplicationViewRepository.save((JobApplicationView) proceed);
-                break;
-        }
-        return proceed;
-    }
+		switch (cachedAnnotation.value()) {
+			case JOB_VIEW:
+				this.jobViewRepository.save((JobView) proceed);
+				break;
+			case JOB_APPLICATION_VIEW:
+				this.jobApplicationViewRepository.save((JobApplicationView) proceed);
+				break;
+		}
+		return proceed;
+	}
 }

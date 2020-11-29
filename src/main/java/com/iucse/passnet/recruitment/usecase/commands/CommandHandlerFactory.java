@@ -17,35 +17,37 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CommandHandlerFactory {
-    private final UUIDGeneratorService uuidGeneratorService;
+	private final UUIDGeneratorService uuidGeneratorService;
 
-    @Autowired
-    public CommandHandlerFactory(UUIDGeneratorService uuidGeneratorService) {
-        this.uuidGeneratorService = uuidGeneratorService;
-    }
+	@Autowired
+	public CommandHandlerFactory(UUIDGeneratorService uuidGeneratorService) {
+		this.uuidGeneratorService = uuidGeneratorService;
+	}
 
-    @PrepareCommandHandler
-    @PrepareDomainEvent(EventTypes.TeacherPostedJob)
-    public AbstractJobAggregateCommandHandler<Job> getTeacherPostJobCommandHandler(TeacherPostJobCommand command) {
-        return TeacherPostJobCommandHandler.builder()
-                .command(command)
-                .uuidGeneratorService(this.uuidGeneratorService)
-                .build();
-    }
+	@PrepareCommandHandler
+	@PrepareDomainEvent(EventTypes.TeacherPostedJob)
+	public AbstractJobAggregateCommandHandler<Job> getTeacherPostJobCommandHandler(TeacherPostJobCommand command) {
+		return TeacherPostJobCommandHandler
+			.builder()
+			.command(command)
+			.uuidGeneratorService(this.uuidGeneratorService)
+			.build();
+	}
 
-    @PrepareCommandHandler
-    @PrepareDomainEvent(EventTypes.StudentAppliedJob)
-    public AbstractJobAggregateCommandHandler<Job> getStudentApplyJobCommandHandler(StudentApplyJobCommand command) {
-        return StudentApplyJobCommandHandler.builder()
-                .uuidGeneratorService(this.uuidGeneratorService)
-                .command(command)
-                .build();
-    }
+	@PrepareCommandHandler
+	@PrepareDomainEvent(EventTypes.StudentAppliedJob)
+	public AbstractJobAggregateCommandHandler<Job> getStudentApplyJobCommandHandler(StudentApplyJobCommand command) {
+		return StudentApplyJobCommandHandler
+			.builder()
+			.uuidGeneratorService(this.uuidGeneratorService)
+			.command(command)
+			.build();
+	}
 
-    @PrepareCommandHandler
-    public AbstractJobAggregateCommandHandler<Job> getTeacherAcceptStudentJobApplicationCommandHandler(TeacherAcceptStudentJobApplicationCommand command) {
-        return TeacherAcceptStudentApplicationCommandHandler.builder()
-                .command(command)
-                .build();
-    }
+	@PrepareCommandHandler
+	public AbstractJobAggregateCommandHandler<Job> getTeacherAcceptStudentJobApplicationCommandHandler(
+		TeacherAcceptStudentJobApplicationCommand command
+	) {
+		return TeacherAcceptStudentApplicationCommandHandler.builder().command(command).build();
+	}
 }

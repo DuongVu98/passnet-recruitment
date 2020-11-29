@@ -19,27 +19,27 @@ import rx.Observer;
 @Configuration
 public class ReactConfiguration {
 
-    // Command gateway
-    @Publisher(topic = "command-gateway")
-    public CommandGateway getCommandGateway() {
-        return new CommandGateway();
-    }
+	// Command gateway
+	@Publisher(topic = "command-gateway")
+	public CommandGateway getCommandGateway() {
+		return new CommandGateway();
+	}
 
-    @Bean
-    @Subscriber(topic = "command-gateway")
-    public CommandSubscriber getCommandSubscriber() {
-        return new CommandSubscriber();
-    }
+	@Bean
+	@Subscriber(topic = "command-gateway")
+	public CommandSubscriber getCommandSubscriber() {
+		return new CommandSubscriber();
+	}
 
-    // Domain event handler
-    @Publisher(topic = "domain-event")
-    public DomainEventBus getEventBus() {
-        return new DomainEventBus();
-    }
+	// Domain event handler
+	@Publisher(topic = "domain-event")
+	public DomainEventBus getEventBus() {
+		return new DomainEventBus();
+	}
 
-    @Bean
-    @Subscriber(topic = "domain-event")
-    public ViewUpdateSubscriber getViewUpdateSubscriber() {
-        return new ViewUpdateSubscriber();
-    }
+	@Bean
+	@Subscriber(topic = "domain-event")
+	public ViewUpdateSubscriber getViewUpdateSubscriber() {
+		return new ViewUpdateSubscriber();
+	}
 }

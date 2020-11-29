@@ -14,21 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/query")
 @Slf4j(topic = "[QueryRestController]")
 public class QueryRestController extends BaseController {
+	private final QueryController queryController;
 
-    private final QueryController queryController;
+	@Autowired
+	public QueryRestController(QueryController queryController) {
+		this.queryController = queryController;
+	}
 
-    @Autowired
-    public QueryRestController(QueryController queryController) {
-        this.queryController = queryController;
-    }
+	@GetMapping(value = "/job-view")
+	public JobView getJobView(@RequestParam("jobId") String id) {
+		return this.queryController.getJobView(id);
+	}
 
-    @GetMapping(value = "/job-view")
-    public JobView getJobView(@RequestParam("jobId") String id) {
-        return this.queryController.getJobView(id);
-    }
-
-    @GetMapping(value = "/job-application-view")
-    public JobApplicationView getJobApplicationView(@RequestParam("jobApplicationId") String id) {
-        return this.queryController.getJobApplicationView(id);
-    }
+	@GetMapping(value = "/job-application-view")
+	public JobApplicationView getJobApplicationView(@RequestParam("jobApplicationId") String id) {
+		return this.queryController.getJobApplicationView(id);
+	}
 }

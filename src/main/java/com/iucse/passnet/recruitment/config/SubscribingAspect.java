@@ -15,30 +15,28 @@ import rx.Observer;
 @Aspect
 @Component
 public class SubscribingAspect {
-    private final ApplicationContext context;
-    private EventBus eventBus;
+	private final ApplicationContext context;
+	private EventBus eventBus;
 
-    @Autowired
-    public SubscribingAspect(ApplicationContext context) {
-        this.context = context;
-    }
+	@Autowired
+	public SubscribingAspect(ApplicationContext context) {
+		this.context = context;
+	}
 
-    @Pointcut("@annotation(com.iucse.passnet.recruitment.domain.annotation.Subscriber)")
-    public void getSubscriberFromAnnotation() {
-    }
+	@Pointcut("@annotation(com.iucse.passnet.recruitment.domain.annotation.Subscriber)")
+	public void getSubscriberFromAnnotation() {}
 
-    @Around("getSubscriberFromAnnotation()")
-    public Object subscribe(ProceedingJoinPoint joinPoint) throws Throwable {
+	@Around("getSubscriberFromAnnotation()")
+	public Object subscribe(ProceedingJoinPoint joinPoint) throws Throwable {
+		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+		Subscriber subscriberAnnotation = methodSignature.getMethod().getAnnotation(Subscriber.class);
 
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        Subscriber subscriberAnnotation = methodSignature.getMethod().getAnnotation(Subscriber.class);
+		this.eventBus = (EventBus) context.getBean(subscriberAnnotation.topic());
 
-        this.eventBus = (EventBus) context.getBean(subscriberAnnotation.topic());
-
-        Object proceed = joinPoint.proceed();
-        if (proceed instanceof Observer) {
-            this.eventBus.subscribe((Observer) proceed);
-        }
-        return proceed;
-    }
+		Object proceed = joinPoint.proceed();
+		if (proceed instanceof Observer) {
+			this.eventBus.subscribe((Observer) proceed);
+		}
+		return proceed;
+	}
 }

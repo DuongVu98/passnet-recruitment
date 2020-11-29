@@ -9,25 +9,21 @@ import rx.Observer;
 
 @Slf4j(topic = "[ViewUpdateSubscriber]")
 public class ViewUpdateSubscriber implements Observer<DomainEvent> {
+	@Autowired
+	private JobViewUpdateHandler jobViewUpdateHandler;
 
-    @Autowired
-    private JobViewUpdateHandler jobViewUpdateHandler;
-    @Autowired
-    private JobApplicationViewUpdateHandler jobApplicationViewUpdateHandler;
+	@Autowired
+	private JobApplicationViewUpdateHandler jobApplicationViewUpdateHandler;
 
-    @Override
-    public void onCompleted() {
+	@Override
+	public void onCompleted() {}
 
-    }
+	@Override
+	public void onError(Throwable e) {}
 
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onNext(DomainEvent event) {
-        this.jobViewUpdateHandler.handle(event);
-        this.jobApplicationViewUpdateHandler.handle(event);
-    }
+	@Override
+	public void onNext(DomainEvent event) {
+		this.jobViewUpdateHandler.handle(event);
+		this.jobApplicationViewUpdateHandler.handle(event);
+	}
 }

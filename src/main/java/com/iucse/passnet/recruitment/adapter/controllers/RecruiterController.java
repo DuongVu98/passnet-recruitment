@@ -10,30 +10,32 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RecruiterController {
-    private final CommandGateway commandGateway;
+	private final CommandGateway commandGateway;
 
-    @Autowired
-    public RecruiterController(CommandGateway commandGateway) {
-        this.commandGateway = commandGateway;
-    }
+	@Autowired
+	public RecruiterController(CommandGateway commandGateway) {
+		this.commandGateway = commandGateway;
+	}
 
-    public void postJob(JobCreationForm form, String teacherId) {
-        BaseCommand command = TeacherPostJobCommand.builder()
-           .jobOwnerId(teacherId)
-           .content(form.getContent())
-           .jobName(form.getJobTitle())
-           .courseName(form.getCourseName())
-           .requirement(form.getRequirement())
-           .semester(form.getSemester())
-           .build();
-        this.commandGateway.send(command);
-    }
+	public void postJob(JobCreationForm form, String teacherId) {
+		BaseCommand command = TeacherPostJobCommand
+			.builder()
+			.jobOwnerId(teacherId)
+			.content(form.getContent())
+			.jobName(form.getJobTitle())
+			.courseName(form.getCourseName())
+			.requirement(form.getRequirement())
+			.semester(form.getSemester())
+			.build();
+		this.commandGateway.send(command);
+	}
 
-    public void acceptJobApplication(String jobApplicationId, String jobId) {
-        BaseCommand command = TeacherAcceptStudentJobApplicationCommand.builder()
-           .jobApplicationId(jobApplicationId)
-           .jobId(jobId)
-           .build();
-        this.commandGateway.send(command);
-    }
+	public void acceptJobApplication(String jobApplicationId, String jobId) {
+		BaseCommand command = TeacherAcceptStudentJobApplicationCommand
+			.builder()
+			.jobApplicationId(jobApplicationId)
+			.jobId(jobId)
+			.build();
+		this.commandGateway.send(command);
+	}
 }

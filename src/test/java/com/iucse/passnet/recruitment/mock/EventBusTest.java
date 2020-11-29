@@ -7,11 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class EventBusTest {
+	@Autowired
+	private DomainEventBus domainEventBus;
 
-    @Autowired
-    private DomainEventBus domainEventBus;
-
-    @Test
-    public void multipleMessagesObservableTest(){
-    }
+	@Test
+	public void multipleMessagesObservableTest() {}
 }

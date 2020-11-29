@@ -4,6 +4,7 @@ plugins {
     id 'java'
     id "com.google.protobuf" version "0.8.8"
     id 'com.github.sherter.google-java-format' version '0.9'
+    id 'com.diffplug.gradle.spotless' version '4.5.1'
 }
 group = 'com.iucse.passnet'
 version = '0.0.1-SNAPSHOT'
@@ -44,6 +45,21 @@ protobuf {
     }
     generateProtoTasks.generatedFilesBaseDir = 'generated-sources'
 }
+
+googleJavaFormat {
+//    source = sourceSets*.allJava
+    options style: 'AOSP'
+    source 'src/main/java'
+    include 'src/main/java/com/iucse/passnet/recruitment/usecase/events/handlers/JobApplicationViewUpdateHandler.java'
+}
+
+spotless {
+    java {
+        target 'src/*/java/**/*.java'
+        prettier(['prettier': '2.0.5', 'prettier-plugin-java': '0.8.0']).config(['parser': 'java', 'tabWidth': 4, 'printWidth': 120, 'useTabs': true])
+    }
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-integration'

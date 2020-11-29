@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class DomainEvent {
-    private EventTypes eventTypes;
-    private Job aggregate;
-    private ValueObject entityId;
+	private EventTypes eventTypes;
+	private Job aggregate;
+	private ValueObject entityId;
 }

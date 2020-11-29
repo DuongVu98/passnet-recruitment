@@ -18,44 +18,42 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j(topic = "[PrepareCommandHandlerAspect]")
 public class PrepareCommandHandlerAspect {
+	private final DomainEventBus eventBus;
+	private final JobAggregateRepository aggregateRepository;
 
-    private final DomainEventBus eventBus;
-    private final JobAggregateRepository aggregateRepository;
+	@Autowired
+	public PrepareCommandHandlerAspect(DomainEventBus eventBus, JobAggregateRepository aggregateRepository) {
+		this.eventBus = eventBus;
+		this.aggregateRepository = aggregateRepository;
+	}
 
-    @Autowired
-    public PrepareCommandHandlerAspect(DomainEventBus eventBus, JobAggregateRepository aggregateRepository) {
-        this.eventBus = eventBus;
-        this.aggregateRepository = aggregateRepository;
-    }
+	@Pointcut("@annotation(com.iucse.passnet.recruitment.domain.annotation.PrepareDomainEvent)")
+	public void getPrepareDomainEventAnnotation() {}
 
-    @Pointcut("@annotation(com.iucse.passnet.recruitment.domain.annotation.PrepareDomainEvent)")
-    public void getPrepareDomainEventAnnotation() {
-    }
+	@Pointcut("@annotation(com.iucse.passnet.recruitment.domain.annotation.PrepareCommandHandler)")
+	public void getPrepareCommandHandler() {}
 
-    @Pointcut("@annotation(com.iucse.passnet.recruitment.domain.annotation.PrepareCommandHandler)")
-    public void getPrepareCommandHandler() {}
+	@Around("getPrepareDomainEventAnnotation()")
+	public Object prepareEvent(ProceedingJoinPoint joinPoint) throws Throwable {
+		log.info("prepareEvent");
 
-    @Around("getPrepareDomainEventAnnotation()")
-    public Object prepareEvent(ProceedingJoinPoint joinPoint) throws Throwable {
-        log.info("prepareEvent");
+		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+		PrepareDomainEvent annotation = methodSignature.getMethod().getAnnotation(PrepareDomainEvent.class);
 
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        PrepareDomainEvent annotation = methodSignature.getMethod().getAnnotation(PrepareDomainEvent.class);
+		AbstractJobAggregateCommandHandler<Job> commandHandler = (AbstractJobAggregateCommandHandler<Job>) joinPoint.proceed();
+		commandHandler.setEventToApply(annotation.value());
+		commandHandler.setEventBus(this.eventBus);
 
-        AbstractJobAggregateCommandHandler<Job> commandHandler = (AbstractJobAggregateCommandHandler<Job>) joinPoint.proceed();
-        commandHandler.setEventToApply(annotation.value());
-        commandHandler.setEventBus(this.eventBus);
+		return commandHandler;
+	}
 
-        return commandHandler;
-    }
+	@Around("getPrepareCommandHandler()")
+	public Object prepareCommandHandler(ProceedingJoinPoint joinPoint) throws Throwable {
+		log.info("prepareCommandHandler");
 
-    @Around("getPrepareCommandHandler()")
-    public Object prepareCommandHandler(ProceedingJoinPoint joinPoint) throws Throwable {
-        log.info("prepareCommandHandler");
+		AbstractJobAggregateCommandHandler<Job> commandHandler = (AbstractJobAggregateCommandHandler<Job>) joinPoint.proceed();
+		commandHandler.setAggregateRepository(this.aggregateRepository);
 
-        AbstractJobAggregateCommandHandler<Job> commandHandler = (AbstractJobAggregateCommandHandler<Job>) joinPoint.proceed();
-        commandHandler.setAggregateRepository(this.aggregateRepository);
-
-        return commandHandler;
-    }
+		return commandHandler;
+	}
 }
