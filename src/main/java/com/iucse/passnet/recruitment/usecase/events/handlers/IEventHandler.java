@@ -4,5 +4,5 @@ import com.iucse.passnet.recruitment.domain.viewrepos.JobViewRepository;
 import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
 
 public interface IEventHandler {
-    void handle(DomainEvent event);
+	void handle(DomainEvent event);
 }

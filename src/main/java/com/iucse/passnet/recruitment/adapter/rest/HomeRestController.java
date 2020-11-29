@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Home API")
 public class HomeRestController {
 
-    @GetMapping(value = "")
-    public String getHomePage() {
-        return "Hello";
-    }
+	@GetMapping(value = "")
+	public String getHomePage() {
+		return "Hello";
+	}
 }

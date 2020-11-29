@@ -14,35 +14,32 @@ import rx.Observer;
 
 @Slf4j(topic = "[CommandSubscriber]")
 public class CommandSubscriber implements Observer<BaseCommand> {
+	@Autowired
+	private CommandHandlerFactory commandHandlerFactory;
 
-    @Autowired
-    private CommandHandlerFactory commandHandlerFactory;
+	@Override
+	public void onCompleted() {}
 
-    @Override
-    public void onCompleted() {
+	@Override
+	public void onError(Throwable e) {}
 
-    }
+	@Override
+	public void onNext(BaseCommand command) {
+		AbstractJobAggregateCommandHandler<Job> commandHandler = this.getJobAggregateCommandHandler(command);
+		new Thread(new CommandTaskRunner(commandHandler)).start();
+	}
 
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onNext(BaseCommand command) {
-        AbstractJobAggregateCommandHandler<Job> commandHandler = this.getJobAggregateCommandHandler(command);
-        new Thread(new CommandTaskRunner(commandHandler)).start();
-    }
-
-    private AbstractJobAggregateCommandHandler<Job> getJobAggregateCommandHandler(BaseCommand command) {
-        if (command instanceof TeacherPostJobCommand) {
-            return this.commandHandlerFactory.getTeacherPostJobCommandHandler((TeacherPostJobCommand) command);
-        } else if (command instanceof StudentApplyJobCommand) {
-            return this.commandHandlerFactory.getStudentApplyJobCommandHandler((StudentApplyJobCommand) command);
-        } else if (command instanceof TeacherAcceptStudentJobApplicationCommand) {
-            return this.commandHandlerFactory.getTeacherAcceptStudentJobApplicationCommandHandler((TeacherAcceptStudentJobApplicationCommand) command);
-        } else {
-            return null;
-        }
-    }
+	private AbstractJobAggregateCommandHandler<Job> getJobAggregateCommandHandler(BaseCommand command) {
+		if (command instanceof TeacherPostJobCommand) {
+			return this.commandHandlerFactory.getTeacherPostJobCommandHandler((TeacherPostJobCommand) command);
+		} else if (command instanceof StudentApplyJobCommand) {
+			return this.commandHandlerFactory.getStudentApplyJobCommandHandler((StudentApplyJobCommand) command);
+		} else if (command instanceof TeacherAcceptStudentJobApplicationCommand) {
+			return this.commandHandlerFactory.getTeacherAcceptStudentJobApplicationCommandHandler(
+					(TeacherAcceptStudentJobApplicationCommand) command
+				);
+		} else {
+			return null;
+		}
+	}
 }

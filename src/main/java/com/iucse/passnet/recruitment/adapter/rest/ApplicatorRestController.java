@@ -11,16 +11,19 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @Tag(name = "Applicator API")
 public class ApplicatorRestController extends BaseController {
+	private final ApplicatorController applicatorController;
 
-    private final ApplicatorController applicatorController;
+	@Autowired
+	public ApplicatorRestController(ApplicatorController applicatorController) {
+		this.applicatorController = applicatorController;
+	}
 
-    @Autowired
-    public ApplicatorRestController(ApplicatorController applicatorController) {
-        this.applicatorController = applicatorController;
-    }
-
-    @GetMapping(value = "/apply-job")
-    public void studentApplyJob(@RequestBody JobApplicationForm form, @RequestParam("studentId") String studentId, @RequestParam("jobId") String jobId) {
-        this.applicatorController.studentApplyJob(form, studentId, jobId);
-    }
+	@GetMapping(value = "/apply-job")
+	public void studentApplyJob(
+		@RequestBody JobApplicationForm form,
+		@RequestParam("studentId") String studentId,
+		@RequestParam("jobId") String jobId
+	) {
+		this.applicatorController.studentApplyJob(form, studentId, jobId);
+	}
 }

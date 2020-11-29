@@ -5,5 +5,4 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface JobApplicationViewRepository extends CrudRepository<JobApplicationView, String> {
-}
+public interface JobApplicationViewRepository extends CrudRepository<JobApplicationView, String> {}
