@@ -43,6 +43,7 @@ public class CommandHandlerFactory {
     }
 
     @PrepareCommandHandler
+    @PrepareDomainEvent(EventTypes.TeacherAcceptedJobApplication)
     public AbstractJobAggregateCommandHandler<Job> getTeacherAcceptStudentJobApplicationCommandHandler(TeacherAcceptStudentJobApplicationCommand command) {
         return TeacherAcceptStudentApplicationCommandHandler.builder()
                 .command(command)
