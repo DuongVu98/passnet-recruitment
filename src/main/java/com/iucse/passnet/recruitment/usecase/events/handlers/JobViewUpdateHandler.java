@@ -31,7 +31,7 @@ public class JobViewUpdateHandler implements IEventHandler {
                 break;
             case StudentAppliedJob:
                 break;
-            case TeacherAcceptedJob:
+            case TeacherAcceptedJobApplication:
                 break;
             default:
                 break;
