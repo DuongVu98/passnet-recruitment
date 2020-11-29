@@ -28,8 +28,11 @@ public class JobViewUpdateHandler implements IEventHandler {
         switch (event.getEventTypes()) {
             case TeacherPostedJob:
                 this.updateFromJob(event.getAggregate());
+                break;
             case StudentAppliedJob:
+                break;
             case TeacherAcceptedJob:
+                break;
         }
     }
 
