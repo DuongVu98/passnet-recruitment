@@ -37,6 +37,9 @@ public class JobApplicationViewUpdateHandler implements IEventHandler {
                 this.updateFromAggregate();
                 break;
             case TeacherAcceptedJob:
+                this.aggregate = event.getAggregate();
+                this.jobApplicationId = (JobApplicationId) event.getEntityId();
+                this.updateFromAggregate();
                 break;
             default:
                 break;
