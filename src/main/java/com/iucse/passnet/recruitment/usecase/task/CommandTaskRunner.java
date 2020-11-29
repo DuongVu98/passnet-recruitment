@@ -12,7 +12,7 @@ public class CommandTaskRunner implements Runnable{
 
     @Override
     public void run() {
-        Job aggregate = jobAbstractCommandHandler.execute();
-        jobAbstractCommandHandler.getEventBus().send(jobAbstractCommandHandler.getDomainEvent());
+        DomainEvent domainEvent = jobAbstractCommandHandler.execute();
+        jobAbstractCommandHandler.getEventBus().send(domainEvent);
     }
 }

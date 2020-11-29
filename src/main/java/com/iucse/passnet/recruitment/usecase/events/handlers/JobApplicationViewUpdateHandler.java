@@ -29,6 +29,6 @@ public class JobApplicationViewUpdateHandler implements IEventHandler {
     }
 
     private void updateFromAggregate(Job aggregate) {
-
+        
     }
 }

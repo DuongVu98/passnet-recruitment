@@ -19,13 +19,13 @@ public class TeacherAcceptStudentApplicationCommandHandler extends AbstractJobAg
     private final TeacherAcceptStudentJobApplicationCommand command;
 
     @Builder
-    public TeacherAcceptStudentApplicationCommandHandler(JobAggregateRepository aggregateRepository, EventTypes eventToApply, DomainEventBus eventBus, DomainEvent domainEvent, TeacherAcceptStudentJobApplicationCommand command) {
-        super(aggregateRepository, eventToApply, eventBus, domainEvent);
+    public TeacherAcceptStudentApplicationCommandHandler(JobAggregateRepository aggregateRepository, EventTypes eventToApply, DomainEventBus eventBus, TeacherAcceptStudentJobApplicationCommand command) {
+        super(aggregateRepository, eventToApply, eventBus);
         this.command = command;
     }
 
     @Override
-    public Job execute() {
+    public DomainEvent execute() {
         Job jobAggregate = this.aggregateRepository.findByIdWithJobApplications(new JobId(this.command.getJobId()));
         List<JobApplication> jobApplicationList = jobAggregate.getJobApplications().stream().filter(jobApplication -> jobApplication.getId().equal(new JobApplicationId(this.command.getJobApplicationId()))).collect(Collectors.toList());
 
@@ -36,8 +36,7 @@ public class TeacherAcceptStudentApplicationCommandHandler extends AbstractJobAg
             jobAggregate.acceptJobApplication(jobApplication);
 
             Job aggregate = this.aggregateRepository.save(jobAggregate);
-            this.domainEvent = new DomainEvent(this.getEventToApply(), aggregate, jobAggregate.getId());
-            return this.aggregateRepository.save(jobAggregate);
+            return new DomainEvent(this.getEventToApply(), aggregate, jobAggregate.getId());
         }
     }
 }

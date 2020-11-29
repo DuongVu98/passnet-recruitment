@@ -17,14 +17,14 @@ public class StudentApplyJobCommandHandler extends AbstractJobAggregateCommandHa
     private final UUIDGeneratorService uuidGeneratorService;
 
     @Builder
-    public StudentApplyJobCommandHandler(JobAggregateRepository aggregateRepository, EventTypes eventToApply, DomainEventBus eventBus, DomainEvent domainEvent, StudentApplyJobCommand command, UUIDGeneratorService uuidGeneratorService) {
-        super(aggregateRepository, eventToApply, eventBus, domainEvent);
+    public StudentApplyJobCommandHandler(JobAggregateRepository aggregateRepository, EventTypes eventToApply, DomainEventBus eventBus, StudentApplyJobCommand command, UUIDGeneratorService uuidGeneratorService) {
+        super(aggregateRepository, eventToApply, eventBus);
         this.command = command;
         this.uuidGeneratorService = uuidGeneratorService;
     }
 
     @Override
-    public Job execute() {
+    public DomainEvent execute() {
         Job job = this.aggregateRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
 
         JobApplication newJobApplication = JobApplication.builder()
@@ -37,8 +37,7 @@ public class StudentApplyJobCommandHandler extends AbstractJobAggregateCommandHa
 
         job.receiveJobApplication(newJobApplication);
         Job aggregate = this.aggregateRepository.save(job);
-        this.domainEvent = new DomainEvent(this.getEventToApply(), aggregate, newJobApplication.getId());
 
-        return aggregate;
+        return new DomainEvent(this.getEventToApply(), aggregate, newJobApplication.getId());
     }
 }
