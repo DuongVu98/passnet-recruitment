@@ -20,8 +20,5 @@ public abstract class AbstractJobAggregateCommandHandler<AGGREGATE> {
     @Getter @Setter
     private DomainEventBus eventBus;
 
-    @Getter
-    protected DomainEvent domainEvent;
-
-    public abstract AGGREGATE execute();
+    public abstract DomainEvent execute();
 }

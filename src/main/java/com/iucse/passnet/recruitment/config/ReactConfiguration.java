@@ -19,13 +19,6 @@ import rx.Observer;
 @Configuration
 public class ReactConfiguration {
 
-    private final JobViewUpdateHandler jobViewUpdateHandler;
-
-    @Autowired
-    public ReactConfiguration(JobViewUpdateHandler jobViewRepository) {
-        this.jobViewUpdateHandler = jobViewRepository;
-    }
-
     // Command gateway
     @Publisher(topic = "command-gateway")
     public CommandGateway getCommandGateway() {
@@ -47,6 +40,6 @@ public class ReactConfiguration {
     @Bean
     @Subscriber(topic = "domain-event")
     public ViewUpdateSubscriber getViewUpdateSubscriber() {
-        return new ViewUpdateSubscriber(this.jobViewUpdateHandler);
+        return new ViewUpdateSubscriber();
     }
 }
