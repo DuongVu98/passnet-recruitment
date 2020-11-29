@@ -8,9 +8,11 @@ import com.iucse.passnet.recruitment.usecase.commands.requests.StudentApplyJobCo
 import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherAcceptStudentJobApplicationCommand;
 import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherPostJobCommand;
 import com.iucse.passnet.recruitment.usecase.task.CommandTaskRunner;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import rx.Observer;
 
+@Slf4j(topic = "[CommandSubscriber]")
 public class CommandSubscriber implements Observer<BaseCommand> {
 
     @Autowired

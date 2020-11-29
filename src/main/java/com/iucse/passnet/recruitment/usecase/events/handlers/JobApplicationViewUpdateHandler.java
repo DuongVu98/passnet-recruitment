@@ -30,16 +30,21 @@ public class JobApplicationViewUpdateHandler implements IEventHandler {
     public void handle(DomainEvent event) {
         switch (event.getEventTypes()) {
             case TeacherPostedJob:
+                break;
             case StudentAppliedJob:
                 this.aggregate = event.getAggregate();
                 this.jobApplicationId = (JobApplicationId) event.getEntityId();
                 this.updateFromAggregate();
                 break;
             case TeacherAcceptedJob:
+                break;
+            default:
+                break;
         }
     }
 
     private void updateFromAggregate() {
+        log.info("update job application view");
         Optional<JobApplication> optional = this.aggregate.getJobApplications().stream().filter(jobApplication -> jobApplication.getId().equal(this.jobApplicationId)).findFirst();
         if(optional.isPresent()){
             JobApplication jobApplication = optional.get();
