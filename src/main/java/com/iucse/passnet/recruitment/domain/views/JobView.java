@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.redis.core.RedisHash;
 
 @Getter
@@ -18,6 +19,8 @@ public class JobView extends CacheableView {
 	private String content;
 	private String requirement;
 	private String semester;
+
+	@Setter
 	private List<LiteJobApplicationView> jobApplicationsView;
 
 	@Builder

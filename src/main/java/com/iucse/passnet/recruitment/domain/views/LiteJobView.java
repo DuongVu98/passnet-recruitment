@@ -6,8 +6,8 @@ import lombok.Builder;
 @Builder
 @AllArgsConstructor
 public class LiteJobView {
-    String courseName;
-    String jobTitle;
-    String semester;
-    String department;
+	String courseName;
+	String jobTitle;
+	String semester;
+	String department;
 }
