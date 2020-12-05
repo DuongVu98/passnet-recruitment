@@ -42,6 +42,7 @@ public class PostedJobsViewUpdateHandler implements IEventHandler {
 		PostedJobsView postedJobsView = this.createPostedJobsViewIfNotExist();
 		LiteJobView newLiteJobView = LiteJobView
 			.builder()
+			.id(aggregate.getId().getValue())
 			.jobTitle(aggregate.getJobName().getValue())
 			.courseName(aggregate.getCourseName().getValue())
 			.department("")
