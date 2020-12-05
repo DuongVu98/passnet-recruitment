@@ -43,3 +43,7 @@ graphql.playground:
   mapping: /playground
   endpoint: /graphql
 
+view:
+  posted-jobs:
+    id: postedJobViews
+

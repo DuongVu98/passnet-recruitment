@@ -7,17 +7,22 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
 import com.iucse.passnet.recruitment.domain.annotation.Cached;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.domain.repositories.JobApplicationRepository;
-import com.iucse.passnet.recruitment.domain.views.JobApplicationView;
-import com.iucse.passnet.recruitment.domain.views.JobView;
-import com.iucse.passnet.recruitment.domain.views.ViewTypes;
+import com.iucse.passnet.recruitment.domain.viewrepos.PostedJobsViewRepository;
+import com.iucse.passnet.recruitment.domain.views.*;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ViewQuery {
 	private final JobAggregateRepository jobEntityRepository;
 	private final JobApplicationRepository jobApplicationEntityRepository;
+
+	@Value("view.posted-jobs.id")
+	private String postedJobsViewId;
 
 	@Autowired
 	public ViewQuery(
@@ -50,5 +55,27 @@ public class ViewQuery {
 		} else {
 			return null;
 		}
+	}
+
+	@Cached(ViewTypes.POSTED_JOBS_VIEW)
+	public PostedJobsView queryPostedJobsView() {
+		List<LiteJobView> liteJobViewList =
+			this.jobEntityRepository.findAll()
+				.stream()
+				.map(
+					job ->
+						LiteJobView
+							.builder()
+							.id(job.getId().getValue())
+							.jobTitle(job.getJobName().getValue())
+							.semester(job.getSemester().getValue())
+							.department("")
+							.courseName(job.getCourseName().getValue())
+							.appliedAmount(job.getJobApplications().size())
+							.build()
+				)
+				.collect(Collectors.toList());
+
+		return PostedJobsView.builder().id(this.postedJobsViewId).litePostedJobs(liteJobViewList).build();
 	}
 }
