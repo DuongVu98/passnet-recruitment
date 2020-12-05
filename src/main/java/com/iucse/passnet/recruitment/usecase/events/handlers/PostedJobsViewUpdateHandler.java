@@ -8,14 +8,15 @@ import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
 import java.util.ArrayList;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PostedJobsViewUpdateHandler implements IEventHandler {
 	private final PostedJobsViewRepository postedJobsViewRepository;
 
-	@Value("view.posted-jobs.id")
+	@Autowired
+	@Qualifier("posted-jobs-view-id")
 	private String postedJobsViewId;
 
 	@Autowired

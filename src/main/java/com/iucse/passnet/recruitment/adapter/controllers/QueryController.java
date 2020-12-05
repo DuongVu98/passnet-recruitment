@@ -9,6 +9,7 @@ import com.iucse.passnet.recruitment.domain.views.PostedJobsView;
 import com.iucse.passnet.recruitment.usecase.queries.ViewQuery;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,8 @@ public class QueryController {
 	private final PostedJobsViewRepository postedJobsViewRepository;
 	private final ViewQuery viewQuery;
 
-	@Value("view.posted-jobs.id")
+	@Autowired
+	@Qualifier("posted-jobs-view-id")
 	private String postedJobsViewId;
 
 	@Autowired

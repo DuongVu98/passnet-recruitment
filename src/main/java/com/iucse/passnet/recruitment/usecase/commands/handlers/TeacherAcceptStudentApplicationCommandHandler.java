@@ -11,7 +11,9 @@ import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
 import com.iucse.passnet.recruitment.usecase.events.events.EventTypes;
 import java.util.Optional;
 import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j(topic = "[TeacherAcceptStudentApplicationCommandHandler]")
 public class TeacherAcceptStudentApplicationCommandHandler extends AbstractJobAggregateCommandHandler<Job> {
 	private final TeacherAcceptStudentJobApplicationCommand command;
 
@@ -38,10 +40,16 @@ public class TeacherAcceptStudentApplicationCommandHandler extends AbstractJobAg
 			.findAny();
 
 		if (optional.isPresent()) {
+			log.info("non-null domain event");
+
 			JobApplication jobApplication = optional.get();
 			jobAggregate.acceptJobApplication(jobApplication);
-			return new DomainEvent(this.getEventToApply(), jobAggregate, jobApplication.getId());
+			Job aggregate = this.aggregateRepository.save(jobAggregate);
+
+			return new DomainEvent(this.getEventToApply(), aggregate, jobApplication.getId());
 		} else {
+			log.info("null domain event");
+
 			return null;
 		}
 	}

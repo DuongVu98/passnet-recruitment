@@ -7,13 +7,12 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
 import com.iucse.passnet.recruitment.domain.annotation.Cached;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.domain.repositories.JobApplicationRepository;
-import com.iucse.passnet.recruitment.domain.viewrepos.PostedJobsViewRepository;
 import com.iucse.passnet.recruitment.domain.views.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,7 +20,8 @@ public class ViewQuery {
 	private final JobAggregateRepository jobEntityRepository;
 	private final JobApplicationRepository jobApplicationEntityRepository;
 
-	@Value("view.posted-jobs.id")
+	@Autowired
+	@Qualifier("posted-jobs-view-id")
 	private String postedJobsViewId;
 
 	@Autowired

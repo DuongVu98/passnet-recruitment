@@ -44,6 +44,7 @@ public class JobApplication {
 
 	public void accepted() {
 		if (this.applicationState.getValue().equals(ApplicationStates.PENDING)) {
+			log.info("change state!");
 			this.applicationState = new ApplicationState(ApplicationStates.ACCEPTED);
 		}
 	}

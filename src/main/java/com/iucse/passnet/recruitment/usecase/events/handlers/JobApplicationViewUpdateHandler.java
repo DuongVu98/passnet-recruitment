@@ -45,7 +45,6 @@ public class JobApplicationViewUpdateHandler implements IEventHandler {
 	}
 
 	private void updateFromAggregate() {
-		log.info("update job application view");
 		Optional<JobApplication> optional =
 			this.aggregate.getJobApplications()
 				.stream()

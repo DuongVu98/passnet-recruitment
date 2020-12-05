@@ -3,6 +3,7 @@ package com.iucse.passnet.recruitment.adapter.subscribers;
 import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
 import com.iucse.passnet.recruitment.usecase.events.handlers.JobApplicationViewUpdateHandler;
 import com.iucse.passnet.recruitment.usecase.events.handlers.JobViewUpdateHandler;
+import com.iucse.passnet.recruitment.usecase.events.handlers.PostedJobsViewUpdateHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import rx.Observer;
@@ -15,6 +16,9 @@ public class ViewUpdateSubscriber implements Observer<DomainEvent> {
 	@Autowired
 	private JobApplicationViewUpdateHandler jobApplicationViewUpdateHandler;
 
+	@Autowired
+	private PostedJobsViewUpdateHandler postedJobsViewUpdateHandler;
+
 	@Override
 	public void onCompleted() {}
 
@@ -25,5 +29,6 @@ public class ViewUpdateSubscriber implements Observer<DomainEvent> {
 	public void onNext(DomainEvent event) {
 		this.jobViewUpdateHandler.handle(event);
 		this.jobApplicationViewUpdateHandler.handle(event);
+		this.postedJobsViewUpdateHandler.handle(event);
 	}
 }

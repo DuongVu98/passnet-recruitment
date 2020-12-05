@@ -35,12 +35,11 @@ public class PrepareCommandHandlerAspect {
 
 	@Around("getPrepareDomainEventAnnotation()")
 	public Object prepareEvent(ProceedingJoinPoint joinPoint) throws Throwable {
-		log.info("prepareEvent");
-
 		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 		PrepareDomainEvent annotation = methodSignature.getMethod().getAnnotation(PrepareDomainEvent.class);
 
 		AbstractJobAggregateCommandHandler<Job> commandHandler = (AbstractJobAggregateCommandHandler<Job>) joinPoint.proceed();
+
 		commandHandler.setEventToApply(annotation.value());
 		commandHandler.setEventBus(this.eventBus);
 
@@ -49,8 +48,6 @@ public class PrepareCommandHandlerAspect {
 
 	@Around("getPrepareCommandHandler()")
 	public Object prepareCommandHandler(ProceedingJoinPoint joinPoint) throws Throwable {
-		log.info("prepareCommandHandler");
-
 		AbstractJobAggregateCommandHandler<Job> commandHandler = (AbstractJobAggregateCommandHandler<Job>) joinPoint.proceed();
 		commandHandler.setAggregateRepository(this.aggregateRepository);
 

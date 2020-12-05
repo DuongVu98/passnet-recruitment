@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.*;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 @Builder
 @Getter
@@ -15,6 +16,7 @@ import lombok.*;
 @ToString
 @Entity
 @Table(name = "jobs")
+@Slf4j(topic = "[Job]")
 public class Job {
 	@EmbeddedId
 	@AttributeOverride(name = "value", column = @Column(name = "id"))
@@ -45,7 +47,11 @@ public class Job {
 	private Content content;
 
 	@Builder.Default
-	@OneToMany(mappedBy = "job", cascade = { CascadeType.MERGE, CascadeType.REMOVE }, fetch = FetchType.LAZY)
+	@OneToMany(
+		mappedBy = "job",
+		cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE },
+		fetch = FetchType.LAZY
+	)
 	private List<JobApplication> jobApplications = new ArrayList<>();
 
 	public void receiveJobApplication(JobApplication application) {
@@ -55,12 +61,20 @@ public class Job {
 
 	public void acceptJobApplication(JobApplication application) {
 		if (this.jobApplications.contains(application)) {
+			log.info("application list contains this application");
+
 			this.jobApplications =
 				this.jobApplications.stream()
 					.map(
 						currentApplication -> {
 							if (currentApplication.getId().equal(application.getId())) {
+								log.info("change state!");
+
 								currentApplication.accepted();
+								log.info(
+									"currentApplication after accepted: {}",
+									currentApplication.getApplicationState().getValue()
+								);
 							}
 							return currentApplication;
 						}
