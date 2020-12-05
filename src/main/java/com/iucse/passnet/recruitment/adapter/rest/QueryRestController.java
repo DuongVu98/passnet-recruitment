@@ -33,7 +33,7 @@ public class QueryRestController extends BaseController {
 	}
 
 	@GetMapping(value = "/posted-jobs")
-	public PostedJobsView getPostedJobsView(){
+	public PostedJobsView getPostedJobsView() {
 		return this.queryController.getPostedJobsView();
 	}
 }
