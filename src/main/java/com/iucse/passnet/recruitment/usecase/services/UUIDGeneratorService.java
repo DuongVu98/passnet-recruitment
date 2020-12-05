@@ -1,13 +1,12 @@
 package com.iucse.passnet.recruitment.usecase.services;
 
-import org.springframework.stereotype.Service;
-
 import java.util.UUID;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UUIDGeneratorService {
 
-    public UUID generate(){
-        return UUID.randomUUID();
-    }
+	public UUID generate() {
+		return UUID.randomUUID();
+	}
 }

@@ -11,17 +11,16 @@ import lombok.Setter;
 
 @AllArgsConstructor
 public abstract class AbstractJobAggregateCommandHandler<AGGREGATE> {
-    @Setter
-    protected JobAggregateRepository aggregateRepository;
+	@Setter
+	protected JobAggregateRepository aggregateRepository;
 
-    @Getter @Setter
-    private EventTypes eventToApply;
+	@Getter
+	@Setter
+	private EventTypes eventToApply;
 
-    @Getter @Setter
-    private DomainEventBus eventBus;
+	@Getter
+	@Setter
+	private DomainEventBus eventBus;
 
-    @Getter
-    protected DomainEvent domainEvent;
-
-    public abstract AGGREGATE execute();
+	public abstract DomainEvent execute();
 }

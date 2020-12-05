@@ -11,7 +11,6 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CacheableView {
-
-    @Id
-    protected String id;
+	@Id
+	protected String id;
 }

@@ -4,15 +4,16 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.usecase.commands.handlers.AbstractJobAggregateCommandHandler;
 import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @AllArgsConstructor
-public class CommandTaskRunner implements Runnable{
+@Slf4j(topic = "[CommandTaskRunner]")
+public class CommandTaskRunner implements Runnable {
+	private final AbstractJobAggregateCommandHandler<Job> jobAbstractCommandHandler;
 
-    private final AbstractJobAggregateCommandHandler<Job> jobAbstractCommandHandler;
-
-    @Override
-    public void run() {
-        Job aggregate = jobAbstractCommandHandler.execute();
-        jobAbstractCommandHandler.getEventBus().send(jobAbstractCommandHandler.getDomainEvent());
-    }
+	@Override
+	public void run() {
+		DomainEvent domainEvent = jobAbstractCommandHandler.execute();
+		jobAbstractCommandHandler.getEventBus().send(domainEvent);
+	}
 }

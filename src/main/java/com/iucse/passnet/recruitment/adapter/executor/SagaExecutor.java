@@ -4,18 +4,13 @@ import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
 import rx.Observer;
 
 public class SagaExecutor implements Observer<DomainEvent> {
-    @Override
-    public void onCompleted() {
 
-    }
+	@Override
+	public void onCompleted() {}
 
-    @Override
-    public void onError(Throwable e) {
+	@Override
+	public void onError(Throwable e) {}
 
-    }
-
-    @Override
-    public void onNext(DomainEvent event) {
-
-    }
+	@Override
+	public void onNext(DomainEvent event) {}
 }

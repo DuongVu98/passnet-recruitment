@@ -11,22 +11,22 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j(topic = "[ApplicatorController]")
 public class ApplicatorController {
+	private final CommandGateway commandGateway;
 
-    private final CommandGateway commandGateway;
+	@Autowired
+	public ApplicatorController(CommandGateway commandGateway) {
+		this.commandGateway = commandGateway;
+	}
 
-    @Autowired
-    public ApplicatorController(CommandGateway commandGateway) {
-        this.commandGateway = commandGateway;
-    }
+	public void studentApplyJob(JobApplicationForm jobApplicationForm, String studentId, String jobId) {
+		BaseCommand command = StudentApplyJobCommand
+			.builder()
+			.jobId(jobId)
+			.studentId(studentId)
+			.content(jobApplicationForm.getContent())
+			.letter(jobApplicationForm.getLetter())
+			.build();
 
-    public void studentApplyJob(JobApplicationForm jobApplicationForm, String studentId, String jobId){
-        BaseCommand command = StudentApplyJobCommand.builder()
-           .jobId(jobId)
-           .studentId(studentId)
-           .content(jobApplicationForm.getContent())
-           .letter(jobApplicationForm.getLetter())
-           .build();
-
-        this.commandGateway.send(command);
-    }
+		this.commandGateway.send(command);
+	}
 }

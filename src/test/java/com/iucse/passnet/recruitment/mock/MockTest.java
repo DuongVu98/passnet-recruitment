@@ -9,12 +9,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@Sql({"/sql/single-job.view.sql"})
+@Sql({ "/sql/single-job.view.sql" })
 public class MockTest {
-    private final JobAggregateRepository jobAggregateRepository;
+	private final JobAggregateRepository jobAggregateRepository;
 
-    @Autowired
-    public MockTest(JobAggregateRepository jobAggregateRepository) {
-        this.jobAggregateRepository = jobAggregateRepository;
-    }
+	@Autowired
+	public MockTest(JobAggregateRepository jobAggregateRepository) {
+		this.jobAggregateRepository = jobAggregateRepository;
+	}
 }
