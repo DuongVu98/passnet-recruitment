@@ -1,38 +1,56 @@
 package com.iucse.passnet.recruitment.usecase.commands.handlers;
 
+import com.iucse.passnet.recruitment.adapter.channel.DomainEventBus;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplication;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobApplicationId;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherAcceptStudentJobApplicationCommand;
+import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
+import com.iucse.passnet.recruitment.usecase.events.events.EventTypes;
+import java.util.Optional;
 import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+@Slf4j(topic = "[TeacherAcceptStudentApplicationCommandHandler]")
 public class TeacherAcceptStudentApplicationCommandHandler extends AbstractJobAggregateCommandHandler<Job> {
+	private final TeacherAcceptStudentJobApplicationCommand command;
 
-    private final TeacherAcceptStudentJobApplicationCommand command;
+	@Builder
+	public TeacherAcceptStudentApplicationCommandHandler(
+		JobAggregateRepository aggregateRepository,
+		EventTypes eventToApply,
+		DomainEventBus eventBus,
+		TeacherAcceptStudentJobApplicationCommand command
+	) {
+		super(aggregateRepository, eventToApply, eventBus);
+		this.command = command;
+	}
 
-    @Builder
-    public TeacherAcceptStudentApplicationCommandHandler(JobAggregateRepository aggregateRepository, TeacherAcceptStudentJobApplicationCommand command) {
-        super(aggregateRepository);
-        this.command = command;
-    }
+	@Override
+	public DomainEvent execute() {
+		Job jobAggregate = this.aggregateRepository.findByIdWithJobApplications(new JobId(this.command.getJobId()));
+		Optional<JobApplication> optional = jobAggregate
+			.getJobApplications()
+			.stream()
+			.filter(
+				jobApplication -> jobApplication.getId().equal(new JobApplicationId(this.command.getJobApplicationId()))
+			)
+			.findAny();
 
-    @Override
-    public Job execute() {
-        Job jobAggregate = this.aggregateRepository.findByIdWithJobApplications(new JobId(this.command.getJobId()));
-        List<JobApplication> jobApplicationList = jobAggregate.getJobApplications().stream().filter(jobApplication -> jobApplication.getId().equal(new JobApplicationId(this.command.getJobApplicationId()))).collect(Collectors.toList());
+		if (optional.isPresent()) {
+			log.info("non-null domain event");
 
-        if (jobApplicationList.isEmpty()) {
-            return null;
-        } else {
-            JobApplication jobApplication = jobApplicationList.get(0);
-            jobAggregate.acceptJobApplication(jobApplication);
+			JobApplication jobApplication = optional.get();
+			jobAggregate.acceptJobApplication(jobApplication);
+			Job aggregate = this.aggregateRepository.save(jobAggregate);
 
-            return this.aggregateRepository.save(jobAggregate);
-        }
-    }
+			return new DomainEvent(this.getEventToApply(), aggregate, jobApplication.getId());
+		} else {
+			log.info("null domain event");
+
+			return null;
+		}
+	}
 }

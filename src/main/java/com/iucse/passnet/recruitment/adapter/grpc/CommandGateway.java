@@ -9,16 +9,15 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j(topic = "[CommandGateway]")
 public class CommandGateway {
+	private GreetingGrpc.GreetingBlockingStub greetingStub;
 
-    private GreetingGrpc.GreetingBlockingStub greetingStub;
+	@Autowired
+	public CommandGateway(GreetingGrpc.GreetingBlockingStub greetingStub) {
+		this.greetingStub = greetingStub;
+	}
 
-    @Autowired
-    public CommandGateway(GreetingGrpc.GreetingBlockingStub greetingStub){
-        this.greetingStub = greetingStub;
-    }
-
-    public void sendRequest(){
-        HelloReply helloReply = greetingStub.sayHello(HelloRequest.newBuilder().setName("Tony").build());
-        log.info(helloReply.getMessage());
-    }
+	public void sendRequest() {
+		HelloReply helloReply = greetingStub.sayHello(HelloRequest.newBuilder().setName("Tony").build());
+		log.info(helloReply.getMessage());
+	}
 }
