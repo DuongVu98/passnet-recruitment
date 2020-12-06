@@ -6,13 +6,11 @@ import com.iucse.passnet.recruitment.domain.views.JobView;
 import com.iucse.passnet.recruitment.domain.views.PostedJobsView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/query")
+@CrossOrigin("*")
 @Slf4j(topic = "[QueryRestController]")
 public class QueryRestController extends BaseController {
 	private final QueryController queryController;
