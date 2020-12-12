@@ -1,11 +1,13 @@
 package com.iucse.passnet.recruitment.adapter.rest;
 
 import com.iucse.passnet.recruitment.adapter.controllers.QueryController;
+import com.iucse.passnet.recruitment.domain.exceptions.JobNotFoundException;
+import com.iucse.passnet.recruitment.domain.exceptions.NullIdentifierException;
 import com.iucse.passnet.recruitment.domain.views.JobApplicationView;
-import com.iucse.passnet.recruitment.domain.views.JobView;
 import com.iucse.passnet.recruitment.domain.views.PostedJobsView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,13 +23,19 @@ public class QueryRestController extends BaseController {
 	}
 
 	@GetMapping(value = "/job-view")
-	public JobView getJobView(@RequestParam("jobId") String id) {
-		return this.queryController.getJobView(id);
+	public ResponseEntity<?> getJobView(@RequestParam("jobId") String id) {
+		try {
+			return ResponseEntity.ok(this.queryController.getJobView(id));
+		} catch (NullIdentifierException e) {
+			return badRequest(e);
+		}catch (JobNotFoundException e){
+			return notFound();
+		}
 	}
 
 	@GetMapping(value = "/job-application-view")
-	public JobApplicationView getJobApplicationView(@RequestParam("jobApplicationId") String id) {
-		return this.queryController.getJobApplicationView(id);
+	public ResponseEntity<?> getJobApplicationView(@RequestParam("jobApplicationId") String id) {
+		return ResponseEntity.ok(this.queryController.getJobApplicationView(id));
 	}
 
 	@GetMapping(value = "/posted-jobs")

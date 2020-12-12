@@ -34,7 +34,7 @@ public class ViewQuery {
 	}
 
 	@Cached(ViewTypes.JOB_VIEW)
-	public JobView queryJobView(String id) {
+	public JobView queryJobView(String id) throws NullPointerException{
 		Job aggregate = this.jobEntityRepository.findByIdWithJobApplications(new JobId(id));
 		return new JobView(aggregate, id);
 	}

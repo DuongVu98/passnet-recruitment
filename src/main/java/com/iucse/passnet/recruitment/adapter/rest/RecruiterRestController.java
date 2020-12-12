@@ -3,15 +3,12 @@ package com.iucse.passnet.recruitment.adapter.rest;
 import com.iucse.passnet.recruitment.adapter.controllers.RecruiterController;
 import com.iucse.passnet.recruitment.adapter.forms.JobCreationForm;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/recruiter")
+@RequestMapping(value = "/command/recruiter")
 @Tag(name = "Recruiter API")
 @Slf4j(topic = "[RecruiterRestController]")
 public class RecruiterRestController extends BaseController {
@@ -20,22 +17,6 @@ public class RecruiterRestController extends BaseController {
 	@Autowired
 	public RecruiterRestController(RecruiterController recruiterController) {
 		this.recruiterController = recruiterController;
-	}
-
-	@ResponseBody
-	@GetMapping(value = "/posted-jobs")
-	public ResponseEntity<?> getAllPostedJobsTest() {
-		//        try {
-		//            Optional<List<Job>> opt = Optional.ofNullable(this.recruiterController.getAllPostedJobs());
-		//            if (opt.isPresent()) {
-		//                return ResponseEntity.ok(opt.get());
-		//            } else {
-		//                return notFound();
-		//            }
-		//        } catch (Exception exception) {
-		//            return badRequest(exception);
-		//        }
-		return null;
 	}
 
 	@PostMapping(value = "/post-job")

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 //@CrossOrigin
 @RestController
-@RequestMapping(value = "/applicator")
+@RequestMapping(value = "/command/applicator")
 @Tag(name = "Applicator API")
 public class ApplicatorRestController extends BaseController {
 	private final ApplicatorController applicatorController;

@@ -1,5 +1,7 @@
 package com.iucse.passnet.recruitment.adapter.controllers;
 
+import com.iucse.passnet.recruitment.domain.exceptions.JobNotFoundException;
+import com.iucse.passnet.recruitment.domain.exceptions.NullIdentifierException;
 import com.iucse.passnet.recruitment.domain.viewrepos.JobApplicationViewRepository;
 import com.iucse.passnet.recruitment.domain.viewrepos.JobViewRepository;
 import com.iucse.passnet.recruitment.domain.viewrepos.PostedJobsViewRepository;
@@ -10,7 +12,6 @@ import com.iucse.passnet.recruitment.usecase.queries.ViewQuery;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -37,11 +38,20 @@ public class QueryController {
 		this.viewQuery = viewQuery;
 	}
 
-	public JobView getJobView(String id) {
-		if (this.jobViewRepository.findById(id).isPresent()) {
-			return this.jobViewRepository.findById(id).get();
-		} else {
-			return this.viewQuery.queryJobView(id);
+	public JobView getJobView(String id) throws NullIdentifierException, JobNotFoundException{
+		if(id != null){
+			if (this.jobViewRepository.findById(id).isPresent()) {
+				return this.jobViewRepository.findById(id).get();
+			} else {
+				try {
+					return this.viewQuery.queryJobView(id);
+				} catch (NullPointerException exception){
+					throw new JobNotFoundException(String.format("Job with id %s not found", id));
+				}
+			}
+		}
+		else {
+			throw new NullIdentifierException("Job id is null");
 		}
 	}
 
