@@ -82,6 +82,7 @@ test {
 }
 
 bootJar {
+    archiveName 'PassnetRecruitment.jar'
     manifest {
         attributes(
                 'Start-Class': 'com.iucse.passnet.recruitment.PassnetRecruitmentApplication'
