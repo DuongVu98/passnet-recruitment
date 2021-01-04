@@ -1,0 +1,22 @@
+version: "3.7"
+
+networks:
+  passnet-recruitment-network:
+    driver: bridge
+      ipam:
+        config:
+          subnet: 172.20.0.0/24
+services:
+  server:
+    image: tony16019/passnet-recruitment:latest
+    container_name: passnet-recruitment-server
+    networks:
+      passnet-recruitment-network:
+        - ipv4_address: 172.20.0.12
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
