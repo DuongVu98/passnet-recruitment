@@ -1,0 +1,32 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: "jdbc:postgresql://aggregatedb:5432/passnet_recruitment"
+    username: passnet-recruitment-app
+    password: tungduong98
+    driverClassName: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: false
+        generate_statistics: false
+        enable_lazy_load_no_trans: true
+    show-sql: false
+  redis:
+    host: viewcache
+    port: 6379
+springdoc:
+  api-docs:
+    path: /api-docs
+  pathsToMatch: /**
+  swagger-ui:
+    path: /swagger-ui.html
+grpc:
+  port: 9090
+
+view:
+  posted-jobs:
+    id: postedJobViews
+

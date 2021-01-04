@@ -6,6 +6,7 @@ networks:
       ipam:
         config:
           subnet: 172.20.0.0/24
+
 services:
   server:
     image: tony16019/passnet-recruitment:latest
@@ -16,7 +17,23 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - db
+      - aggregatedb
 
-  db:
+  aggregatedb:
     image: postgres:latest
+    environment:
+      - POSTGRES_USER=passnet-recruitment-app
+      - POSTGRES_PASSWORD=tungduong98
+      - POSTGRES_DB=passnet_recruitment
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+
+  viewcache:
+    image: redis:alpine
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    volumes:
+      - database-data:/var/lib/redis
+
+volumes:
+  database-data:
