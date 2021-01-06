@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "jobs")
+@Table(name = "jobs", schema = "public")
 @Slf4j(topic = "[Job]")
 public class Job {
 	@EmbeddedId

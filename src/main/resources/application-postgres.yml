@@ -2,7 +2,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: "jdbc:postgresql://aggregatedb:5432/passnet_recruitment"
+    url: "jdbc:postgresql://192.168.99.100:5432/passnet_recruitment"
     username: passnet-recruitment-app
     password: tungduong98
     driverClassName: org.postgresql.Driver
@@ -18,7 +18,7 @@ spring:
     console:
       enabled: false
   redis:
-    host: viewcache
+    host: 192.168.99.100
     port: 6379
 springdoc:
   api-docs:

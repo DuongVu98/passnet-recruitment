@@ -1,19 +1,15 @@
 version: "3.7"
 
 networks:
-  passnet-recruitment-network:
+  passnetrecruitmentnetwork:
     driver: bridge
-      ipam:
-        config:
-          subnet: 172.20.0.0/24
 
 services:
   server:
     image: tony16019/passnet-recruitment:latest
     container_name: passnet-recruitment-server
     networks:
-      passnet-recruitment-network:
-        - ipv4_address: 172.20.0.12
+      passnetrecruitmentnetwork:
     ports:
       - "8080:8080"
     depends_on:
@@ -27,6 +23,10 @@ services:
       - POSTGRES_DB=passnet_recruitment
     volumes:
       - database-data:/var/lib/postgresql/data/
+    networks:
+      passnetrecruitmentnetwork:
+    ports:
+      - "5432:5432"
 
   viewcache:
     image: redis:alpine
@@ -34,6 +34,8 @@ services:
       - REDIS_REPLICATION_MODE=master
     volumes:
       - database-data:/var/lib/redis
+    networks:
+      passnetrecruitmentnetwork:
 
 volumes:
   database-data:
