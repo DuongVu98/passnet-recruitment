@@ -18,7 +18,7 @@ public class ApplicatorRestController extends BaseController {
 		this.applicatorController = applicatorController;
 	}
 
-	@GetMapping(value = "/apply-job")
+	@PostMapping(value = "/apply-job")
 	public void studentApplyJob(
 		@RequestBody JobApplicationForm form,
 		@RequestParam("studentId") String studentId,
