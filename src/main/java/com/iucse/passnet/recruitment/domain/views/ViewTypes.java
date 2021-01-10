@@ -4,4 +4,5 @@ public enum ViewTypes {
 	JOB_VIEW,
 	JOB_APPLICATION_VIEW,
 	POSTED_JOBS_VIEW,
+	USER_OWN_JOB_VIEW,
 }

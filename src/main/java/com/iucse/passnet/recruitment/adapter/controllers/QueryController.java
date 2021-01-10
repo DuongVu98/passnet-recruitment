@@ -4,10 +4,9 @@ import com.iucse.passnet.recruitment.domain.exceptions.JobNotFoundException;
 import com.iucse.passnet.recruitment.domain.exceptions.NullIdentifierException;
 import com.iucse.passnet.recruitment.domain.viewrepos.JobApplicationViewRepository;
 import com.iucse.passnet.recruitment.domain.viewrepos.JobViewRepository;
+import com.iucse.passnet.recruitment.domain.viewrepos.OwnJobListViewRepository;
 import com.iucse.passnet.recruitment.domain.viewrepos.PostedJobsViewRepository;
-import com.iucse.passnet.recruitment.domain.views.JobApplicationView;
-import com.iucse.passnet.recruitment.domain.views.JobView;
-import com.iucse.passnet.recruitment.domain.views.PostedJobsView;
+import com.iucse.passnet.recruitment.domain.views.*;
 import com.iucse.passnet.recruitment.usecase.queries.ViewQuery;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ public class QueryController {
 	private final JobViewRepository jobViewRepository;
 	private final JobApplicationViewRepository jobApplicationViewRepository;
 	private final PostedJobsViewRepository postedJobsViewRepository;
+	private final OwnJobListViewRepository ownJobListViewRepository;
 	private final ViewQuery viewQuery;
 
 	@Autowired
@@ -30,27 +30,28 @@ public class QueryController {
 		JobViewRepository jobViewRepository,
 		JobApplicationViewRepository jobApplicationViewRepository,
 		PostedJobsViewRepository postedJobsViewRepository,
+		OwnJobListViewRepository ownJobListViewRepository,
 		ViewQuery viewQuery
 	) {
 		this.jobViewRepository = jobViewRepository;
 		this.jobApplicationViewRepository = jobApplicationViewRepository;
 		this.postedJobsViewRepository = postedJobsViewRepository;
+		this.ownJobListViewRepository = ownJobListViewRepository;
 		this.viewQuery = viewQuery;
 	}
 
-	public JobView getJobView(String id) throws NullIdentifierException, JobNotFoundException{
-		if(id != null){
+	public JobView getJobView(String id) throws NullIdentifierException, JobNotFoundException {
+		if (id != null) {
 			if (this.jobViewRepository.findById(id).isPresent()) {
 				return this.jobViewRepository.findById(id).get();
 			} else {
 				try {
 					return this.viewQuery.queryJobView(id);
-				} catch (NullPointerException exception){
+				} catch (NullPointerException exception) {
 					throw new JobNotFoundException(String.format("Job with id %s not found", id));
 				}
 			}
-		}
-		else {
+		} else {
 			throw new NullIdentifierException("Job id is null");
 		}
 	}
@@ -63,5 +64,10 @@ public class QueryController {
 	public PostedJobsView getPostedJobsView() {
 		Optional<PostedJobsView> optional = this.postedJobsViewRepository.findById(this.postedJobsViewId);
 		return optional.orElseGet(this.viewQuery::queryPostedJobsView);
+	}
+
+	public OwnedJobListView getPostedJobsByUserView(String uid) {
+		Optional<OwnedJobListView> viewOptional = Optional.ofNullable(this.ownJobListViewRepository.findByTeacherId(uid));
+		return viewOptional.orElseGet(() -> viewQuery.queryUserOwnJob(uid));
 	}
 }

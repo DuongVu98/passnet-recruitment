@@ -1,0 +1,23 @@
+version: "3.7"
+
+networks:
+  passnetrecruitmentnetwork:
+    driver: bridge
+
+services:
+  server:
+    image: tony16019/passnet-recruitment:latest
+    container_name: passnet-recruitment-server
+    networks:
+      passnetrecruitmentnetwork:
+    environment:
+      - PROFILE=local
+    ports:
+      - "8080:8080"
+
+  viewcache:
+    image: redis:alpine
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    networks:
+      passnetrecruitmentnetwork:

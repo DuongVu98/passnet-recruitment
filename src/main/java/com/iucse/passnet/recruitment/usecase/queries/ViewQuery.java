@@ -34,7 +34,7 @@ public class ViewQuery {
 	}
 
 	@Cached(ViewTypes.JOB_VIEW)
-	public JobView queryJobView(String id) throws NullPointerException{
+	public JobView queryJobView(String id) throws NullPointerException {
 		Job aggregate = this.jobEntityRepository.findByIdWithJobApplications(new JobId(id));
 		return new JobView(aggregate, id);
 	}
@@ -77,5 +77,27 @@ public class ViewQuery {
 				.collect(Collectors.toList());
 
 		return PostedJobsView.builder().id(this.postedJobsViewId).litePostedJobs(liteJobViewList).build();
+	}
+
+	@Cached(ViewTypes.USER_OWN_JOB_VIEW)
+	public OwnedJobListView queryUserOwnJob(String uid) {
+		List<LiteJobView> liteJobViewList =
+			this.jobEntityRepository.findAll()
+				.stream()
+				.filter(job -> job.getJobOwner().getValue().equals(uid))
+				.map(
+					job ->
+						LiteJobView
+							.builder()
+							.id(job.getId().getValue())
+							.jobTitle(job.getJobName().getValue())
+							.semester(job.getSemester().getValue())
+							.department("")
+							.courseName(job.getCourseName().getValue())
+							.appliedAmount(job.getJobApplications().size())
+							.build()
+				)
+				.collect(Collectors.toList());
+		return OwnedJobListView.builder().id(uid).litePostedJobs(liteJobViewList).build();
 	}
 }
