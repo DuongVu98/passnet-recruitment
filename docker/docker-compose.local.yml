@@ -21,3 +21,5 @@ services:
       - REDIS_REPLICATION_MODE=master
     networks:
       passnetrecruitmentnetwork:
+    ports:
+      - "6379:6379"
