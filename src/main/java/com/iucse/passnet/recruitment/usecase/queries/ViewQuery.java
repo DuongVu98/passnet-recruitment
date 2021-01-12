@@ -98,6 +98,6 @@ public class ViewQuery {
 							.build()
 				)
 				.collect(Collectors.toList());
-		return OwnedJobListView.builder().id(uid).litePostedJobs(liteJobViewList).build();
+		return OwnedJobListView.builder().id(uid).teacherId(uid).litePostedJobs(liteJobViewList).build();
 	}
 }

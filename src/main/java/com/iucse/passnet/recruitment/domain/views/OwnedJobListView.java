@@ -16,8 +16,9 @@ public class OwnedJobListView extends CacheableView {
 	private String teacherId;
 
 	@Builder
-	public OwnedJobListView(String id, List<LiteJobView> litePostedJobs) {
+	public OwnedJobListView(String id, List<LiteJobView> litePostedJobs, String teacherId) {
 		super(id);
 		this.litePostedJobs = litePostedJobs;
+		this.teacherId = teacherId;
 	}
 }
