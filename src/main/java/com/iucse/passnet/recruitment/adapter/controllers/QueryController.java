@@ -2,10 +2,7 @@ package com.iucse.passnet.recruitment.adapter.controllers;
 
 import com.iucse.passnet.recruitment.domain.exceptions.JobNotFoundException;
 import com.iucse.passnet.recruitment.domain.exceptions.NullIdentifierException;
-import com.iucse.passnet.recruitment.domain.viewrepos.JobApplicationViewRepository;
-import com.iucse.passnet.recruitment.domain.viewrepos.JobViewRepository;
-import com.iucse.passnet.recruitment.domain.viewrepos.OwnJobListViewRepository;
-import com.iucse.passnet.recruitment.domain.viewrepos.PostedJobsViewRepository;
+import com.iucse.passnet.recruitment.domain.viewrepos.*;
 import com.iucse.passnet.recruitment.domain.views.*;
 import com.iucse.passnet.recruitment.usecase.queries.ViewQuery;
 import java.util.Optional;
@@ -19,6 +16,7 @@ public class QueryController {
 	private final JobApplicationViewRepository jobApplicationViewRepository;
 	private final PostedJobsViewRepository postedJobsViewRepository;
 	private final OwnJobListViewRepository ownJobListViewRepository;
+	private final JobApplicationListViewRepository jobApplicationListViewRepository;
 	private final ViewQuery viewQuery;
 
 	@Autowired
@@ -26,17 +24,12 @@ public class QueryController {
 	private String postedJobsViewId;
 
 	@Autowired
-	public QueryController(
-		JobViewRepository jobViewRepository,
-		JobApplicationViewRepository jobApplicationViewRepository,
-		PostedJobsViewRepository postedJobsViewRepository,
-		OwnJobListViewRepository ownJobListViewRepository,
-		ViewQuery viewQuery
-	) {
+	public QueryController(JobViewRepository jobViewRepository, JobApplicationViewRepository jobApplicationViewRepository, PostedJobsViewRepository postedJobsViewRepository, OwnJobListViewRepository ownJobListViewRepository, JobApplicationListViewRepository jobApplicationListViewRepository, ViewQuery viewQuery) {
 		this.jobViewRepository = jobViewRepository;
 		this.jobApplicationViewRepository = jobApplicationViewRepository;
 		this.postedJobsViewRepository = postedJobsViewRepository;
 		this.ownJobListViewRepository = ownJobListViewRepository;
+		this.jobApplicationListViewRepository = jobApplicationListViewRepository;
 		this.viewQuery = viewQuery;
 	}
 
@@ -71,5 +64,10 @@ public class QueryController {
 			this.ownJobListViewRepository.findByTeacherId(uid)
 		);
 		return viewOptional.orElseGet(() -> viewQuery.queryUserOwnJob(uid));
+	}
+
+	public JobApplicationListView getJobApplicationListView(String jobId) {
+		Optional<JobApplicationListView> jobApplicationListViewOptional = this.jobApplicationListViewRepository.findById(jobId);
+		return jobApplicationListViewOptional.orElseGet(() -> this.viewQuery.queryJobApplicationListView(jobId));
 	}
 }

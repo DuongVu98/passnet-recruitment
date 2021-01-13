@@ -7,7 +7,7 @@ import lombok.Setter;
 import org.springframework.data.redis.core.RedisHash;
 
 @Getter
-@RedisHash(value = "posted_jobs_view", timeToLive = 10)
+@RedisHash(value = "owned_job_list_view", timeToLive = 10)
 public class OwnedJobListView extends CacheableView {
 	@Setter
 	private List<LiteJobView> litePostedJobs;
