@@ -67,7 +67,9 @@ public class QueryController {
 	}
 
 	public OwnedJobListView getPostedJobsByUserView(String uid) {
-		Optional<OwnedJobListView> viewOptional = Optional.ofNullable(this.ownJobListViewRepository.findByTeacherId(uid));
+		Optional<OwnedJobListView> viewOptional = Optional.ofNullable(
+			this.ownJobListViewRepository.findByTeacherId(uid)
+		);
 		return viewOptional.orElseGet(() -> viewQuery.queryUserOwnJob(uid));
 	}
 }
