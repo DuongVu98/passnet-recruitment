@@ -7,6 +7,7 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
 import com.iucse.passnet.recruitment.domain.annotation.Cached;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.domain.repositories.JobApplicationRepository;
+import com.iucse.passnet.recruitment.domain.viewrepos.JobApplicationListViewRepository;
 import com.iucse.passnet.recruitment.domain.views.*;
 import java.util.List;
 import java.util.Optional;
@@ -26,9 +27,8 @@ public class ViewQuery {
 
 	@Autowired
 	public ViewQuery(
-		JobAggregateRepository jobEntityRepository,
-		JobApplicationRepository jobApplicationEntityRepository
-	) {
+	JobAggregateRepository jobEntityRepository,
+	JobApplicationRepository jobApplicationEntityRepository) {
 		this.jobEntityRepository = jobEntityRepository;
 		this.jobApplicationEntityRepository = jobApplicationEntityRepository;
 	}
@@ -99,5 +99,11 @@ public class ViewQuery {
 				)
 				.collect(Collectors.toList());
 		return OwnedJobListView.builder().id(uid).teacherId(uid).litePostedJobs(liteJobViewList).build();
+	}
+
+	@Cached(ViewTypes.JOB_APPLICATION_LIST_VIEW)
+	public JobApplicationListView queryJobApplicationListView(String jobId) {
+		Job aggregate = this.jobEntityRepository.findByIdWithJobApplications(new JobId(jobId));
+		return new JobApplicationListView(aggregate);
 	}
 }

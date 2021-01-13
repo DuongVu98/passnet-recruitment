@@ -3,6 +3,7 @@ package com.iucse.passnet.recruitment.adapter.rest;
 import com.iucse.passnet.recruitment.adapter.controllers.QueryController;
 import com.iucse.passnet.recruitment.domain.exceptions.JobNotFoundException;
 import com.iucse.passnet.recruitment.domain.exceptions.NullIdentifierException;
+import com.iucse.passnet.recruitment.domain.views.JobApplicationListView;
 import com.iucse.passnet.recruitment.domain.views.OwnedJobListView;
 import com.iucse.passnet.recruitment.domain.views.PostedJobsView;
 import lombok.extern.slf4j.Slf4j;
@@ -47,5 +48,11 @@ public class QueryRestController extends BaseController {
 	public ResponseEntity<?> getOwnPostedJobs(@RequestParam("teacherId") String teacherId) {
 		OwnedJobListView ownedJobListView = this.queryController.getPostedJobsByUserView(teacherId);
 		return ResponseEntity.ok(ownedJobListView);
+	}
+
+	@GetMapping(value = "/job-application-list-view")
+	public ResponseEntity<?> getJobApplicationListView(@RequestParam("jobId") String jobId) {
+		JobApplicationListView jobApplicationListView = this.queryController.getJobApplicationListView(jobId);
+		return ResponseEntity.ok(jobApplicationListView);
 	}
 }
