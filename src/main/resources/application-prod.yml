@@ -31,6 +31,11 @@ springdoc:
 grpc:
   port: 9090
 
+saga:
+  grpc:
+    host: localhost
+    port: 6565
+
 view:
   posted-jobs:
     id: postedJobViews

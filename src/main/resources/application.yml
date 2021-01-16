@@ -22,7 +22,7 @@ spring:
         trace: false
         web-allow-others: false
   redis:
-    host: 192.168.99.100
+    host: 192.168.99.101
     port: 6379
 springdoc:
   api-docs:
@@ -32,20 +32,6 @@ springdoc:
     path: /swagger-ui.html
 grpc:
   port: 9090
-
-graphql:
-  servlet:
-    mapping: /query
-    enabled: true
-    maxQueryDepth: 5
-#    cors:
-#      allowed-origins: "*"
-#      allowed-headers: "Access-Control-Allow-Origin, access-control-allow-origin, access-control-allow-headers, Origin, X-Requested-With, Content-Type, Accept, Authorization"
-#      allowed-methods: "GET,HEAD,OPTIONS,POST,PUT"
-#    corsEnabled: false
-graphql.playground:
-  mapping: /playground
-  endpoint: /graphql
 
 view:
   posted-jobs:
