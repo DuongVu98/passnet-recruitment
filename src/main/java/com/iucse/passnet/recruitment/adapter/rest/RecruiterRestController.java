@@ -5,6 +5,7 @@ import com.iucse.passnet.recruitment.adapter.forms.JobCreationForm;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,5 +31,10 @@ public class RecruiterRestController extends BaseController {
 		@RequestParam("jobId") String jobId
 	) {
 		this.recruiterController.acceptJobApplication(jobApplicationId, jobId);
+	}
+
+	@PostMapping(value = "/create-classroom")
+	public ResponseEntity<?> createClassroom(@RequestParam("jobId") String jobId) {
+
 	}
 }

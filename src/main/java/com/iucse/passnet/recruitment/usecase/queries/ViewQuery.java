@@ -27,8 +27,9 @@ public class ViewQuery {
 
 	@Autowired
 	public ViewQuery(
-	JobAggregateRepository jobEntityRepository,
-	JobApplicationRepository jobApplicationEntityRepository) {
+		JobAggregateRepository jobEntityRepository,
+		JobApplicationRepository jobApplicationEntityRepository
+	) {
 		this.jobEntityRepository = jobEntityRepository;
 		this.jobApplicationEntityRepository = jobApplicationEntityRepository;
 	}

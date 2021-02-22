@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_package = "com.cseiu.passnet.saga.recruitmentsaga";
+
+package produceEvents;
+
+service EventProducer {
+    rpc ProduceCreateClassEvent (CreateClassEvent) returns (SagaResponse) {}
+}
+
+message CreateClassEvent {
+    string teacherId = 1;
+    repeated string taIds = 2;
+}
+
+message SagaResponse {
+    string message = 1;
+}

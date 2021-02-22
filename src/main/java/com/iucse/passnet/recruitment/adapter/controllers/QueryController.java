@@ -24,7 +24,14 @@ public class QueryController {
 	private String postedJobsViewId;
 
 	@Autowired
-	public QueryController(JobViewRepository jobViewRepository, JobApplicationViewRepository jobApplicationViewRepository, PostedJobsViewRepository postedJobsViewRepository, OwnJobListViewRepository ownJobListViewRepository, JobApplicationListViewRepository jobApplicationListViewRepository, ViewQuery viewQuery) {
+	public QueryController(
+		JobViewRepository jobViewRepository,
+		JobApplicationViewRepository jobApplicationViewRepository,
+		PostedJobsViewRepository postedJobsViewRepository,
+		OwnJobListViewRepository ownJobListViewRepository,
+		JobApplicationListViewRepository jobApplicationListViewRepository,
+		ViewQuery viewQuery
+	) {
 		this.jobViewRepository = jobViewRepository;
 		this.jobApplicationViewRepository = jobApplicationViewRepository;
 		this.postedJobsViewRepository = postedJobsViewRepository;
@@ -67,7 +74,8 @@ public class QueryController {
 	}
 
 	public JobApplicationListView getJobApplicationListView(String jobId) {
-		Optional<JobApplicationListView> jobApplicationListViewOptional = this.jobApplicationListViewRepository.findById(jobId);
+		Optional<JobApplicationListView> jobApplicationListViewOptional =
+			this.jobApplicationListViewRepository.findById(jobId);
 		return jobApplicationListViewOptional.orElseGet(() -> this.viewQuery.queryJobApplicationListView(jobId));
 	}
 }

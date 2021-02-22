@@ -1,5 +1,6 @@
 package com.iucse.passnet.recruitment.config;
 
+import com.cseiu.passnet.saga.recruitmentsaga.EventProducerGrpc;
 import com.cseiu.passnet.saga.recruitmentsaga.GreetingGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -16,9 +17,9 @@ public class SagaConfiguration {
 	private int servicePort;
 
 	@Bean
-	public GreetingGrpc.GreetingBlockingStub getStub() {
+	public EventProducerGrpc.EventProducerBlockingStub eventProducerBlockingStub(){
 		ManagedChannel channel = ManagedChannelBuilder.forAddress(serviceHost, servicePort).usePlaintext().build();
-		GreetingGrpc.GreetingBlockingStub greetingStub = GreetingGrpc.newBlockingStub(channel);
-		return greetingStub;
+		EventProducerGrpc.EventProducerBlockingStub eventProducerBlockingStub = EventProducerGrpc.newBlockingStub(channel);
+		return eventProducerBlockingStub;
 	}
 }
