@@ -23,4 +23,8 @@ public class BaseController {
 			HttpStatus.BAD_REQUEST
 		);
 	}
+
+	protected ResponseEntity<?> ok() {
+		return ResponseEntity.ok().build();
+	}
 }

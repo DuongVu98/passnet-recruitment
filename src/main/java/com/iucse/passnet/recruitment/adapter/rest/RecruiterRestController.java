@@ -35,6 +35,7 @@ public class RecruiterRestController extends BaseController {
 
 	@PostMapping(value = "/create-classroom")
 	public ResponseEntity<?> createClassroom(@RequestParam("jobId") String jobId) {
-
+		this.recruiterController.createClassroom(jobId);
+		return ok();
 	}
 }
