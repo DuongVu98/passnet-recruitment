@@ -1,6 +1,0 @@
-type Query {
-    jobView(id: ID): JobView
-    jobApplicationView(id: ID): JobApplicationView
-    postedJobsView: PostedJobsView
-    postedJobsByTeacherIdView(teacherId: ID): PostedJobsView
-}

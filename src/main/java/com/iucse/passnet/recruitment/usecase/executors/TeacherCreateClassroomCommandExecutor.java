@@ -6,7 +6,7 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.vos.ApplicationStates;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
 import com.iucse.passnet.recruitment.domain.events.produce.CreateClassEvent;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
-import com.iucse.passnet.recruitment.usecase.commands.TeacherCreateClassroomCommand;
+import com.iucse.passnet.recruitment.domain.commands.TeacherCreateClassroomCommand;
 import lombok.Builder;
 
 import java.util.List;

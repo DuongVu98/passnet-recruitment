@@ -31,4 +31,4 @@ out/
 
 log.txt
 
-**/application-dev.yml
+**/application-local.yml

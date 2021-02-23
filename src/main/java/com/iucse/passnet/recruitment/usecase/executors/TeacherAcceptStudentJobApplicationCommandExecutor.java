@@ -6,7 +6,7 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobApplicationId;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
 import com.iucse.passnet.recruitment.domain.exceptions.JobApplicationNotFound;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
-import com.iucse.passnet.recruitment.usecase.commands.TeacherAcceptStudentJobApplicationCommand;
+import com.iucse.passnet.recruitment.domain.commands.TeacherAcceptStudentJobApplicationCommand;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 

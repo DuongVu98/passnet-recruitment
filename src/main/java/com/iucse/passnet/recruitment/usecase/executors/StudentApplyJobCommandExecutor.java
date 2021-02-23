@@ -5,7 +5,7 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplicatio
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
-import com.iucse.passnet.recruitment.usecase.commands.StudentApplyJobCommand;
+import com.iucse.passnet.recruitment.domain.commands.StudentApplyJobCommand;
 import lombok.Builder;
 
 public class StudentApplyJobCommandExecutor extends AbstractCommandExecutor<StudentApplyJobCommand, Job>{

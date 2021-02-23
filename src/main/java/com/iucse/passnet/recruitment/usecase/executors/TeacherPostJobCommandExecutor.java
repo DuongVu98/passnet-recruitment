@@ -4,7 +4,7 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
-import com.iucse.passnet.recruitment.usecase.commands.TeacherPostJobCommand;
+import com.iucse.passnet.recruitment.domain.commands.TeacherPostJobCommand;
 import lombok.Builder;
 
 public class TeacherPostJobCommandExecutor extends AbstractCommandExecutor<TeacherPostJobCommand, Job>{

@@ -59,7 +59,7 @@ public class Job {
 		this.jobApplications.add(application);
 	}
 
-	public void acceptJobApplication(JobApplication application) {
+	public void acceptJobApplication(JobApplication application) throws JobApplicationNotFound {
 		if (this.jobApplications.contains(application)) {
 			log.info("application list contains this application");
 

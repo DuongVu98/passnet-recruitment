@@ -5,7 +5,7 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.exceptions.CommandExecutorNotFoundException;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
-import com.iucse.passnet.recruitment.usecase.commands.*;
+import com.iucse.passnet.recruitment.domain.commands.*;
 import com.iucse.passnet.recruitment.usecase.executors.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

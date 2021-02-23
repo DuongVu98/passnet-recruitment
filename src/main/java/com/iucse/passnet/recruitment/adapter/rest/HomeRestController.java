@@ -12,6 +12,6 @@ public class HomeRestController {
 
 	@GetMapping(value = "")
 	public String getHomePage() {
-		return "Hello";
+		return "Welcome to Passnet Recruitment service";
 	}
 }
