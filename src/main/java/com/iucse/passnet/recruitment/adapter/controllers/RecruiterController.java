@@ -1,11 +1,10 @@
 package com.iucse.passnet.recruitment.adapter.controllers;
 
-import com.iucse.passnet.recruitment.adapter.forms.JobCreationForm;
+import com.iucse.passnet.recruitment.domain.forms.JobCreationForm;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.commands.TeacherAcceptStudentJobApplicationCommand;
 import com.iucse.passnet.recruitment.domain.commands.TeacherCreateClassroomCommand;
 import com.iucse.passnet.recruitment.domain.commands.TeacherPostJobCommand;
-import com.iucse.passnet.recruitment.domain.exceptions.CommandExecutorNotFoundException;
 import com.iucse.passnet.recruitment.usecase.executors.AbstractCommandExecutor;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +55,6 @@ public class RecruiterController {
 			.build();
 
 		AbstractCommandExecutor<TeacherCreateClassroomCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(command);
-		commandExecutor.execute(command);
+		Job aggregate = commandExecutor.execute(command);
 	}
 }

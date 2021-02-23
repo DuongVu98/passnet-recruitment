@@ -1,12 +1,14 @@
 package com.iucse.passnet.recruitment.adapter.rest;
 
 import com.iucse.passnet.recruitment.adapter.controllers.RecruiterController;
-import com.iucse.passnet.recruitment.adapter.forms.JobCreationForm;
+import com.iucse.passnet.recruitment.domain.forms.JobCreationForm;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @Tag(name = "Recruiter API")
@@ -21,7 +23,7 @@ public class RecruiterRestController extends BaseController {
 	}
 
 	@PostMapping(value = "/post-job")
-	public ResponseEntity<?> postNewJob(@RequestBody JobCreationForm form, @RequestParam("teacherId") String teacherId) {
+	public ResponseEntity<?> postNewJob(@Valid @RequestBody JobCreationForm form, @RequestParam("teacherId") String teacherId) {
 		try {
 			this.recruiterController.postJob(form, teacherId);
 			return ok();

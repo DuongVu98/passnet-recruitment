@@ -1,6 +1,6 @@
 package com.iucse.passnet.recruitment.adapter.controllers;
 
-import com.iucse.passnet.recruitment.adapter.forms.JobApplicationForm;
+import com.iucse.passnet.recruitment.domain.forms.JobApplicationForm;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.commands.StudentApplyJobCommand;
 import com.iucse.passnet.recruitment.usecase.executors.AbstractCommandExecutor;
