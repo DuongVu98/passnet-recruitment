@@ -6,10 +6,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-//@CrossOrigin
 @RestController
-@RequestMapping(value = "/command/applicator")
 @Tag(name = "Applicator API")
+@RequestMapping(value = "/command/applicator")
 public class ApplicatorRestController extends BaseController {
 	private final ApplicatorController applicatorController;
 
@@ -24,6 +23,10 @@ public class ApplicatorRestController extends BaseController {
 		@RequestParam("studentId") String studentId,
 		@RequestParam("jobId") String jobId
 	) {
-		this.applicatorController.studentApplyJob(form, studentId, jobId);
+		try {
+			this.applicatorController.studentApplyJob(form, studentId, jobId);
+		} catch (Throwable throwable) {
+			throwable.printStackTrace();
+		}
 	}
 }

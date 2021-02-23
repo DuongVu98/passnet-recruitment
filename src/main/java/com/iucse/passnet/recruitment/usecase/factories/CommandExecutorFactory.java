@@ -1,12 +1,12 @@
-package com.iucse.passnet.recruitment.usecase.test.factories;
+package com.iucse.passnet.recruitment.usecase.factories;
 
-import com.iucse.passnet.recruitment.adapter.grpc.RecruitmentSagaGateway;
+import com.iucse.passnet.recruitment.usecase.grpc.RecruitmentSagaGateway;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.exceptions.CommandExecutorNotFoundException;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
-import com.iucse.passnet.recruitment.usecase.test.commands.*;
-import com.iucse.passnet.recruitment.usecase.test.executors.*;
+import com.iucse.passnet.recruitment.usecase.commands.*;
+import com.iucse.passnet.recruitment.usecase.executors.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

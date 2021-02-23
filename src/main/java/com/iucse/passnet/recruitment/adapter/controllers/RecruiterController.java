@@ -1,24 +1,28 @@
 package com.iucse.passnet.recruitment.adapter.controllers;
 
-import com.iucse.passnet.recruitment.adapter.channel.CommandGateway;
 import com.iucse.passnet.recruitment.adapter.forms.JobCreationForm;
-import com.iucse.passnet.recruitment.usecase.commands.requests.BaseCommand;
-import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherAcceptStudentJobApplicationCommand;
-import com.iucse.passnet.recruitment.usecase.commands.requests.TeacherPostJobCommand;
+import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
+import com.iucse.passnet.recruitment.domain.exceptions.CommandExecutorNotFoundException;
+import com.iucse.passnet.recruitment.usecase.commands.BaseCommand;
+import com.iucse.passnet.recruitment.usecase.commands.TeacherAcceptStudentJobApplicationCommand;
+import com.iucse.passnet.recruitment.usecase.commands.TeacherPostJobCommand;
+import com.iucse.passnet.recruitment.usecase.executors.AbstractCommandExecutor;
+import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RecruiterController {
-	private final CommandGateway commandGateway;
+
+	private final CommandExecutorFactory commandExecutorFactory;
 
 	@Autowired
-	public RecruiterController(CommandGateway commandGateway) {
-		this.commandGateway = commandGateway;
+	public RecruiterController(CommandExecutorFactory commandExecutorFactory) {
+		this.commandExecutorFactory = commandExecutorFactory;
 	}
 
-	public void postJob(JobCreationForm form, String teacherId) {
-		BaseCommand command = TeacherPostJobCommand
+	public void postJob(JobCreationForm form, String teacherId) throws Throwable {
+		TeacherPostJobCommand command = TeacherPostJobCommand
 			.builder()
 			.jobOwnerId(teacherId)
 			.content(form.getContent())
@@ -27,16 +31,20 @@ public class RecruiterController {
 			.requirement(form.getRequirement())
 			.semester(form.getSemester())
 			.build();
-		this.commandGateway.send(command);
+
+		AbstractCommandExecutor<TeacherPostJobCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(command);
+		Job aggregate = commandExecutor.execute(command);
 	}
 
-	public void acceptJobApplication(String jobApplicationId, String jobId) {
-		BaseCommand command = TeacherAcceptStudentJobApplicationCommand
+	public void acceptJobApplication(String jobApplicationId, String jobId) throws Throwable {
+		TeacherAcceptStudentJobApplicationCommand command = TeacherAcceptStudentJobApplicationCommand
 			.builder()
 			.jobApplicationId(jobApplicationId)
 			.jobId(jobId)
 			.build();
-		this.commandGateway.send(command);
+
+		AbstractCommandExecutor<TeacherAcceptStudentJobApplicationCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(command);
+		Job aggregate = commandExecutor.execute(command);
 	}
 
 	public void createClassroom(String jobId) {

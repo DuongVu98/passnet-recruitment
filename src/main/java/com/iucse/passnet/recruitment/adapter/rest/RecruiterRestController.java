@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/command/recruiter")
 @Tag(name = "Recruiter API")
 @Slf4j(topic = "[RecruiterRestController]")
+@RequestMapping(value = "/command/recruiter")
 public class RecruiterRestController extends BaseController {
 	private final RecruiterController recruiterController;
 
@@ -21,16 +21,26 @@ public class RecruiterRestController extends BaseController {
 	}
 
 	@PostMapping(value = "/post-job")
-	public void postNewJob(@RequestBody JobCreationForm form, @RequestParam("teacherId") String teacherId) {
-		this.recruiterController.postJob(form, teacherId);
+	public ResponseEntity<?> postNewJob(@RequestBody JobCreationForm form, @RequestParam("teacherId") String teacherId) {
+		try {
+			this.recruiterController.postJob(form, teacherId);
+			return ok();
+		} catch (Throwable throwable) {
+			return badRequest(throwable);
+		}
 	}
 
 	@PostMapping(value = "/accept-application")
-	public void acceptJobApplication(
+	public ResponseEntity<?> acceptJobApplication(
 		@RequestParam("jobApplicationId") String jobApplicationId,
 		@RequestParam("jobId") String jobId
 	) {
-		this.recruiterController.acceptJobApplication(jobApplicationId, jobId);
+		try {
+			this.recruiterController.acceptJobApplication(jobApplicationId, jobId);
+		} catch (Throwable throwable) {
+			return badRequest(throwable);
+		}
+		return ok();
 	}
 
 	@PostMapping(value = "/create-classroom")

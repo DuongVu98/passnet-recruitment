@@ -1,11 +1,11 @@
-package com.iucse.passnet.recruitment.usecase.test.executors;
+package com.iucse.passnet.recruitment.usecase.executors;
 
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplication;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
-import com.iucse.passnet.recruitment.usecase.test.commands.StudentApplyJobCommand;
+import com.iucse.passnet.recruitment.usecase.commands.StudentApplyJobCommand;
 import lombok.Builder;
 
 public class StudentApplyJobCommandExecutor extends AbstractCommandExecutor<StudentApplyJobCommand, Job>{
@@ -19,7 +19,7 @@ public class StudentApplyJobCommandExecutor extends AbstractCommandExecutor<Stud
     }
 
     @Override
-    protected Job execute(StudentApplyJobCommand command) {
+    public Job execute(StudentApplyJobCommand command) {
         Job job = this.aggregateRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
 
         JobApplication newJobApplication = JobApplication

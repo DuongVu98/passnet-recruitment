@@ -1,4 +1,4 @@
-package com.iucse.passnet.recruitment.usecase.test.executors;
+package com.iucse.passnet.recruitment.usecase.executors;
 
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplication;
@@ -6,8 +6,7 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobApplicationId;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
 import com.iucse.passnet.recruitment.domain.exceptions.JobApplicationNotFound;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
-import com.iucse.passnet.recruitment.usecase.events.events.DomainEvent;
-import com.iucse.passnet.recruitment.usecase.test.commands.TeacherAcceptStudentJobApplicationCommand;
+import com.iucse.passnet.recruitment.usecase.commands.TeacherAcceptStudentJobApplicationCommand;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +21,7 @@ public class TeacherAcceptStudentJobApplicationCommandExecutor extends AbstractC
     }
 
     @Override
-    protected Job execute(TeacherAcceptStudentJobApplicationCommand command) throws JobApplicationNotFound {
+    public Job execute(TeacherAcceptStudentJobApplicationCommand command) throws JobApplicationNotFound {
         Job jobAggregate = this.aggregateRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
         Optional<JobApplication> optional = jobAggregate
            .getJobApplications()

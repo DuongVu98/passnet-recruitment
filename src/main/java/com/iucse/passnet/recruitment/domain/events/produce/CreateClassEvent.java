@@ -1,4 +1,4 @@
-package com.iucse.passnet.recruitment.usecase.events.produce;
+package com.iucse.passnet.recruitment.domain.events.produce;
 
 import lombok.Builder;
 import lombok.Getter;

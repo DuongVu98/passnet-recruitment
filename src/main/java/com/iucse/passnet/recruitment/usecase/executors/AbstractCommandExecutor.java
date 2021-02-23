@@ -1,4 +1,4 @@
-package com.iucse.passnet.recruitment.usecase.test.executors;
+package com.iucse.passnet.recruitment.usecase.executors;
 
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import lombok.AllArgsConstructor;
@@ -13,5 +13,5 @@ public abstract class AbstractCommandExecutor<COMMAND, RETURN> {
     protected JobAggregateRepository aggregateRepository;
 
     @Transactional
-    protected abstract RETURN execute(COMMAND command) throws Throwable;
+    public abstract RETURN execute(COMMAND command) throws Throwable;
 }

@@ -1,4 +1,4 @@
-package com.iucse.passnet.recruitment.usecase.test.commands;
+package com.iucse.passnet.recruitment.usecase.commands;
 
 import lombok.Builder;
 import lombok.Getter;
