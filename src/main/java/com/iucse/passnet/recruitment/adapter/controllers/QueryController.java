@@ -41,41 +41,47 @@ public class QueryController {
 	}
 
 	public JobView getJobView(String id) throws NullIdentifierException, JobNotFoundException {
-		if (id != null) {
-			if (this.jobViewRepository.findById(id).isPresent()) {
-				return this.jobViewRepository.findById(id).get();
-			} else {
-				try {
-					return this.viewQuery.queryJobView(id);
-				} catch (NullPointerException exception) {
-					throw new JobNotFoundException(String.format("Job with id %s not found", id));
-				}
-			}
-		} else {
-			throw new NullIdentifierException("Job id is null");
-		}
+//		if (id != null) {
+//			if (this.jobViewRepository.findById(id).isPresent()) {
+//				return this.jobViewRepository.findById(id).get();
+//			} else {
+//				try {
+//					return this.viewQuery.queryJobView(id);
+//				} catch (NullPointerException exception) {
+//					throw new JobNotFoundException(String.format("Job with id %s not found", id));
+//				}
+//			}
+//		} else {
+//			throw new NullIdentifierException("Job id is null");
+//		}
+		return this.viewQuery.queryJobView(id);
 	}
 
 	public JobApplicationView getJobApplicationView(String id) {
-		Optional<JobApplicationView> optional = this.jobApplicationViewRepository.findById(id);
-		return optional.orElseGet(() -> this.viewQuery.queryJobApplicationView(id));
+//		Optional<JobApplicationView> optional = this.jobApplicationViewRepository.findById(id);
+//		return optional.orElseGet(() -> this.viewQuery.queryJobApplicationView(id));
+		return this.viewQuery.queryJobApplicationView(id);
 	}
 
 	public PostedJobsView getPostedJobsView() {
-		Optional<PostedJobsView> optional = this.postedJobsViewRepository.findById(this.postedJobsViewId);
-		return optional.orElseGet(this.viewQuery::queryPostedJobsView);
+//		Optional<PostedJobsView> optional = this.postedJobsViewRepository.findById(this.postedJobsViewId);
+//		return optional.orElseGet(this.viewQuery::queryPostedJobsView);
+		return this.viewQuery.queryPostedJobsView();
 	}
 
 	public OwnedJobListView getPostedJobsByUserView(String uid) {
-		Optional<OwnedJobListView> viewOptional = Optional.ofNullable(
-			this.ownJobListViewRepository.findByTeacherId(uid)
-		);
-		return viewOptional.orElseGet(() -> viewQuery.queryUserOwnJob(uid));
+//		Optional<OwnedJobListView> viewOptional = Optional.ofNullable(
+//			this.ownJobListViewRepository.findByTeacherId(uid)
+//		);
+//		return viewOptional.orElseGet(() -> viewQuery.queryUserOwnJob(uid));
+		return this.viewQuery.queryUserOwnJob(uid);
 	}
 
 	public JobApplicationListView getJobApplicationListView(String jobId) {
-		Optional<JobApplicationListView> jobApplicationListViewOptional =
-			this.jobApplicationListViewRepository.findById(jobId);
-		return jobApplicationListViewOptional.orElseGet(() -> this.viewQuery.queryJobApplicationListView(jobId));
+//		Optional<JobApplicationListView> jobApplicationListViewOptional =
+//			this.jobApplicationListViewRepository.findById(jobId);
+//		return jobApplicationListViewOptional.orElseGet(() -> this.viewQuery.queryJobApplicationListView(jobId));
+
+		return this.viewQuery.queryJobApplicationListView(jobId);
 	}
 }
