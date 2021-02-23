@@ -8,5 +8,5 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class TeacherCreateClassroomCommand extends BaseCommand {
-    private String jobId;
+	private String jobId;
 }

@@ -3,12 +3,11 @@ package com.iucse.passnet.recruitment.adapter.rest;
 import com.iucse.passnet.recruitment.adapter.controllers.RecruiterController;
 import com.iucse.passnet.recruitment.domain.forms.JobCreationForm;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @Tag(name = "Recruiter API")
@@ -33,10 +32,7 @@ public class RecruiterRestController extends BaseController {
 	}
 
 	@PostMapping(value = "/accept-application")
-	public ResponseEntity<?> acceptJobApplication(
-		@RequestParam("jobApplicationId") String jobApplicationId,
-		@RequestParam("jobId") String jobId
-	) {
+	public ResponseEntity<?> acceptJobApplication(@RequestParam("jobApplicationId") String jobApplicationId, @RequestParam("jobId") String jobId) {
 		try {
 			this.recruiterController.acceptJobApplication(jobApplicationId, jobId);
 		} catch (Throwable throwable) {

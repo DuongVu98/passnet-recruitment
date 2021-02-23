@@ -17,7 +17,7 @@ public class SagaConfiguration {
 	private int servicePort;
 
 	@Bean
-	public EventProducerGrpc.EventProducerBlockingStub eventProducerBlockingStub(){
+	public EventProducerGrpc.EventProducerBlockingStub eventProducerBlockingStub() {
 		ManagedChannel channel = ManagedChannelBuilder.forAddress(serviceHost, servicePort).usePlaintext().build();
 		EventProducerGrpc.EventProducerBlockingStub eventProducerBlockingStub = EventProducerGrpc.newBlockingStub(channel);
 		return eventProducerBlockingStub;

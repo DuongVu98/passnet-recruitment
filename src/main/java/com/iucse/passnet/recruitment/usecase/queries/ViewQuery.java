@@ -27,22 +27,19 @@ public class ViewQuery {
 	private String postedJobsViewId;
 
 	@Autowired
-	public ViewQuery(
-		JobAggregateRepository jobEntityRepository,
-		JobApplicationRepository jobApplicationEntityRepository
-	) {
+	public ViewQuery(JobAggregateRepository jobEntityRepository, JobApplicationRepository jobApplicationEntityRepository) {
 		this.jobEntityRepository = jobEntityRepository;
 		this.jobApplicationEntityRepository = jobApplicationEntityRepository;
 	}
 
-//	@Cached(ViewTypes.JOB_VIEW)
+	//	@Cached(ViewTypes.JOB_VIEW)
 	@Cacheable(value = "job-view", key = "#id", sync = true)
 	public JobView queryJobView(String id) throws NullPointerException {
 		Job aggregate = this.jobEntityRepository.findByIdWithJobApplications(new JobId(id));
 		return new JobView(aggregate, id);
 	}
 
-//	@Cached(ViewTypes.JOB_APPLICATION_VIEW)
+	//	@Cached(ViewTypes.JOB_APPLICATION_VIEW)
 	@Cacheable(value = "job-application-view", key = "#id", sync = true)
 	public JobApplicationView queryJobApplicationView(String id) {
 		Optional<JobApplication> optional = this.jobApplicationEntityRepository.findById(new JobApplicationId(id));
@@ -61,7 +58,7 @@ public class ViewQuery {
 		}
 	}
 
-//	@Cached(ViewTypes.POSTED_JOBS_VIEW)
+	//	@Cached(ViewTypes.POSTED_JOBS_VIEW)
 	@Cacheable(value = "posted-jobs-view", sync = true)
 	public PostedJobsView queryPostedJobsView() {
 		List<LiteJobView> liteJobViewList =
@@ -84,7 +81,7 @@ public class ViewQuery {
 		return PostedJobsView.builder().id(this.postedJobsViewId).litePostedJobs(liteJobViewList).build();
 	}
 
-//	@Cached(ViewTypes.USER_OWN_JOB_VIEW)
+	//	@Cached(ViewTypes.USER_OWN_JOB_VIEW)
 	@Cacheable(value = "own-jobs-list-view", key = "#uid")
 	public OwnedJobListView queryUserOwnJob(String uid) {
 		List<LiteJobView> liteJobViewList =
@@ -107,7 +104,7 @@ public class ViewQuery {
 		return OwnedJobListView.builder().id(uid).teacherId(uid).litePostedJobs(liteJobViewList).build();
 	}
 
-//	@Cached(ViewTypes.JOB_APPLICATION_LIST_VIEW)
+	//	@Cached(ViewTypes.JOB_APPLICATION_LIST_VIEW)
 	@Cacheable(value = "job-application-list-view", key = "#jobId")
 	public JobApplicationListView queryJobApplicationListView(String jobId) {
 		Job aggregate = this.jobEntityRepository.findByIdWithJobApplications(new JobId(jobId));

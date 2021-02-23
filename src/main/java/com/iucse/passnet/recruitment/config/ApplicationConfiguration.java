@@ -20,11 +20,7 @@ public class ApplicationConfiguration {
 	public OpenAPI customOpenApi() {
 		return new OpenAPI()
 			.components(new Components())
-			.info(
-				new Info()
-					.title("Passnet Recruitment API Docs")
-					.description("RESTful API documents for Passnet Recruitment service")
-			);
+			.info(new Info().title("Passnet Recruitment API Docs").description("RESTful API documents for Passnet Recruitment service"));
 	}
 
 	@Bean("posted-jobs-view-id")

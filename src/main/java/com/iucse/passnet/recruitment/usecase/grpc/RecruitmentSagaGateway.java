@@ -2,7 +2,6 @@ package com.iucse.passnet.recruitment.usecase.grpc;
 
 import com.cseiu.passnet.saga.recruitmentsaga.EventProducerGrpc;
 import com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents;
-
 import com.iucse.passnet.recruitment.domain.events.produce.CreateClassEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,11 @@ public class RecruitmentSagaGateway {
 
 	public void produceCreateClassEvent(CreateClassEvent createClassEvent) {
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.produceCreateClassEvent(
-			ProduceEvents.CreateClassEvent.newBuilder().setTeacherId(createClassEvent.getTeacherId()).addAllTaIds(createClassEvent.getTaIdList()).build()
+			ProduceEvents
+				.CreateClassEvent.newBuilder()
+				.setTeacherId(createClassEvent.getTeacherId())
+				.addAllTaIds(createClassEvent.getTaIdList())
+				.build()
 		);
 		log.info(response.getMessage());
 	}

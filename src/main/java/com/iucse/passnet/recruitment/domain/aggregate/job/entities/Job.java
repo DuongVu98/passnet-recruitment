@@ -47,11 +47,7 @@ public class Job {
 	private Content content;
 
 	@Builder.Default
-	@OneToMany(
-		mappedBy = "job",
-		cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE },
-		fetch = FetchType.LAZY
-	)
+	@OneToMany(mappedBy = "job", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, fetch = FetchType.LAZY)
 	private List<JobApplication> jobApplications = new ArrayList<>();
 
 	public void receiveJobApplication(JobApplication application) {
@@ -71,19 +67,14 @@ public class Job {
 								log.info("change state!");
 
 								currentApplication.accepted();
-								log.info(
-									"currentApplication after accepted: {}",
-									currentApplication.getApplicationState().getValue()
-								);
+								log.info("currentApplication after accepted: {}", currentApplication.getApplicationState().getValue());
 							}
 							return currentApplication;
 						}
 					)
 					.collect(Collectors.toList());
 		} else {
-			throw new JobApplicationNotFound(
-				String.format("job application with id: %s not found in this job", application.getId())
-			);
+			throw new JobApplicationNotFound(String.format("job application with id: %s not found in this job", application.getId()));
 		}
 	}
 }

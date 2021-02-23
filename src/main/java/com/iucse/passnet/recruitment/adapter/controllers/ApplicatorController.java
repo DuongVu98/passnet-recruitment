@@ -1,8 +1,8 @@
 package com.iucse.passnet.recruitment.adapter.controllers;
 
-import com.iucse.passnet.recruitment.domain.forms.JobApplicationForm;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.commands.StudentApplyJobCommand;
+import com.iucse.passnet.recruitment.domain.forms.JobApplicationForm;
 import com.iucse.passnet.recruitment.usecase.executors.AbstractCommandExecutor;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j(topic = "[ApplicatorController]")
 public class ApplicatorController {
-
 	private final CommandExecutorFactory commandExecutorFactory;
 
 	@Autowired
@@ -23,7 +22,8 @@ public class ApplicatorController {
 
 	@CacheEvict(value = "job-view", key = "#jobId")
 	public void studentApplyJob(JobApplicationForm jobApplicationForm, String studentId, String jobId) throws Throwable {
-		StudentApplyJobCommand command = StudentApplyJobCommand.builder()
+		StudentApplyJobCommand command = StudentApplyJobCommand
+			.builder()
 			.jobId(jobId)
 			.studentId(studentId)
 			.content(jobApplicationForm.getContent())

@@ -3,10 +3,9 @@ package com.iucse.passnet.recruitment.adapter.rest;
 import com.iucse.passnet.recruitment.adapter.controllers.ApplicatorController;
 import com.iucse.passnet.recruitment.domain.forms.JobApplicationForm;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @Tag(name = "Applicator API")
