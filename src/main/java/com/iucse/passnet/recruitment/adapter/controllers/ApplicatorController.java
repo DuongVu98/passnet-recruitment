@@ -7,6 +7,7 @@ import com.iucse.passnet.recruitment.usecase.executors.AbstractCommandExecutor;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,6 +21,7 @@ public class ApplicatorController {
 		this.commandExecutorFactory = commandExecutorFactory;
 	}
 
+	@CacheEvict(value = "job-view", key = "#jobId")
 	public void studentApplyJob(JobApplicationForm jobApplicationForm, String studentId, String jobId) throws Throwable {
 		StudentApplyJobCommand command = StudentApplyJobCommand.builder()
 			.jobId(jobId)

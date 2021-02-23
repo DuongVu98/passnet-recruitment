@@ -45,7 +45,11 @@ public class RecruiterRestController extends BaseController {
 
 	@PostMapping(value = "/create-classroom")
 	public ResponseEntity<?> createClassroom(@RequestParam("jobId") String jobId) {
-		this.recruiterController.createClassroom(jobId);
-		return ok();
+		try {
+			this.recruiterController.createClassroom(jobId);
+			return ok();
+		} catch (Throwable throwable) {
+			return badRequest(throwable);
+		}
 	}
 }

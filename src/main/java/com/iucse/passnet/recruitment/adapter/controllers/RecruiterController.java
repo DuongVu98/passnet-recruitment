@@ -3,10 +3,13 @@ package com.iucse.passnet.recruitment.adapter.controllers;
 import com.iucse.passnet.recruitment.adapter.forms.JobCreationForm;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.commands.TeacherAcceptStudentJobApplicationCommand;
+import com.iucse.passnet.recruitment.domain.commands.TeacherCreateClassroomCommand;
 import com.iucse.passnet.recruitment.domain.commands.TeacherPostJobCommand;
+import com.iucse.passnet.recruitment.domain.exceptions.CommandExecutorNotFoundException;
 import com.iucse.passnet.recruitment.usecase.executors.AbstractCommandExecutor;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,6 +37,7 @@ public class RecruiterController {
 		Job aggregate = commandExecutor.execute(command);
 	}
 
+	@CacheEvict(value = "job-view", key = "#jobId")
 	public void acceptJobApplication(String jobApplicationId, String jobId) throws Throwable {
 		TeacherAcceptStudentJobApplicationCommand command = TeacherAcceptStudentJobApplicationCommand
 			.builder()
@@ -45,7 +49,13 @@ public class RecruiterController {
 		Job aggregate = commandExecutor.execute(command);
 	}
 
-	public void createClassroom(String jobId) {
+	@CacheEvict(value = "job-view", key = "#jobId")
+	public void createClassroom(String jobId) throws Throwable {
+		TeacherCreateClassroomCommand command = TeacherCreateClassroomCommand.builder()
+			.jobId(jobId)
+			.build();
 
+		AbstractCommandExecutor<TeacherCreateClassroomCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(command);
+		commandExecutor.execute(command);
 	}
 }
