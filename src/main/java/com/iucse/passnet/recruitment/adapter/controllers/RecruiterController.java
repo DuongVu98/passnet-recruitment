@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RecruiterController {
-
 	private final CommandExecutorFactory commandExecutorFactory;
 
 	@Autowired
@@ -30,7 +29,9 @@ public class RecruiterController {
 			.semester(form.getSemester())
 			.build();
 
-		AbstractCommandExecutor<TeacherPostJobCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(command);
+		AbstractCommandExecutor<TeacherPostJobCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(
+			command
+		);
 		Job aggregate = commandExecutor.execute(command);
 	}
 
@@ -41,11 +42,11 @@ public class RecruiterController {
 			.jobId(jobId)
 			.build();
 
-		AbstractCommandExecutor<TeacherAcceptStudentJobApplicationCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(command);
+		AbstractCommandExecutor<TeacherAcceptStudentJobApplicationCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(
+			command
+		);
 		Job aggregate = commandExecutor.execute(command);
 	}
 
-	public void createClassroom(String jobId) {
-
-	}
+	public void createClassroom(String jobId) {}
 }
