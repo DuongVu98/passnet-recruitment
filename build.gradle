@@ -89,9 +89,9 @@ bootJar {
     }
 }
 
-task bootRunDev(dependsOn: bootRun) {
+task bootRunLocal(dependsOn: bootRun) {
     bootRun {
-        args = ["--spring.profiles.active=dev"]
+        args = ["--spring.profiles.active=local"]
     }
 }
 
