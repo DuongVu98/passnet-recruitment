@@ -24,9 +24,7 @@ public class CommandExecutorFactory {
     }
 
     public AbstractCommandExecutor produceCommandExecutor(BaseCommand command) throws CommandExecutorNotFoundException {
-        if(command instanceof TeacherCreateClassroomCommand){
-            return this.produceTeacherCreateClassroomCommandExecutor((TeacherCreateClassroomCommand) command);
-        } else if (command instanceof StudentApplyJobCommand) {
+        if (command instanceof StudentApplyJobCommand) {
             return this.produceStudentApplyJobCommandExecutor((StudentApplyJobCommand)command);
         } else if(command instanceof TeacherAcceptStudentJobApplicationCommand) {
             return this.produceTeacherAcceptStudentJobApplicationCommandExecutor((TeacherAcceptStudentJobApplicationCommand)command);
@@ -35,13 +33,6 @@ public class CommandExecutorFactory {
         } else {
             throw new CommandExecutorNotFoundException("command executor not found");
         }
-    }
-
-    private AbstractCommandExecutor<TeacherCreateClassroomCommand, Job> produceTeacherCreateClassroomCommandExecutor(TeacherCreateClassroomCommand command){
-        return TeacherCreateClassroomCommandExecutor.builder()
-           .aggregateRepository(this.aggregateRepository)
-           .recruitmentSagaGateway(this.recruitmentSagaGateway)
-           .build();
     }
     private AbstractCommandExecutor<StudentApplyJobCommand, Job> produceStudentApplyJobCommandExecutor(StudentApplyJobCommand command) {
         return StudentApplyJobCommandExecutor.builder()
@@ -56,8 +47,9 @@ public class CommandExecutorFactory {
     }
     private AbstractCommandExecutor<TeacherPostJobCommand, Job> produceTeacherPostJobCommandExecutor(TeacherPostJobCommand command) {
         return TeacherPostJobCommandExecutor.builder()
-           .aggregateRepository(this.aggregateRepository)
-           .uuidGeneratorService(this.uuidGeneratorService)
-           .build();
+                .aggregateRepository(this.aggregateRepository)
+                .uuidGeneratorService(this.uuidGeneratorService)
+                .recruitmentSagaGateway(this.recruitmentSagaGateway)
+                .build();
     }
 }

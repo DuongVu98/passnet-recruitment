@@ -4,9 +4,11 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplication;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobApplicationId;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
+import com.iucse.passnet.recruitment.domain.events.produce.AcceptStudentApplicationEvent;
 import com.iucse.passnet.recruitment.domain.exceptions.JobApplicationNotFound;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.domain.commands.TeacherAcceptStudentJobApplicationCommand;
+import com.iucse.passnet.recruitment.usecase.grpc.RecruitmentSagaGateway;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,9 +17,12 @@ import java.util.Optional;
 @Slf4j(topic = "[TeacherAcceptStudentJobApplicationCommandExecutor]")
 public class TeacherAcceptStudentJobApplicationCommandExecutor extends AbstractCommandExecutor<TeacherAcceptStudentJobApplicationCommand, Job>{
 
+    private final RecruitmentSagaGateway recruitmentSagaGateway;
+
     @Builder
-    public TeacherAcceptStudentJobApplicationCommandExecutor(JobAggregateRepository aggregateRepository) {
+    public TeacherAcceptStudentJobApplicationCommandExecutor(JobAggregateRepository aggregateRepository, RecruitmentSagaGateway recruitmentSagaGateway) {
         super(aggregateRepository);
+        this.recruitmentSagaGateway = recruitmentSagaGateway;
     }
 
     @Override
@@ -35,7 +40,15 @@ public class TeacherAcceptStudentJobApplicationCommandExecutor extends AbstractC
             JobApplication jobApplication = optional.get();
             jobAggregate.acceptJobApplication(jobApplication);
 
-            return this.aggregateRepository.save(jobAggregate);
+            Job updatedJob = this.aggregateRepository.save(jobAggregate);
+
+            recruitmentSagaGateway.produceAcceptStudentApplicationEvent(AcceptStudentApplicationEvent.builder()
+                    .jobId(updatedJob.getId().getValue())
+                    .taId(jobApplication.getApplicationOwner().getValue())
+                    .build()
+            );
+
+            return updatedJob;
         } else {
             throw new JobApplicationNotFound("application {} doesn't exit in job");
         }

@@ -2,7 +2,9 @@ package com.iucse.passnet.recruitment.usecase.executors;
 
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
+import com.iucse.passnet.recruitment.domain.events.produce.PostNewJobEvent;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
+import com.iucse.passnet.recruitment.usecase.grpc.RecruitmentSagaGateway;
 import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
 import com.iucse.passnet.recruitment.domain.commands.TeacherPostJobCommand;
 import lombok.Builder;
@@ -10,11 +12,13 @@ import lombok.Builder;
 public class TeacherPostJobCommandExecutor extends AbstractCommandExecutor<TeacherPostJobCommand, Job>{
 
     private final UUIDGeneratorService uuidGeneratorService;
+    private final RecruitmentSagaGateway recruitmentSagaGateway;
 
     @Builder
-    public TeacherPostJobCommandExecutor(JobAggregateRepository aggregateRepository, UUIDGeneratorService uuidGeneratorService) {
+    public TeacherPostJobCommandExecutor(JobAggregateRepository aggregateRepository, UUIDGeneratorService uuidGeneratorService, RecruitmentSagaGateway recruitmentSagaGateway) {
         super(aggregateRepository);
         this.uuidGeneratorService = uuidGeneratorService;
+        this.recruitmentSagaGateway = recruitmentSagaGateway;
     }
 
     @Override
@@ -30,6 +34,14 @@ public class TeacherPostJobCommandExecutor extends AbstractCommandExecutor<Teach
            .jobOwner(new UserId(teacherPostJobCommand.getJobOwnerId()))
            .build();
 
-        return this.aggregateRepository.save(newJob);
+        Job savedJob = this.aggregateRepository.save(newJob);
+
+        recruitmentSagaGateway.producePostNewJobEvent(PostNewJobEvent.builder()
+                .jobId(savedJob.getId().getValue())
+                .ownerId(savedJob.getJobOwner().getValue())
+                .build()
+        );
+
+        return savedJob;
     }
 }

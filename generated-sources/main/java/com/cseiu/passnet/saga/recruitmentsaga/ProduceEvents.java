@@ -14,749 +14,6 @@ public final class ProduceEvents {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface CreateClassEventOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:produceEvents.CreateClassEvent)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string teacherId = 1;</code>
-     */
-    java.lang.String getTeacherId();
-    /**
-     * <code>string teacherId = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getTeacherIdBytes();
-
-    /**
-     * <code>repeated string taIds = 2;</code>
-     */
-    java.util.List<java.lang.String>
-        getTaIdsList();
-    /**
-     * <code>repeated string taIds = 2;</code>
-     */
-    int getTaIdsCount();
-    /**
-     * <code>repeated string taIds = 2;</code>
-     */
-    java.lang.String getTaIds(int index);
-    /**
-     * <code>repeated string taIds = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getTaIdsBytes(int index);
-  }
-  /**
-   * Protobuf type {@code produceEvents.CreateClassEvent}
-   */
-  public  static final class CreateClassEvent extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:produceEvents.CreateClassEvent)
-      CreateClassEventOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use CreateClassEvent.newBuilder() to construct.
-    private CreateClassEvent(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private CreateClassEvent() {
-      teacherId_ = "";
-      taIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private CreateClassEvent(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              teacherId_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
-                taIds_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              taIds_.add(s);
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
-          taIds_ = taIds_.getUnmodifiableView();
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_CreateClassEvent_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_CreateClassEvent_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent.class, com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int TEACHERID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object teacherId_;
-    /**
-     * <code>string teacherId = 1;</code>
-     */
-    public java.lang.String getTeacherId() {
-      java.lang.Object ref = teacherId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        teacherId_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string teacherId = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getTeacherIdBytes() {
-      java.lang.Object ref = teacherId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        teacherId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int TAIDS_FIELD_NUMBER = 2;
-    private com.google.protobuf.LazyStringList taIds_;
-    /**
-     * <code>repeated string taIds = 2;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getTaIdsList() {
-      return taIds_;
-    }
-    /**
-     * <code>repeated string taIds = 2;</code>
-     */
-    public int getTaIdsCount() {
-      return taIds_.size();
-    }
-    /**
-     * <code>repeated string taIds = 2;</code>
-     */
-    public java.lang.String getTaIds(int index) {
-      return taIds_.get(index);
-    }
-    /**
-     * <code>repeated string taIds = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getTaIdsBytes(int index) {
-      return taIds_.getByteString(index);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getTeacherIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, teacherId_);
-      }
-      for (int i = 0; i < taIds_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, taIds_.getRaw(i));
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getTeacherIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, teacherId_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < taIds_.size(); i++) {
-          dataSize += computeStringSizeNoTag(taIds_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getTaIdsList().size();
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent)) {
-        return super.equals(obj);
-      }
-      com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent other = (com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent) obj;
-
-      if (!getTeacherId()
-          .equals(other.getTeacherId())) return false;
-      if (!getTaIdsList()
-          .equals(other.getTaIdsList())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + TEACHERID_FIELD_NUMBER;
-      hash = (53 * hash) + getTeacherId().hashCode();
-      if (getTaIdsCount() > 0) {
-        hash = (37 * hash) + TAIDS_FIELD_NUMBER;
-        hash = (53 * hash) + getTaIdsList().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code produceEvents.CreateClassEvent}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:produceEvents.CreateClassEvent)
-        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEventOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_CreateClassEvent_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_CreateClassEvent_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent.class, com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent.Builder.class);
-      }
-
-      // Construct using com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        teacherId_ = "";
-
-        taIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_CreateClassEvent_descriptor;
-      }
-
-      @java.lang.Override
-      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent getDefaultInstanceForType() {
-        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent build() {
-        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent buildPartial() {
-        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent result = new com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        result.teacherId_ = teacherId_;
-        if (((bitField0_ & 0x00000002) != 0)) {
-          taIds_ = taIds_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000002);
-        }
-        result.taIds_ = taIds_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent) {
-          return mergeFrom((com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent other) {
-        if (other == com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent.getDefaultInstance()) return this;
-        if (!other.getTeacherId().isEmpty()) {
-          teacherId_ = other.teacherId_;
-          onChanged();
-        }
-        if (!other.taIds_.isEmpty()) {
-          if (taIds_.isEmpty()) {
-            taIds_ = other.taIds_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureTaIdsIsMutable();
-            taIds_.addAll(other.taIds_);
-          }
-          onChanged();
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private java.lang.Object teacherId_ = "";
-      /**
-       * <code>string teacherId = 1;</code>
-       */
-      public java.lang.String getTeacherId() {
-        java.lang.Object ref = teacherId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          teacherId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string teacherId = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getTeacherIdBytes() {
-        java.lang.Object ref = teacherId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          teacherId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string teacherId = 1;</code>
-       */
-      public Builder setTeacherId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        teacherId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string teacherId = 1;</code>
-       */
-      public Builder clearTeacherId() {
-        
-        teacherId_ = getDefaultInstance().getTeacherId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string teacherId = 1;</code>
-       */
-      public Builder setTeacherIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        teacherId_ = value;
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.LazyStringList taIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureTaIdsIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
-          taIds_ = new com.google.protobuf.LazyStringArrayList(taIds_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-      /**
-       * <code>repeated string taIds = 2;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getTaIdsList() {
-        return taIds_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string taIds = 2;</code>
-       */
-      public int getTaIdsCount() {
-        return taIds_.size();
-      }
-      /**
-       * <code>repeated string taIds = 2;</code>
-       */
-      public java.lang.String getTaIds(int index) {
-        return taIds_.get(index);
-      }
-      /**
-       * <code>repeated string taIds = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getTaIdsBytes(int index) {
-        return taIds_.getByteString(index);
-      }
-      /**
-       * <code>repeated string taIds = 2;</code>
-       */
-      public Builder setTaIds(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureTaIdsIsMutable();
-        taIds_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string taIds = 2;</code>
-       */
-      public Builder addTaIds(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureTaIdsIsMutable();
-        taIds_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string taIds = 2;</code>
-       */
-      public Builder addAllTaIds(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureTaIdsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, taIds_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string taIds = 2;</code>
-       */
-      public Builder clearTaIds() {
-        taIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string taIds = 2;</code>
-       */
-      public Builder addTaIdsBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureTaIdsIsMutable();
-        taIds_.add(value);
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:produceEvents.CreateClassEvent)
-    }
-
-    // @@protoc_insertion_point(class_scope:produceEvents.CreateClassEvent)
-    private static final com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent();
-    }
-
-    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<CreateClassEvent>
-        PARSER = new com.google.protobuf.AbstractParser<CreateClassEvent>() {
-      @java.lang.Override
-      public CreateClassEvent parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new CreateClassEvent(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<CreateClassEvent> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<CreateClassEvent> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.CreateClassEvent getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface SagaResponseOrBuilder extends
       // @@protoc_insertion_point(interface_extends:produceEvents.SagaResponse)
       com.google.protobuf.MessageOrBuilder {
@@ -1306,16 +563,2638 @@ public final class ProduceEvents {
 
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_produceEvents_CreateClassEvent_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_produceEvents_CreateClassEvent_fieldAccessorTable;
+  public interface PostNewJobEventOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:produceEvents.PostNewJobEvent)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string ownerId = 1;</code>
+     */
+    java.lang.String getOwnerId();
+    /**
+     * <code>string ownerId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getOwnerIdBytes();
+
+    /**
+     * <code>string jobId = 2;</code>
+     */
+    java.lang.String getJobId();
+    /**
+     * <code>string jobId = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getJobIdBytes();
+  }
+  /**
+   * Protobuf type {@code produceEvents.PostNewJobEvent}
+   */
+  public  static final class PostNewJobEvent extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:produceEvents.PostNewJobEvent)
+      PostNewJobEventOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use PostNewJobEvent.newBuilder() to construct.
+    private PostNewJobEvent(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private PostNewJobEvent() {
+      ownerId_ = "";
+      jobId_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PostNewJobEvent(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              ownerId_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              jobId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_PostNewJobEvent_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_PostNewJobEvent_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent.class, com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent.Builder.class);
+    }
+
+    public static final int OWNERID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object ownerId_;
+    /**
+     * <code>string ownerId = 1;</code>
+     */
+    public java.lang.String getOwnerId() {
+      java.lang.Object ref = ownerId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ownerId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string ownerId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getOwnerIdBytes() {
+      java.lang.Object ref = ownerId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ownerId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int JOBID_FIELD_NUMBER = 2;
+    private volatile java.lang.Object jobId_;
+    /**
+     * <code>string jobId = 2;</code>
+     */
+    public java.lang.String getJobId() {
+      java.lang.Object ref = jobId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        jobId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string jobId = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getJobIdBytes() {
+      java.lang.Object ref = jobId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        jobId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getOwnerIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, ownerId_);
+      }
+      if (!getJobIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, jobId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getOwnerIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, ownerId_);
+      }
+      if (!getJobIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, jobId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent)) {
+        return super.equals(obj);
+      }
+      com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent other = (com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent) obj;
+
+      if (!getOwnerId()
+          .equals(other.getOwnerId())) return false;
+      if (!getJobId()
+          .equals(other.getJobId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + OWNERID_FIELD_NUMBER;
+      hash = (53 * hash) + getOwnerId().hashCode();
+      hash = (37 * hash) + JOBID_FIELD_NUMBER;
+      hash = (53 * hash) + getJobId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code produceEvents.PostNewJobEvent}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:produceEvents.PostNewJobEvent)
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEventOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_PostNewJobEvent_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_PostNewJobEvent_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent.class, com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent.Builder.class);
+      }
+
+      // Construct using com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        ownerId_ = "";
+
+        jobId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_PostNewJobEvent_descriptor;
+      }
+
+      @java.lang.Override
+      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent getDefaultInstanceForType() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent build() {
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent buildPartial() {
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent result = new com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent(this);
+        result.ownerId_ = ownerId_;
+        result.jobId_ = jobId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent) {
+          return mergeFrom((com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent other) {
+        if (other == com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent.getDefaultInstance()) return this;
+        if (!other.getOwnerId().isEmpty()) {
+          ownerId_ = other.ownerId_;
+          onChanged();
+        }
+        if (!other.getJobId().isEmpty()) {
+          jobId_ = other.jobId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object ownerId_ = "";
+      /**
+       * <code>string ownerId = 1;</code>
+       */
+      public java.lang.String getOwnerId() {
+        java.lang.Object ref = ownerId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          ownerId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string ownerId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getOwnerIdBytes() {
+        java.lang.Object ref = ownerId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ownerId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string ownerId = 1;</code>
+       */
+      public Builder setOwnerId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        ownerId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ownerId = 1;</code>
+       */
+      public Builder clearOwnerId() {
+        
+        ownerId_ = getDefaultInstance().getOwnerId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ownerId = 1;</code>
+       */
+      public Builder setOwnerIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        ownerId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object jobId_ = "";
+      /**
+       * <code>string jobId = 2;</code>
+       */
+      public java.lang.String getJobId() {
+        java.lang.Object ref = jobId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          jobId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string jobId = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getJobIdBytes() {
+        java.lang.Object ref = jobId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          jobId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string jobId = 2;</code>
+       */
+      public Builder setJobId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        jobId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string jobId = 2;</code>
+       */
+      public Builder clearJobId() {
+        
+        jobId_ = getDefaultInstance().getJobId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string jobId = 2;</code>
+       */
+      public Builder setJobIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        jobId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:produceEvents.PostNewJobEvent)
+    }
+
+    // @@protoc_insertion_point(class_scope:produceEvents.PostNewJobEvent)
+    private static final com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent();
+    }
+
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<PostNewJobEvent>
+        PARSER = new com.google.protobuf.AbstractParser<PostNewJobEvent>() {
+      @java.lang.Override
+      public PostNewJobEvent parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PostNewJobEvent(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<PostNewJobEvent> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PostNewJobEvent> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.PostNewJobEvent getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface AcceptStudentApplicationEventOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:produceEvents.AcceptStudentApplicationEvent)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string jobId = 1;</code>
+     */
+    java.lang.String getJobId();
+    /**
+     * <code>string jobId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getJobIdBytes();
+
+    /**
+     * <code>string taId = 2;</code>
+     */
+    java.lang.String getTaId();
+    /**
+     * <code>string taId = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getTaIdBytes();
+  }
+  /**
+   * Protobuf type {@code produceEvents.AcceptStudentApplicationEvent}
+   */
+  public  static final class AcceptStudentApplicationEvent extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:produceEvents.AcceptStudentApplicationEvent)
+      AcceptStudentApplicationEventOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use AcceptStudentApplicationEvent.newBuilder() to construct.
+    private AcceptStudentApplicationEvent(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private AcceptStudentApplicationEvent() {
+      jobId_ = "";
+      taId_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private AcceptStudentApplicationEvent(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              jobId_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              taId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_AcceptStudentApplicationEvent_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_AcceptStudentApplicationEvent_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent.class, com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent.Builder.class);
+    }
+
+    public static final int JOBID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object jobId_;
+    /**
+     * <code>string jobId = 1;</code>
+     */
+    public java.lang.String getJobId() {
+      java.lang.Object ref = jobId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        jobId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string jobId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getJobIdBytes() {
+      java.lang.Object ref = jobId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        jobId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TAID_FIELD_NUMBER = 2;
+    private volatile java.lang.Object taId_;
+    /**
+     * <code>string taId = 2;</code>
+     */
+    public java.lang.String getTaId() {
+      java.lang.Object ref = taId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        taId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string taId = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTaIdBytes() {
+      java.lang.Object ref = taId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        taId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getJobIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, jobId_);
+      }
+      if (!getTaIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, taId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getJobIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, jobId_);
+      }
+      if (!getTaIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, taId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent)) {
+        return super.equals(obj);
+      }
+      com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent other = (com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent) obj;
+
+      if (!getJobId()
+          .equals(other.getJobId())) return false;
+      if (!getTaId()
+          .equals(other.getTaId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + JOBID_FIELD_NUMBER;
+      hash = (53 * hash) + getJobId().hashCode();
+      hash = (37 * hash) + TAID_FIELD_NUMBER;
+      hash = (53 * hash) + getTaId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code produceEvents.AcceptStudentApplicationEvent}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:produceEvents.AcceptStudentApplicationEvent)
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEventOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_AcceptStudentApplicationEvent_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_AcceptStudentApplicationEvent_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent.class, com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent.Builder.class);
+      }
+
+      // Construct using com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        jobId_ = "";
+
+        taId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_AcceptStudentApplicationEvent_descriptor;
+      }
+
+      @java.lang.Override
+      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent getDefaultInstanceForType() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent build() {
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent buildPartial() {
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent result = new com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent(this);
+        result.jobId_ = jobId_;
+        result.taId_ = taId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent) {
+          return mergeFrom((com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent other) {
+        if (other == com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent.getDefaultInstance()) return this;
+        if (!other.getJobId().isEmpty()) {
+          jobId_ = other.jobId_;
+          onChanged();
+        }
+        if (!other.getTaId().isEmpty()) {
+          taId_ = other.taId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object jobId_ = "";
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public java.lang.String getJobId() {
+        java.lang.Object ref = jobId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          jobId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getJobIdBytes() {
+        java.lang.Object ref = jobId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          jobId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public Builder setJobId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        jobId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public Builder clearJobId() {
+        
+        jobId_ = getDefaultInstance().getJobId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public Builder setJobIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        jobId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object taId_ = "";
+      /**
+       * <code>string taId = 2;</code>
+       */
+      public java.lang.String getTaId() {
+        java.lang.Object ref = taId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          taId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string taId = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTaIdBytes() {
+        java.lang.Object ref = taId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          taId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string taId = 2;</code>
+       */
+      public Builder setTaId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        taId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string taId = 2;</code>
+       */
+      public Builder clearTaId() {
+        
+        taId_ = getDefaultInstance().getTaId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string taId = 2;</code>
+       */
+      public Builder setTaIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        taId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:produceEvents.AcceptStudentApplicationEvent)
+    }
+
+    // @@protoc_insertion_point(class_scope:produceEvents.AcceptStudentApplicationEvent)
+    private static final com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent();
+    }
+
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<AcceptStudentApplicationEvent>
+        PARSER = new com.google.protobuf.AbstractParser<AcceptStudentApplicationEvent>() {
+      @java.lang.Override
+      public AcceptStudentApplicationEvent parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AcceptStudentApplicationEvent(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<AcceptStudentApplicationEvent> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AcceptStudentApplicationEvent> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.AcceptStudentApplicationEvent getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface RemoveStudentApplicationEventOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:produceEvents.RemoveStudentApplicationEvent)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string jobId = 1;</code>
+     */
+    java.lang.String getJobId();
+    /**
+     * <code>string jobId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getJobIdBytes();
+
+    /**
+     * <code>string taId = 2;</code>
+     */
+    java.lang.String getTaId();
+    /**
+     * <code>string taId = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getTaIdBytes();
+  }
+  /**
+   * Protobuf type {@code produceEvents.RemoveStudentApplicationEvent}
+   */
+  public  static final class RemoveStudentApplicationEvent extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:produceEvents.RemoveStudentApplicationEvent)
+      RemoveStudentApplicationEventOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use RemoveStudentApplicationEvent.newBuilder() to construct.
+    private RemoveStudentApplicationEvent(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private RemoveStudentApplicationEvent() {
+      jobId_ = "";
+      taId_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RemoveStudentApplicationEvent(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              jobId_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              taId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_RemoveStudentApplicationEvent_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_RemoveStudentApplicationEvent_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent.class, com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent.Builder.class);
+    }
+
+    public static final int JOBID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object jobId_;
+    /**
+     * <code>string jobId = 1;</code>
+     */
+    public java.lang.String getJobId() {
+      java.lang.Object ref = jobId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        jobId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string jobId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getJobIdBytes() {
+      java.lang.Object ref = jobId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        jobId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TAID_FIELD_NUMBER = 2;
+    private volatile java.lang.Object taId_;
+    /**
+     * <code>string taId = 2;</code>
+     */
+    public java.lang.String getTaId() {
+      java.lang.Object ref = taId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        taId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string taId = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTaIdBytes() {
+      java.lang.Object ref = taId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        taId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getJobIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, jobId_);
+      }
+      if (!getTaIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, taId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getJobIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, jobId_);
+      }
+      if (!getTaIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, taId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent)) {
+        return super.equals(obj);
+      }
+      com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent other = (com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent) obj;
+
+      if (!getJobId()
+          .equals(other.getJobId())) return false;
+      if (!getTaId()
+          .equals(other.getTaId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + JOBID_FIELD_NUMBER;
+      hash = (53 * hash) + getJobId().hashCode();
+      hash = (37 * hash) + TAID_FIELD_NUMBER;
+      hash = (53 * hash) + getTaId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code produceEvents.RemoveStudentApplicationEvent}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:produceEvents.RemoveStudentApplicationEvent)
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEventOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_RemoveStudentApplicationEvent_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_RemoveStudentApplicationEvent_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent.class, com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent.Builder.class);
+      }
+
+      // Construct using com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        jobId_ = "";
+
+        taId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_RemoveStudentApplicationEvent_descriptor;
+      }
+
+      @java.lang.Override
+      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent getDefaultInstanceForType() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent build() {
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent buildPartial() {
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent result = new com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent(this);
+        result.jobId_ = jobId_;
+        result.taId_ = taId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent) {
+          return mergeFrom((com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent other) {
+        if (other == com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent.getDefaultInstance()) return this;
+        if (!other.getJobId().isEmpty()) {
+          jobId_ = other.jobId_;
+          onChanged();
+        }
+        if (!other.getTaId().isEmpty()) {
+          taId_ = other.taId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object jobId_ = "";
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public java.lang.String getJobId() {
+        java.lang.Object ref = jobId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          jobId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getJobIdBytes() {
+        java.lang.Object ref = jobId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          jobId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public Builder setJobId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        jobId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public Builder clearJobId() {
+        
+        jobId_ = getDefaultInstance().getJobId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public Builder setJobIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        jobId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object taId_ = "";
+      /**
+       * <code>string taId = 2;</code>
+       */
+      public java.lang.String getTaId() {
+        java.lang.Object ref = taId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          taId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string taId = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTaIdBytes() {
+        java.lang.Object ref = taId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          taId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string taId = 2;</code>
+       */
+      public Builder setTaId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        taId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string taId = 2;</code>
+       */
+      public Builder clearTaId() {
+        
+        taId_ = getDefaultInstance().getTaId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string taId = 2;</code>
+       */
+      public Builder setTaIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        taId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:produceEvents.RemoveStudentApplicationEvent)
+    }
+
+    // @@protoc_insertion_point(class_scope:produceEvents.RemoveStudentApplicationEvent)
+    private static final com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent();
+    }
+
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<RemoveStudentApplicationEvent>
+        PARSER = new com.google.protobuf.AbstractParser<RemoveStudentApplicationEvent>() {
+      @java.lang.Override
+      public RemoveStudentApplicationEvent parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RemoveStudentApplicationEvent(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RemoveStudentApplicationEvent> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RemoveStudentApplicationEvent> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.RemoveStudentApplicationEvent getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface DeleteJobEventOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:produceEvents.DeleteJobEvent)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string jobId = 1;</code>
+     */
+    java.lang.String getJobId();
+    /**
+     * <code>string jobId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getJobIdBytes();
+  }
+  /**
+   * Protobuf type {@code produceEvents.DeleteJobEvent}
+   */
+  public  static final class DeleteJobEvent extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:produceEvents.DeleteJobEvent)
+      DeleteJobEventOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use DeleteJobEvent.newBuilder() to construct.
+    private DeleteJobEvent(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private DeleteJobEvent() {
+      jobId_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private DeleteJobEvent(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              jobId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_DeleteJobEvent_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_DeleteJobEvent_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent.class, com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent.Builder.class);
+    }
+
+    public static final int JOBID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object jobId_;
+    /**
+     * <code>string jobId = 1;</code>
+     */
+    public java.lang.String getJobId() {
+      java.lang.Object ref = jobId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        jobId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string jobId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getJobIdBytes() {
+      java.lang.Object ref = jobId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        jobId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getJobIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, jobId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getJobIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, jobId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent)) {
+        return super.equals(obj);
+      }
+      com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent other = (com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent) obj;
+
+      if (!getJobId()
+          .equals(other.getJobId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + JOBID_FIELD_NUMBER;
+      hash = (53 * hash) + getJobId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code produceEvents.DeleteJobEvent}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:produceEvents.DeleteJobEvent)
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEventOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_DeleteJobEvent_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_DeleteJobEvent_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent.class, com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent.Builder.class);
+      }
+
+      // Construct using com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        jobId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.internal_static_produceEvents_DeleteJobEvent_descriptor;
+      }
+
+      @java.lang.Override
+      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent getDefaultInstanceForType() {
+        return com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent build() {
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent buildPartial() {
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent result = new com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent(this);
+        result.jobId_ = jobId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent) {
+          return mergeFrom((com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent other) {
+        if (other == com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent.getDefaultInstance()) return this;
+        if (!other.getJobId().isEmpty()) {
+          jobId_ = other.jobId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object jobId_ = "";
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public java.lang.String getJobId() {
+        java.lang.Object ref = jobId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          jobId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getJobIdBytes() {
+        java.lang.Object ref = jobId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          jobId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public Builder setJobId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        jobId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public Builder clearJobId() {
+        
+        jobId_ = getDefaultInstance().getJobId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string jobId = 1;</code>
+       */
+      public Builder setJobIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        jobId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:produceEvents.DeleteJobEvent)
+    }
+
+    // @@protoc_insertion_point(class_scope:produceEvents.DeleteJobEvent)
+    private static final com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent();
+    }
+
+    public static com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<DeleteJobEvent>
+        PARSER = new com.google.protobuf.AbstractParser<DeleteJobEvent>() {
+      @java.lang.Override
+      public DeleteJobEvent parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new DeleteJobEvent(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<DeleteJobEvent> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DeleteJobEvent> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents.DeleteJobEvent getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_produceEvents_SagaResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_produceEvents_SagaResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_produceEvents_PostNewJobEvent_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_produceEvents_PostNewJobEvent_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_produceEvents_AcceptStudentApplicationEvent_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_produceEvents_AcceptStudentApplicationEvent_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_produceEvents_RemoveStudentApplicationEvent_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_produceEvents_RemoveStudentApplicationEvent_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_produceEvents_DeleteJobEvent_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_produceEvents_DeleteJobEvent_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1325,14 +3204,25 @@ public final class ProduceEvents {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\024produce-events.proto\022\rproduceEvents\"4\n" +
-      "\020CreateClassEvent\022\021\n\tteacherId\030\001 \001(\t\022\r\n\005" +
-      "taIds\030\002 \003(\t\"\037\n\014SagaResponse\022\017\n\007message\030\001" +
-      " \001(\t2j\n\rEventProducer\022Y\n\027ProduceCreateCl" +
-      "assEvent\022\037.produceEvents.CreateClassEven" +
-      "t\032\033.produceEvents.SagaResponse\"\000B(\n&com." +
-      "cseiu.passnet.saga.recruitmentsagab\006prot" +
-      "o3"
+      "\n\024produce-events.proto\022\rproduceEvents\"\037\n" +
+      "\014SagaResponse\022\017\n\007message\030\001 \001(\t\"1\n\017PostNe" +
+      "wJobEvent\022\017\n\007ownerId\030\001 \001(\t\022\r\n\005jobId\030\002 \001(" +
+      "\t\"<\n\035AcceptStudentApplicationEvent\022\r\n\005jo" +
+      "bId\030\001 \001(\t\022\014\n\004taId\030\002 \001(\t\"<\n\035RemoveStudent" +
+      "ApplicationEvent\022\r\n\005jobId\030\001 \001(\t\022\014\n\004taId\030" +
+      "\002 \001(\t\"\037\n\016DeleteJobEvent\022\r\n\005jobId\030\001 \001(\t2\251" +
+      "\003\n\rEventProducer\022W\n\026ProducePostNewJobEve" +
+      "nt\022\036.produceEvents.PostNewJobEvent\032\033.pro" +
+      "duceEvents.SagaResponse\"\000\022s\n$ProduceAcce" +
+      "ptStudentApplicationEvent\022,.produceEvent" +
+      "s.AcceptStudentApplicationEvent\032\033.produc" +
+      "eEvents.SagaResponse\"\000\022s\n$ProduceRemoveS" +
+      "tudentApplicationEvent\022,.produceEvents.R" +
+      "emoveStudentApplicationEvent\032\033.produceEv" +
+      "ents.SagaResponse\"\000\022U\n\025ProduceDeleteJobE" +
+      "vent\022\035.produceEvents.DeleteJobEvent\032\033.pr" +
+      "oduceEvents.SagaResponse\"\000B(\n&com.cseiu." +
+      "passnet.saga.recruitmentsagab\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1346,18 +3236,36 @@ public final class ProduceEvents {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_produceEvents_CreateClassEvent_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_produceEvents_CreateClassEvent_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_produceEvents_CreateClassEvent_descriptor,
-        new java.lang.String[] { "TeacherId", "TaIds", });
     internal_static_produceEvents_SagaResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(0);
     internal_static_produceEvents_SagaResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_produceEvents_SagaResponse_descriptor,
         new java.lang.String[] { "Message", });
+    internal_static_produceEvents_PostNewJobEvent_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_produceEvents_PostNewJobEvent_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_produceEvents_PostNewJobEvent_descriptor,
+        new java.lang.String[] { "OwnerId", "JobId", });
+    internal_static_produceEvents_AcceptStudentApplicationEvent_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_produceEvents_AcceptStudentApplicationEvent_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_produceEvents_AcceptStudentApplicationEvent_descriptor,
+        new java.lang.String[] { "JobId", "TaId", });
+    internal_static_produceEvents_RemoveStudentApplicationEvent_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_produceEvents_RemoveStudentApplicationEvent_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_produceEvents_RemoveStudentApplicationEvent_descriptor,
+        new java.lang.String[] { "JobId", "TaId", });
+    internal_static_produceEvents_DeleteJobEvent_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_produceEvents_DeleteJobEvent_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_produceEvents_DeleteJobEvent_descriptor,
+        new java.lang.String[] { "JobId", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
