@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j(topic = "[ApplicatorController]")
 public class ApplicatorController {
-
 	private final CommandExecutorFactory commandExecutorFactory;
 
 	@Autowired
@@ -20,15 +19,19 @@ public class ApplicatorController {
 		this.commandExecutorFactory = commandExecutorFactory;
 	}
 
-	public void studentApplyJob(JobApplicationForm jobApplicationForm, String studentId, String jobId) throws Throwable {
-		StudentApplyJobCommand command = StudentApplyJobCommand.builder()
+	public void studentApplyJob(JobApplicationForm jobApplicationForm, String studentId, String jobId)
+		throws Throwable {
+		StudentApplyJobCommand command = StudentApplyJobCommand
+			.builder()
 			.jobId(jobId)
 			.studentId(studentId)
 			.content(jobApplicationForm.getContent())
 			.letter(jobApplicationForm.getLetter())
 			.build();
 
-		AbstractCommandExecutor<StudentApplyJobCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(command);
+		AbstractCommandExecutor<StudentApplyJobCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(
+			command
+		);
 		Job aggregate = commandExecutor.execute(command);
 	}
 }

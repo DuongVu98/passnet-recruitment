@@ -86,4 +86,32 @@ public class Job {
 			);
 		}
 	}
+
+	public void removeJobApplication(JobApplication application) throws JobApplicationNotFound {
+		if (this.jobApplications.contains(application)) {
+			log.info("application list contains this application");
+
+			this.jobApplications =
+				this.jobApplications.stream()
+					.map(
+						currentApplication -> {
+							if (currentApplication.getId().equal(application.getId())) {
+								log.info("change state!");
+
+								currentApplication.removed();
+								log.info(
+									"currentApplication after accepted: {}",
+									currentApplication.getApplicationState().getValue()
+								);
+							}
+							return currentApplication;
+						}
+					)
+					.collect(Collectors.toList());
+		} else {
+			throw new JobApplicationNotFound(
+				String.format("job application with id: %s not found in this job", application.getId())
+			);
+		}
+	}
 }

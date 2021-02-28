@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @Builder
 public class DeleteJobEvent {
-    private String jobId;
+	private String jobId;
 }

@@ -1,7 +1,6 @@
 package com.iucse.passnet.recruitment.usecase.grpc;
 
 import com.cseiu.passnet.saga.recruitmentsaga.EventProducerGrpc;
-
 import com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents;
 import com.iucse.passnet.recruitment.domain.events.produce.AcceptStudentApplicationEvent;
 import com.iucse.passnet.recruitment.domain.events.produce.DeleteJobEvent;
@@ -23,32 +22,35 @@ public class RecruitmentSagaGateway {
 
 	public void producePostNewJobEvent(PostNewJobEvent postNewJobEvent) {
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.producePostNewJobEvent(
-				ProduceEvents.PostNewJobEvent.newBuilder()
-						.setJobId(postNewJobEvent.getJobId())
-						.setOwnerId(postNewJobEvent.getOwnerId())
-						.build()
+			ProduceEvents
+				.PostNewJobEvent.newBuilder()
+				.setJobId(postNewJobEvent.getJobId())
+				.setOwnerId(postNewJobEvent.getOwnerId())
+				.build()
 		);
 
 		log.info(response.getMessage());
 	}
 
-	public void produceAcceptStudentApplicationEvent(AcceptStudentApplicationEvent acceptStudentApplicationEvent){
+	public void produceAcceptStudentApplicationEvent(AcceptStudentApplicationEvent acceptStudentApplicationEvent) {
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.produceAcceptStudentApplicationEvent(
-				ProduceEvents.AcceptStudentApplicationEvent.newBuilder()
-						.setJobId(acceptStudentApplicationEvent.getJobId())
-						.setTaId(acceptStudentApplicationEvent.getTaId())
-						.build()
+			ProduceEvents
+				.AcceptStudentApplicationEvent.newBuilder()
+				.setJobId(acceptStudentApplicationEvent.getJobId())
+				.setTaId(acceptStudentApplicationEvent.getTaId())
+				.build()
 		);
 
 		log.info(response.getMessage());
 	}
 
-	public void produceRemoveStudentApplicationEvent(RemoveStudentApplicationEvent removeStudentApplicationEvent){
+	public void produceRemoveStudentApplicationEvent(RemoveStudentApplicationEvent removeStudentApplicationEvent) {
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.produceRemoveStudentApplicationEvent(
-				ProduceEvents.RemoveStudentApplicationEvent.newBuilder()
-						.setJobId(removeStudentApplicationEvent.getJobId())
-						.setTaId(removeStudentApplicationEvent.getTaId())
-						.build()
+			ProduceEvents
+				.RemoveStudentApplicationEvent.newBuilder()
+				.setJobId(removeStudentApplicationEvent.getJobId())
+				.setTaId(removeStudentApplicationEvent.getTaId())
+				.build()
 		);
 
 		log.info(response.getMessage());
@@ -56,9 +58,7 @@ public class RecruitmentSagaGateway {
 
 	public void produceDeleteJobEvent(DeleteJobEvent deleteJobEvent) {
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.produceDeleteJobEvent(
-				ProduceEvents.DeleteJobEvent.newBuilder()
-						.setJobId(deleteJobEvent.getJobId())
-						.build()
+			ProduceEvents.DeleteJobEvent.newBuilder().setJobId(deleteJobEvent.getJobId()).build()
 		);
 
 		log.info(response.getMessage());

@@ -48,4 +48,11 @@ public class JobApplication {
 			this.applicationState = new ApplicationState(ApplicationStates.ACCEPTED);
 		}
 	}
+
+	public void removed() {
+		if (this.applicationState.getValue().equals(ApplicationStates.PENDING)) {
+			log.info("change state!");
+			this.applicationState = new ApplicationState(ApplicationStates.PENDING);
+		}
+	}
 }

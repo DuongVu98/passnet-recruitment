@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class AcceptStudentApplicationEvent {
-    private String jobId;
-    private String taId;
+	private String jobId;
+	private String taId;
 }

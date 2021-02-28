@@ -21,7 +21,10 @@ public class RecruiterRestController extends BaseController {
 	}
 
 	@PostMapping(value = "/post-job")
-	public ResponseEntity<?> postNewJob(@RequestBody JobCreationForm form, @RequestParam("teacherId") String teacherId) {
+	public ResponseEntity<?> postNewJob(
+		@RequestBody JobCreationForm form,
+		@RequestParam("teacherId") String teacherId
+	) {
 		try {
 			this.recruiterController.postJob(form, teacherId);
 			return ok();

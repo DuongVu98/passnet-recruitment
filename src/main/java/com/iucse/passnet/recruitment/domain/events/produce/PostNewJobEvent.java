@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class PostNewJobEvent {
-    private String jobId;
-    private String ownerId;
+	private String jobId;
+	private String ownerId;
 }
