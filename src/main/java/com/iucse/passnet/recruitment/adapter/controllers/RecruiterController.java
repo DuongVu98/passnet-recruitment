@@ -31,9 +31,7 @@ public class RecruiterController {
 			.semester(form.getSemester())
 			.build();
 
-		AbstractCommandExecutor<TeacherPostJobCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(
-			command
-		);
+		AbstractCommandExecutor<TeacherPostJobCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(command);
 		Job aggregate = commandExecutor.execute(command);
 	}
 

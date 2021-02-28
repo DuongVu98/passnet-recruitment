@@ -12,8 +12,7 @@ import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j(topic = "[TeacherAcceptStudentJobApplicationCommandExecutor]")
-public class TeacherAcceptStudentJobApplicationCommandExecutor
-	extends AbstractCommandExecutor<TeacherAcceptStudentJobApplicationCommand, Job> {
+public class TeacherAcceptStudentJobApplicationCommandExecutor extends AbstractCommandExecutor<TeacherAcceptStudentJobApplicationCommand, Job> {
 
 	@Builder
 	public TeacherAcceptStudentJobApplicationCommandExecutor(JobAggregateRepository aggregateRepository) {

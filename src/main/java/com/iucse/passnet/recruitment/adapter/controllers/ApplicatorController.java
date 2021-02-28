@@ -30,9 +30,7 @@ public class ApplicatorController {
 			.letter(jobApplicationForm.getLetter())
 			.build();
 
-		AbstractCommandExecutor<StudentApplyJobCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(
-			command
-		);
+		AbstractCommandExecutor<StudentApplyJobCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(command);
 		Job aggregate = commandExecutor.execute(command);
 	}
 }

@@ -15,10 +15,7 @@ public class TeacherCreateClassroomCommandExecutor extends AbstractCommandExecut
 	private final RecruitmentSagaGateway recruitmentSagaGateway;
 
 	@Builder
-	public TeacherCreateClassroomCommandExecutor(
-		JobAggregateRepository aggregateRepository,
-		RecruitmentSagaGateway recruitmentSagaGateway
-	) {
+	public TeacherCreateClassroomCommandExecutor(JobAggregateRepository aggregateRepository, RecruitmentSagaGateway recruitmentSagaGateway) {
 		super(aggregateRepository);
 		this.recruitmentSagaGateway = recruitmentSagaGateway;
 	}
@@ -29,15 +26,11 @@ public class TeacherCreateClassroomCommandExecutor extends AbstractCommandExecut
 		List<String> taIds = job
 			.getJobApplications()
 			.stream()
-			.filter(
-				jobApplication -> jobApplication.getApplicationState().getValue().equals(ApplicationStates.ACCEPTED)
-			)
+			.filter(jobApplication -> jobApplication.getApplicationState().getValue().equals(ApplicationStates.ACCEPTED))
 			.map(jobApplication -> jobApplication.getId().getValue())
 			.collect(Collectors.toList());
 
-		recruitmentSagaGateway.produceCreateClassEvent(
-			CreateClassEvent.builder().teacherId(job.getJobOwner().getValue()).taIdList(taIds).build()
-		);
+		recruitmentSagaGateway.produceCreateClassEvent(CreateClassEvent.builder().teacherId(job.getJobOwner().getValue()).taIdList(taIds).build());
 
 		this.aggregateRepository.delete(job);
 

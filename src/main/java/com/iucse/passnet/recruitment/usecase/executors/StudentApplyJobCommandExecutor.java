@@ -12,10 +12,7 @@ public class StudentApplyJobCommandExecutor extends AbstractCommandExecutor<Stud
 	private final UUIDGeneratorService uuidGeneratorService;
 
 	@Builder
-	public StudentApplyJobCommandExecutor(
-		JobAggregateRepository aggregateRepository,
-		UUIDGeneratorService uuidGeneratorService
-	) {
+	public StudentApplyJobCommandExecutor(JobAggregateRepository aggregateRepository, UUIDGeneratorService uuidGeneratorService) {
 		super(aggregateRepository);
 		this.uuidGeneratorService = uuidGeneratorService;
 	}

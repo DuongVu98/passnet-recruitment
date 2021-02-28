@@ -33,9 +33,7 @@ public class CommandExecutorFactory {
 		} else if (command instanceof StudentApplyJobCommand) {
 			return this.produceStudentApplyJobCommandExecutor((StudentApplyJobCommand) command);
 		} else if (command instanceof TeacherAcceptStudentJobApplicationCommand) {
-			return this.produceTeacherAcceptStudentJobApplicationCommandExecutor(
-					(TeacherAcceptStudentJobApplicationCommand) command
-				);
+			return this.produceTeacherAcceptStudentJobApplicationCommandExecutor((TeacherAcceptStudentJobApplicationCommand) command);
 		} else if (command instanceof TeacherPostJobCommand) {
 			return this.produceTeacherPostJobCommandExecutor((TeacherPostJobCommand) command);
 		} else {
@@ -53,9 +51,7 @@ public class CommandExecutorFactory {
 			.build();
 	}
 
-	private AbstractCommandExecutor<StudentApplyJobCommand, Job> produceStudentApplyJobCommandExecutor(
-		StudentApplyJobCommand command
-	) {
+	private AbstractCommandExecutor<StudentApplyJobCommand, Job> produceStudentApplyJobCommandExecutor(StudentApplyJobCommand command) {
 		return StudentApplyJobCommandExecutor
 			.builder()
 			.aggregateRepository(this.aggregateRepository)
@@ -66,15 +62,10 @@ public class CommandExecutorFactory {
 	private AbstractCommandExecutor<TeacherAcceptStudentJobApplicationCommand, Job> produceTeacherAcceptStudentJobApplicationCommandExecutor(
 		TeacherAcceptStudentJobApplicationCommand command
 	) {
-		return TeacherAcceptStudentJobApplicationCommandExecutor
-			.builder()
-			.aggregateRepository(this.aggregateRepository)
-			.build();
+		return TeacherAcceptStudentJobApplicationCommandExecutor.builder().aggregateRepository(this.aggregateRepository).build();
 	}
 
-	private AbstractCommandExecutor<TeacherPostJobCommand, Job> produceTeacherPostJobCommandExecutor(
-		TeacherPostJobCommand command
-	) {
+	private AbstractCommandExecutor<TeacherPostJobCommand, Job> produceTeacherPostJobCommandExecutor(TeacherPostJobCommand command) {
 		return TeacherPostJobCommandExecutor
 			.builder()
 			.aggregateRepository(this.aggregateRepository)
