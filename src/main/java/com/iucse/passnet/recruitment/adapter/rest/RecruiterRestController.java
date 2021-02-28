@@ -1,8 +1,9 @@
 package com.iucse.passnet.recruitment.adapter.rest;
 
 import com.iucse.passnet.recruitment.adapter.controllers.RecruiterController;
-import com.iucse.passnet.recruitment.adapter.forms.JobCreationForm;
+import com.iucse.passnet.recruitment.domain.forms.JobCreationForm;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
