@@ -2,7 +2,6 @@ package com.iucse.passnet.recruitment.adapter.controllers;
 
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.commands.TeacherAcceptStudentJobApplicationCommand;
-import com.iucse.passnet.recruitment.domain.commands.TeacherCreateClassroomCommand;
 import com.iucse.passnet.recruitment.domain.commands.TeacherDeleteJobCommand;
 import com.iucse.passnet.recruitment.domain.commands.TeacherPostJobCommand;
 import com.iucse.passnet.recruitment.domain.forms.JobCreationForm;
@@ -54,6 +53,7 @@ public class RecruiterController {
 		Job aggregate = commandExecutor.execute(command);
 	}
 
+	@CacheEvict(value = "job-view", key = "#jobId")
 	public void removeJobApplication(String jobApplicationId, String jobId) throws Throwable {
 		TeacherRemoveStudentJobApplicationCommand command = TeacherRemoveStudentJobApplicationCommand.builder()
 				.jobApplicationId(jobApplicationId)
@@ -63,6 +63,7 @@ public class RecruiterController {
 		Job aggregate = commandExecutor.execute(command);
 	}
 
+	@CacheEvict(value = "job-view", key = "#jobId")
 	public void deleteJob(String jobId) throws Throwable {
 		TeacherDeleteJobCommand command = TeacherDeleteJobCommand.builder()
 				.jobId(jobId)
