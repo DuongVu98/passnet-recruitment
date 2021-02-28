@@ -3,7 +3,10 @@ package com.iucse.passnet.recruitment.adapter.controllers;
 import com.iucse.passnet.recruitment.adapter.forms.JobCreationForm;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.commands.TeacherAcceptStudentJobApplicationCommand;
+import com.iucse.passnet.recruitment.domain.commands.TeacherDeleteJobCommand;
 import com.iucse.passnet.recruitment.domain.commands.TeacherPostJobCommand;
+import com.iucse.passnet.recruitment.domain.commands.TeacherRemoveStudentJobApplicationCommand;
+import com.iucse.passnet.recruitment.domain.exceptions.CommandExecutorNotFoundException;
 import com.iucse.passnet.recruitment.usecase.executors.AbstractCommandExecutor;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +51,20 @@ public class RecruiterController {
 		Job aggregate = commandExecutor.execute(command);
 	}
 
-	public void createClassroom(String jobId) {}
+	public void removeJobApplication(String jobApplicationId, String jobId) throws Throwable {
+		TeacherRemoveStudentJobApplicationCommand command = TeacherRemoveStudentJobApplicationCommand.builder()
+				.jobApplicationId(jobApplicationId)
+				.jobId(jobId)
+				.build();
+		AbstractCommandExecutor<TeacherRemoveStudentJobApplicationCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(command);
+		Job aggregate = commandExecutor.execute(command);
+	}
+
+	public void deleteJob(String jobId) throws Throwable {
+		TeacherDeleteJobCommand command = TeacherDeleteJobCommand.builder()
+				.jobId(jobId)
+				.build();
+		AbstractCommandExecutor<TeacherDeleteJobCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(command);
+		Job aggregate = commandExecutor.execute(command);
+	}
 }

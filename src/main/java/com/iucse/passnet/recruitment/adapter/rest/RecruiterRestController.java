@@ -33,7 +33,7 @@ public class RecruiterRestController extends BaseController {
 		}
 	}
 
-	@PostMapping(value = "/accept-application")
+	@PutMapping(value = "/accept-application")
 	public ResponseEntity<?> acceptJobApplication(
 		@RequestParam("jobApplicationId") String jobApplicationId,
 		@RequestParam("jobId") String jobId
@@ -46,9 +46,23 @@ public class RecruiterRestController extends BaseController {
 		return ok();
 	}
 
-	@PostMapping(value = "/create-classroom")
-	public ResponseEntity<?> createClassroom(@RequestParam("jobId") String jobId) {
-		this.recruiterController.createClassroom(jobId);
+	@PutMapping(value = "/remove-application")
+	public ResponseEntity<?> removeApplication(@RequestParam("jobApplicationId") String jobApplicationId, @RequestParam("jobId") String jobId) {
+		try {
+			recruiterController.removeJobApplication(jobApplicationId, jobId);
+		} catch (Throwable throwable) {
+			return badRequest(throwable);
+		}
+		return ok();
+	}
+
+	@DeleteMapping(value = "/delete-job")
+	public ResponseEntity<?> deleteJob(@RequestParam("jobId") String jobId) {
+		try {
+			recruiterController.deleteJob(jobId);
+		} catch (Throwable throwable) {
+			return badRequest(throwable);
+		}
 		return ok();
 	}
 }
