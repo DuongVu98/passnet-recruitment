@@ -2,9 +2,9 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: "jdbc:postgresql://aggregatedb:5432/passnet_recruitment"
-    username: passnet-recruitment-app
-    password: tungduong98
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driverClassName: org.postgresql.Driver
   jpa:
     generate-ddl: true
@@ -20,8 +20,8 @@ spring:
     console:
       enabled: false
   redis:
-    host: viewcache
-    port: 6379
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
 springdoc:
   api-docs:
     path: /api-docs
@@ -33,10 +33,9 @@ grpc:
 
 saga:
   grpc:
-    host: localhost
-    port: 6565
+    host: ${SAGA_GRPC_HOST}
+    port: ${SAGA_GRPC_PORT}
 
 view:
   posted-jobs:
     id: postedJobViews
-
