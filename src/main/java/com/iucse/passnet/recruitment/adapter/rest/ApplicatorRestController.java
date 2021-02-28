@@ -1,8 +1,9 @@
 package com.iucse.passnet.recruitment.adapter.rest;
 
 import com.iucse.passnet.recruitment.adapter.controllers.ApplicatorController;
-import com.iucse.passnet.recruitment.adapter.forms.JobApplicationForm;
+import com.iucse.passnet.recruitment.domain.forms.JobApplicationForm;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class ApplicatorRestController extends BaseController {
 
 	@PostMapping(value = "/apply-job")
 	public void studentApplyJob(
-		@RequestBody JobApplicationForm form,
+		@Valid @RequestBody JobApplicationForm form,
 		@RequestParam("studentId") String studentId,
 		@RequestParam("jobId") String jobId
 	) {

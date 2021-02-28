@@ -1,8 +1,9 @@
 package com.iucse.passnet.recruitment.adapter.rest;
 
 import com.iucse.passnet.recruitment.adapter.controllers.RecruiterController;
-import com.iucse.passnet.recruitment.adapter.forms.JobCreationForm;
+import com.iucse.passnet.recruitment.domain.forms.JobCreationForm;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,7 @@ public class RecruiterRestController extends BaseController {
 	}
 
 	@PostMapping(value = "/post-job")
-	public ResponseEntity<?> postNewJob(
-		@RequestBody JobCreationForm form,
-		@RequestParam("teacherId") String teacherId
-	) {
+	public ResponseEntity<?> postNewJob(@Valid @RequestBody JobCreationForm form, @RequestParam("teacherId") String teacherId) {
 		try {
 			this.recruiterController.postJob(form, teacherId);
 			return ok();
@@ -34,10 +32,7 @@ public class RecruiterRestController extends BaseController {
 	}
 
 	@PostMapping(value = "/accept-application")
-	public ResponseEntity<?> acceptJobApplication(
-		@RequestParam("jobApplicationId") String jobApplicationId,
-		@RequestParam("jobId") String jobId
-	) {
+	public ResponseEntity<?> acceptJobApplication(@RequestParam("jobApplicationId") String jobApplicationId, @RequestParam("jobId") String jobId) {
 		try {
 			this.recruiterController.acceptJobApplication(jobApplicationId, jobId);
 		} catch (Throwable throwable) {
@@ -48,7 +43,11 @@ public class RecruiterRestController extends BaseController {
 
 	@PostMapping(value = "/create-classroom")
 	public ResponseEntity<?> createClassroom(@RequestParam("jobId") String jobId) {
-		this.recruiterController.createClassroom(jobId);
-		return ok();
+		try {
+			this.recruiterController.createClassroom(jobId);
+			return ok();
+		} catch (Throwable throwable) {
+			return badRequest(throwable);
+		}
 	}
 }
