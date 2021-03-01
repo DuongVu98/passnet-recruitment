@@ -7,6 +7,7 @@ import com.iucse.passnet.recruitment.domain.commands.TeacherPostJobCommand;
 import com.iucse.passnet.recruitment.domain.forms.JobCreationForm;
 import com.iucse.passnet.recruitment.domain.commands.TeacherRemoveStudentJobApplicationCommand;
 import com.iucse.passnet.recruitment.domain.exceptions.CommandExecutorNotFoundException;
+import com.iucse.passnet.recruitment.domain.helpers.ViewTypes;
 import com.iucse.passnet.recruitment.usecase.executors.AbstractCommandExecutor;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class RecruiterController {
 		Job aggregate = commandExecutor.execute(command);
 	}
 
-	@CacheEvict(value = "job-view", key = "#jobId")
+	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
 	public void acceptJobApplication(String jobApplicationId, String jobId) throws Throwable {
 		TeacherAcceptStudentJobApplicationCommand command = TeacherAcceptStudentJobApplicationCommand
 			.builder()
@@ -53,7 +54,7 @@ public class RecruiterController {
 		Job aggregate = commandExecutor.execute(command);
 	}
 
-	@CacheEvict(value = "job-view", key = "#jobId")
+	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
 	public void removeJobApplication(String jobApplicationId, String jobId) throws Throwable {
 		TeacherRemoveStudentJobApplicationCommand command = TeacherRemoveStudentJobApplicationCommand.builder()
 				.jobApplicationId(jobApplicationId)
@@ -63,7 +64,7 @@ public class RecruiterController {
 		Job aggregate = commandExecutor.execute(command);
 	}
 
-	@CacheEvict(value = "job-view", key = "#jobId")
+	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
 	public void deleteJob(String jobId) throws Throwable {
 		TeacherDeleteJobCommand command = TeacherDeleteJobCommand.builder()
 				.jobId(jobId)
