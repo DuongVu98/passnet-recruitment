@@ -62,6 +62,7 @@ public class CommandExecutorFactory {
 	) {
 		return TeacherAcceptStudentJobApplicationCommandExecutor
 			.builder()
+			.recruitmentSagaGateway(this.recruitmentSagaGateway)
 			.aggregateRepository(this.aggregateRepository)
 			.build();
 	}
