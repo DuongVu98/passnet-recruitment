@@ -32,3 +32,4 @@ out/
 log.txt
 
 **/application-local.yml
+generated-sources/
