@@ -23,7 +23,7 @@ public class RecruiterRestController extends BaseController {
 
 	@PostMapping(value = "/post-job")
 	public ResponseEntity<?> postNewJob(
-		@RequestBody JobCreationForm form,
+		@Valid @RequestBody JobCreationForm form,
 		@RequestParam("teacherId") String teacherId
 	) {
 		try {
@@ -59,6 +59,7 @@ public class RecruiterRestController extends BaseController {
 
 	@DeleteMapping(value = "/delete-job")
 	public ResponseEntity<?> deleteJob(@RequestParam("jobId") String jobId) {
+		log.debug("delete job with jobId --> {}", jobId);
 		try {
 			recruiterController.deleteJob(jobId);
 		} catch (Throwable throwable) {
