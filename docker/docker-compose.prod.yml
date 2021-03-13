@@ -12,6 +12,9 @@ services:
       passnetrecruitmentnetwork:
     environment:
       - PROFILE=prod
+      - DATABASE_URL=aggregatedb:5432
+      - DATABASE_USERNAME=passnet-recruitment-app
+      - DATABASE_PASSWORD=tungduong98
     ports:
       - "8081:8080"
     depends_on:
@@ -28,14 +31,14 @@ services:
     networks:
       passnetrecruitmentnetwork:
 
-  viewcache:
-    image: redis:alpine
-    environment:
-      - REDIS_REPLICATION_MODE=master
-    volumes:
-      - database-data:/var/lib/redis
-    networks:
-      passnetrecruitmentnetwork:
+#  viewcache:
+#    image: redis:alpine
+#    environment:
+#      - REDIS_REPLICATION_MODE=master
+#    volumes:
+#      - database-data:/var/lib/redis
+#    networks:
+#      passnetrecruitmentnetwork:
 
 volumes:
   database-data:
