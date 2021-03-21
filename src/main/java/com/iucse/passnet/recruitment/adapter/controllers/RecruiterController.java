@@ -40,7 +40,7 @@ public class RecruiterController {
 		Job aggregate = commandExecutor.execute(command);
 	}
 
-	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
+//	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
 	public void acceptJobApplication(String jobApplicationId, String jobId) throws Throwable {
 		TeacherAcceptStudentJobApplicationCommand command = TeacherAcceptStudentJobApplicationCommand
 			.builder()
@@ -54,7 +54,7 @@ public class RecruiterController {
 		Job aggregate = commandExecutor.execute(command);
 	}
 
-	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
+//	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
 	public void removeJobApplication(String jobApplicationId, String jobId) throws Throwable {
 		TeacherRemoveStudentJobApplicationCommand command = TeacherRemoveStudentJobApplicationCommand.builder()
 				.jobApplicationId(jobApplicationId)
@@ -64,7 +64,7 @@ public class RecruiterController {
 		Job aggregate = commandExecutor.execute(command);
 	}
 
-	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
+//	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
 	public void deleteJob(String jobId) throws Throwable {
 		TeacherDeleteJobCommand command = TeacherDeleteJobCommand.builder()
 				.jobId(jobId)
