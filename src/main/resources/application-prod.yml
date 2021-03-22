@@ -19,9 +19,6 @@ spring:
   h2:
     console:
       enabled: false
-  redis:
-    host: ${REDIS_HOST}
-    port: ${REDIS_PORT}
 springdoc:
   api-docs:
     path: /api-docs
@@ -29,7 +26,7 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
 grpc:
-  port: 9090
+  port: ${GRPC_PORT_LISTENER}
 
 saga:
   grpc:
