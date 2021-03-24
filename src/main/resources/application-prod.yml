@@ -32,7 +32,3 @@ saga:
   grpc:
     host: ${SAGA_GRPC_HOST}
     port: ${SAGA_GRPC_PORT}
-
-view:
-  posted-jobs:
-    id: postedJobViews
