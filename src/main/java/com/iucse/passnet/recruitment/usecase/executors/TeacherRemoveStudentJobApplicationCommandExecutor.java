@@ -13,6 +13,7 @@ import com.iucse.passnet.recruitment.usecase.grpc.RecruitmentSagaGateway;
 import java.util.Optional;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
+import org.greenrobot.eventbus.EventBus;
 
 @Slf4j(topic = "[TeacherRemoveStudentJobApplicationCommandExecutor]")
 public class TeacherRemoveStudentJobApplicationCommandExecutor
@@ -44,12 +45,18 @@ public class TeacherRemoveStudentJobApplicationCommandExecutor
 
 			Job updatedJob = this.aggregateRepository.save(jobAggregate);
 
-			recruitmentSagaGateway.produceRemoveStudentApplicationEvent(
-				RemoveStudentApplicationEvent
-					.builder()
-					.jobId(updatedJob.getId().getValue())
-					.taId(jobApplication.getApplicationOwner().getValue())
-					.build()
+//			recruitmentSagaGateway.produceRemoveStudentApplicationEvent(
+//				RemoveStudentApplicationEvent
+//					.builder()
+//					.jobId(updatedJob.getId().getValue())
+//					.taId(jobApplication.getApplicationOwner().getValue())
+//					.build()
+//			);
+			EventBus.getDefault().post(
+					RemoveStudentApplicationEvent.builder()
+							.jobId(updatedJob.getId().getValue())
+							.taId(jobApplication.getApplicationOwner().getValue())
+							.build()
 			);
 
 			return updatedJob;

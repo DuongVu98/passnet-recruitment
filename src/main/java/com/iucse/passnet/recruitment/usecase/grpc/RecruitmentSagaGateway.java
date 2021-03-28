@@ -7,6 +7,8 @@ import com.iucse.passnet.recruitment.domain.events.produce.DeleteJobEvent;
 import com.iucse.passnet.recruitment.domain.events.produce.PostNewJobEvent;
 import com.iucse.passnet.recruitment.domain.events.produce.RemoveStudentApplicationEvent;
 import lombok.extern.slf4j.Slf4j;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,9 +20,11 @@ public class RecruitmentSagaGateway {
 	@Autowired
 	public RecruitmentSagaGateway(EventProducerGrpc.EventProducerBlockingStub eventProducerBlockingStub) {
 		this.eventProducerBlockingStub = eventProducerBlockingStub;
+		EventBus.getDefault().register(this);
 	}
 
-	public void producePostNewJobEvent(PostNewJobEvent postNewJobEvent) {
+	@Subscribe
+	public void on(PostNewJobEvent postNewJobEvent) {
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.producePostNewJobEvent(
 			ProduceEvents
 				.PostNewJobEvent.newBuilder()
@@ -32,7 +36,8 @@ public class RecruitmentSagaGateway {
 		log.info(response.getMessage());
 	}
 
-	public void produceAcceptStudentApplicationEvent(AcceptStudentApplicationEvent acceptStudentApplicationEvent) {
+	@Subscribe
+	public void on(AcceptStudentApplicationEvent acceptStudentApplicationEvent) {
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.produceAcceptStudentApplicationEvent(
 			ProduceEvents
 				.AcceptStudentApplicationEvent.newBuilder()
@@ -44,7 +49,8 @@ public class RecruitmentSagaGateway {
 		log.info(response.getMessage());
 	}
 
-	public void produceRemoveStudentApplicationEvent(RemoveStudentApplicationEvent removeStudentApplicationEvent) {
+	@Subscribe
+	public void on(RemoveStudentApplicationEvent removeStudentApplicationEvent) {
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.produceRemoveStudentApplicationEvent(
 			ProduceEvents
 				.RemoveStudentApplicationEvent.newBuilder()
@@ -56,7 +62,8 @@ public class RecruitmentSagaGateway {
 		log.info(response.getMessage());
 	}
 
-	public void produceDeleteJobEvent(DeleteJobEvent deleteJobEvent) {
+	@Subscribe
+	public void on(DeleteJobEvent deleteJobEvent) {
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.produceDeleteJobEvent(
 			ProduceEvents.DeleteJobEvent.newBuilder().setJobId(deleteJobEvent.getJobId()).build()
 		);

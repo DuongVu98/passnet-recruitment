@@ -12,6 +12,7 @@ import com.iucse.passnet.recruitment.usecase.grpc.RecruitmentSagaGateway;
 import java.util.Optional;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
+import org.greenrobot.eventbus.EventBus;
 
 @Slf4j(topic = "[TeacherAcceptStudentJobApplicationCommandExecutor]")
 public class TeacherAcceptStudentJobApplicationCommandExecutor
@@ -42,13 +43,18 @@ public class TeacherAcceptStudentJobApplicationCommandExecutor
 
 			Job updatedJob = this.aggregateRepository.save(jobAggregate);
 
-			recruitmentSagaGateway.produceAcceptStudentApplicationEvent(
-				AcceptStudentApplicationEvent
-					.builder()
+//			recruitmentSagaGateway.produceAcceptStudentApplicationEvent(
+//				AcceptStudentApplicationEvent
+//					.builder()
+//					.jobId(updatedJob.getId().getValue())
+//					.taId(jobApplication.getApplicationOwner().getValue())
+//					.build()
+//			);
+			EventBus.getDefault().post(
+				AcceptStudentApplicationEvent.builder()
 					.jobId(updatedJob.getId().getValue())
 					.taId(jobApplication.getApplicationOwner().getValue())
-					.build()
-			);
+					.build());
 
 			return updatedJob;
 		} else {
