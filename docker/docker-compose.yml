@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  app:
+    image: gradle:6.8.3-jdk8
+    container_name: passnet_recruitment_dev
+    volumes:
+      - "..:/app:rw"
+    command: "gradle -p /app bootRunLocal"
+    ports:
+      - "8080:8080"
