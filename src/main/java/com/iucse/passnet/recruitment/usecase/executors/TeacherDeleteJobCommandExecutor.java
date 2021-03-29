@@ -9,6 +9,7 @@ import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.grpc.RecruitmentSagaGateway;
 import java.util.Optional;
 import lombok.Builder;
+import org.greenrobot.eventbus.EventBus;
 
 public class TeacherDeleteJobCommandExecutor extends AbstractCommandExecutor<TeacherDeleteJobCommand, Job> {
 	private final RecruitmentSagaGateway recruitmentSagaGateway;
@@ -30,8 +31,11 @@ public class TeacherDeleteJobCommandExecutor extends AbstractCommandExecutor<Tea
 			Job aggregate = jobOptional.get();
 
 			aggregateRepository.delete(aggregate);
-			recruitmentSagaGateway.produceDeleteJobEvent(
-				DeleteJobEvent.builder().jobId(aggregate.getId().getValue()).build()
+//			recruitmentSagaGateway.produceDeleteJobEvent(
+//				DeleteJobEvent.builder().jobId(aggregate.getId().getValue()).build()
+//			);
+			EventBus.getDefault().post(
+					DeleteJobEvent.builder().jobId(aggregate.getId().getValue()).build()
 			);
 
 			return aggregate;

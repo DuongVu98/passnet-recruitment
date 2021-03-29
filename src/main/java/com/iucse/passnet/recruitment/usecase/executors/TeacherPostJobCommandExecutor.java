@@ -8,6 +8,7 @@ import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.grpc.RecruitmentSagaGateway;
 import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
 import lombok.Builder;
+import org.greenrobot.eventbus.EventBus;
 
 public class TeacherPostJobCommandExecutor extends AbstractCommandExecutor<TeacherPostJobCommand, Job> {
 	private final UUIDGeneratorService uuidGeneratorService;
@@ -39,13 +40,18 @@ public class TeacherPostJobCommandExecutor extends AbstractCommandExecutor<Teach
 
 		Job savedJob = this.aggregateRepository.save(newJob);
 
-		recruitmentSagaGateway.producePostNewJobEvent(
-			PostNewJobEvent
-				.builder()
+//		recruitmentSagaGateway.producePostNewJobEvent(
+//			PostNewJobEvent.builder()
+//				.jobId(savedJob.getId().getValue())
+//				.ownerId(savedJob.getJobOwner().getValue())
+//				.build()
+//		);
+
+		EventBus.getDefault().post(
+			PostNewJobEvent.builder()
 				.jobId(savedJob.getId().getValue())
 				.ownerId(savedJob.getJobOwner().getValue())
-				.build()
-		);
+				.build());
 
 		return savedJob;
 	}

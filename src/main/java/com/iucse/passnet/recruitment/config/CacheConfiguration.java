@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 @Configuration
-@EnableCaching
+//@EnableCaching
 @EnableRedisRepositories
 public class CacheConfiguration implements CachingConfigurer {
 //	@Value("${spring.redis.host}")
