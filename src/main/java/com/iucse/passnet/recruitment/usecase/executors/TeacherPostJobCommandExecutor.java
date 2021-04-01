@@ -51,7 +51,8 @@ public class TeacherPostJobCommandExecutor extends AbstractCommandExecutor<Teach
 			PostNewJobEvent.builder()
 				.jobId(savedJob.getId().getValue())
 				.ownerId(savedJob.getJobOwner().getValue())
-				.build());
+				.build()
+		);
 
 		return savedJob;
 	}

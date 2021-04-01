@@ -25,6 +25,7 @@ public class RecruitmentSagaGateway {
 
 	@Subscribe
 	public void on(PostNewJobEvent postNewJobEvent) {
+		log.info("post new job");
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.producePostNewJobEvent(
 			ProduceEvents
 				.PostNewJobEvent.newBuilder()
