@@ -40,14 +40,14 @@ public class QueryRestController extends BaseController {
 	}
 
 	@GetMapping(value = "/posted-jobs")
-	public PostedJobsView getPostedJobsView() {
-		return this.queryController.getPostedJobsView();
+	public ResponseEntity<?> getPostedJobsView() {
+		return ResponseEntity.ok(this.queryController.getPostedJobsView().getLitePostedJobs());
 	}
 
 	@GetMapping(value = "/owned-jobs")
 	public ResponseEntity<?> getOwnPostedJobs(@RequestParam("teacherId") String teacherId) {
 		OwnedJobListView ownedJobListView = this.queryController.getPostedJobsByUserView(teacherId);
-		return ResponseEntity.ok(ownedJobListView);
+		return ResponseEntity.ok(ownedJobListView.getLitePostedJobs());
 	}
 
 	@GetMapping(value = "/job-application-list-view")
