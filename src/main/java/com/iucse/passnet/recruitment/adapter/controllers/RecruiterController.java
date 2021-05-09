@@ -6,7 +6,9 @@ import com.iucse.passnet.recruitment.domain.commands.RemoveJobApplicationCommand
 import com.iucse.passnet.recruitment.domain.commands.TeacherDeleteJobCommand;
 import com.iucse.passnet.recruitment.domain.commands.TeacherPostJobCommand;
 import com.iucse.passnet.recruitment.domain.forms.JobCreationForm;
+import com.iucse.passnet.recruitment.usecase.decorators.CommandExecutorDecoratorTypes;
 import com.iucse.passnet.recruitment.usecase.executors.CommandExecutor;
+import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorDecoratorFactory;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,10 +16,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class RecruiterController {
 	private final CommandExecutorFactory commandExecutorFactory;
+	private final CommandExecutorDecoratorFactory commandExecutorDecoratorFactory;
 
 	@Autowired
-	public RecruiterController(CommandExecutorFactory commandExecutorFactory) {
+	public RecruiterController(CommandExecutorFactory commandExecutorFactory, CommandExecutorDecoratorFactory commandExecutorDecoratorFactory) {
 		this.commandExecutorFactory = commandExecutorFactory;
+		this.commandExecutorDecoratorFactory = commandExecutorDecoratorFactory;
 	}
 
 	public void postJob(JobCreationForm form, String teacherId) {
@@ -38,6 +42,10 @@ public class RecruiterController {
 	//	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
 	public void acceptJobApplication(String jobApplicationId, String jobId) {
 		AcceptJobApplicationCommand command = AcceptJobApplicationCommand.builder().jobApplicationId(jobApplicationId).jobId(jobId).build();
+
+		//		CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
+		//		CommandExecutor commandExecutor1 = commandExecutorDecoratorFactory.produce(commandExecutor, CommandExecutorDecoratorTypes.COMPENSATING_COMMAND_BACKUP);
+		//		Job aggregate = commandExecutor1.execute(command);
 
 		CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
 		Job aggregate = commandExecutor.execute(command);

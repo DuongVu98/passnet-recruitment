@@ -32,7 +32,7 @@ public class TeacherDeleteJobCommandExecutor implements CommandExecutor {
 
 				this.jobRepository.delete(aggregate);
 
-				EventBus.getDefault().post(DeleteJobEvent.builder().jobId(aggregate.getId().getValue()).build());
+				//				EventBus.getDefault().post(DeleteJobEvent.builder().jobId(aggregate.getId().getValue()).build());
 
 				return aggregate;
 			} else {

@@ -44,15 +44,15 @@ public class AcceptJobApplicationCommandExecutor implements CommandExecutor, Com
 
 				Job updatedJob = this.jobRepository.save(jobAggregate);
 
-				EventBus
-					.getDefault()
-					.post(
-						AcceptStudentApplicationEvent
-							.builder()
-							.jobId(updatedJob.getId().getValue())
-							.taId(jobApplication.getApplicationOwner().getValue())
-							.build()
-					);
+				//				EventBus
+				//					.getDefault()
+				//					.post(
+				//						AcceptStudentApplicationEvent
+				//							.builder()
+				//							.jobId(updatedJob.getId().getValue())
+				//							.taId(jobApplication.getApplicationOwner().getValue())
+				//							.build()
+				//					);
 
 				return updatedJob;
 			} else {

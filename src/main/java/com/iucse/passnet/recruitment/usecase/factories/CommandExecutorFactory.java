@@ -2,81 +2,40 @@ package com.iucse.passnet.recruitment.usecase.factories;
 
 import com.iucse.passnet.recruitment.domain.annotation.Decorator;
 import com.iucse.passnet.recruitment.domain.commands.*;
-import com.iucse.passnet.recruitment.domain.compensating.AcceptJobApplicationCompensating;
-import com.iucse.passnet.recruitment.domain.compensating.CompensatingCommand;
-import com.iucse.passnet.recruitment.domain.compensating.RemoveJobApplicationCompensating;
-import com.iucse.passnet.recruitment.domain.exceptions.CommandExecutorNotFoundException;
-import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.decorators.CommandExecutorDecoratorTypes;
-import com.iucse.passnet.recruitment.usecase.executors.*;
-import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
+import com.iucse.passnet.recruitment.usecase.executors.CommandExecutor;
+import com.iucse.passnet.recruitment.usecase.services.CommandExecutorProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import static com.iucse.passnet.recruitment.usecase.decorators.CommandExecutorDecoratorTypes.COMPENSATING_COMMAND_BACKUP;
 
 @Service("transaction-command-executor")
 public class CommandExecutorFactory {
-	private final JobAggregateRepository aggregateRepository;
-	private final UUIDGeneratorService uuidGeneratorService;
+	private final CommandExecutorProvider commandExecutorProvider;
 
-	public CommandExecutorFactory(JobAggregateRepository aggregateRepository, UUIDGeneratorService uuidGeneratorService) {
-		this.aggregateRepository = aggregateRepository;
-		this.uuidGeneratorService = uuidGeneratorService;
+	@Autowired
+	public CommandExecutorFactory(CommandExecutorProvider commandExecutorProvider) {
+		this.commandExecutorProvider = commandExecutorProvider;
 	}
 
-	public CommandExecutor produce(BaseCommand command) {
-		if (command instanceof StudentApplyJobCommand) {
-			return this.produceStudentApplyJobCommand();
-		} else if (command instanceof AcceptJobApplicationCommand) {
-			return this.produceAcceptJobApplicationCommand();
-		} else if (command instanceof TeacherPostJobCommand) {
-			return this.produceTeacherPostJobCommand();
-		} else if (command instanceof RemoveJobApplicationCommand) {
-			return this.produceRemoveJobApplicationCommand();
-		} else if (command instanceof TeacherDeleteJobCommand) {
-			return this.produceTeacherDeleteJobCommand();
-		} else {
-			throw new CommandExecutorNotFoundException("command executor not found");
-		}
+	public CommandExecutor produce(StudentApplyJobCommand command) {
+		return this.commandExecutorProvider.produceStudentApplyJobCommandExecutor();
 	}
 
-	public CommandExecutor produce(CompensatingCommand command) {
-		if (command instanceof AcceptJobApplicationCompensating) {
-			return this.produceAcceptJobApplicationCommand();
-		} else if (command instanceof RemoveJobApplicationCompensating) {
-			return this.produceRemoveJobApplicationCommand();
-		} else {
-			throw new CommandExecutorNotFoundException("command executor not found");
-		}
+	@Decorator(decoratorType = CommandExecutorDecoratorTypes.COMPENSATING_COMMAND_BACKUP)
+	public CommandExecutor produce(AcceptJobApplicationCommand command) {
+		return this.commandExecutorProvider.produceAcceptJobApplicationCommandExecutor();
 	}
 
-	private CommandExecutor produceStudentApplyJobCommand() {
-		return StudentApplyJobCommandExecutor
-			.builder()
-			.jobRepository(this.aggregateRepository)
-			.uuidGeneratorService(this.uuidGeneratorService)
-			.build();
+	public CommandExecutor produce(TeacherPostJobCommand command) {
+		return this.commandExecutorProvider.produceTeacherPostJobCommandExecutor();
 	}
 
-	@Decorator(decoratorType = COMPENSATING_COMMAND_BACKUP)
-	private CommandExecutor produceAcceptJobApplicationCommand() {
-		return AcceptJobApplicationCommandExecutor.builder().jobRepository(this.aggregateRepository).build();
+	@Decorator(decoratorType = CommandExecutorDecoratorTypes.COMPENSATING_COMMAND_BACKUP)
+	public CommandExecutor produce(RemoveJobApplicationCommand command) {
+		return this.commandExecutorProvider.produceRemoveJobApplicationCommandExecutor();
 	}
 
-	private CommandExecutor produceTeacherPostJobCommand() {
-		return TeacherPostJobCommandExecutor
-			.builder()
-			.jobRepository(this.aggregateRepository)
-			.uuidGeneratorService(this.uuidGeneratorService)
-			.build();
-	}
-
-	@Decorator(decoratorType = COMPENSATING_COMMAND_BACKUP)
-	private CommandExecutor produceRemoveJobApplicationCommand() {
-		return RemoveJobApplicationCommandExecutor.builder().jobRepository(this.aggregateRepository).build();
-	}
-
-	private CommandExecutor produceTeacherDeleteJobCommand() {
-		return TeacherDeleteJobCommandExecutor.builder().jobRepository(aggregateRepository).build();
+	public CommandExecutor produce(TeacherDeleteJobCommand command) {
+		return this.commandExecutorProvider.produceTeacherDeleteJobCommandExecutor();
 	}
 }

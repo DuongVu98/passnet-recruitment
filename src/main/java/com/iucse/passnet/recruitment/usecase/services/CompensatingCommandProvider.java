@@ -12,28 +12,36 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CompensatingCommandProvider {
-    private final UUIDGeneratorService uuidGeneratorService;
+	private final UUIDGeneratorService uuidGeneratorService;
 
-    @Autowired
-    public CompensatingCommandProvider(UUIDGeneratorService uuidGeneratorService) {
-        this.uuidGeneratorService = uuidGeneratorService;
-    }
+	@Autowired
+	public CompensatingCommandProvider(UUIDGeneratorService uuidGeneratorService) {
+		this.uuidGeneratorService = uuidGeneratorService;
+	}
 
-    public CompensatingCommand build(BaseCommand baseCommand) {
-        if (baseCommand instanceof AcceptJobApplicationCommand) {
-            return this.build((AcceptJobApplicationCommand) baseCommand);
-        } else if (baseCommand instanceof RemoveJobApplicationCommand) {
-            return this.build((RemoveJobApplicationCommand) baseCommand);
-        } else {
-            throw new WrongCommandTypeException("transaction command is not included.");
-        }
-    }
+	public CompensatingCommand build(BaseCommand baseCommand) {
+		if (baseCommand instanceof AcceptJobApplicationCommand) {
+			return this.build((AcceptJobApplicationCommand) baseCommand);
+		} else if (baseCommand instanceof RemoveJobApplicationCommand) {
+			return this.build((RemoveJobApplicationCommand) baseCommand);
+		} else {
+			throw new WrongCommandTypeException("transaction command is not included.");
+		}
+	}
 
-    private AcceptJobApplicationCompensating build(AcceptJobApplicationCommand baseCommand) {
-        return new AcceptJobApplicationCompensating(this.uuidGeneratorService.generate().toString(), baseCommand.getJobId(), baseCommand.getJobApplicationId());
-    }
+	private AcceptJobApplicationCompensating build(AcceptJobApplicationCommand baseCommand) {
+		return new AcceptJobApplicationCompensating(
+			this.uuidGeneratorService.generate().toString(),
+			baseCommand.getJobId(),
+			baseCommand.getJobApplicationId()
+		);
+	}
 
-    private RemoveJobApplicationCompensating build(RemoveJobApplicationCommand baseCommand) {
-        return new RemoveJobApplicationCompensating(this.uuidGeneratorService.generate().toString(), baseCommand.getJobId(), baseCommand.getJobApplicationId());
-    }
+	private RemoveJobApplicationCompensating build(RemoveJobApplicationCommand baseCommand) {
+		return new RemoveJobApplicationCompensating(
+			this.uuidGeneratorService.generate().toString(),
+			baseCommand.getJobId(),
+			baseCommand.getJobApplicationId()
+		);
+	}
 }

@@ -39,9 +39,9 @@ public class TeacherPostJobCommandExecutor implements CommandExecutor {
 
 			Job savedJob = this.jobRepository.save(newJob);
 
-			EventBus
-				.getDefault()
-				.post(PostNewJobEvent.builder().jobId(savedJob.getId().getValue()).ownerId(savedJob.getJobOwner().getValue()).build());
+			//			EventBus
+			//				.getDefault()
+			//				.post(PostNewJobEvent.builder().jobId(savedJob.getId().getValue()).ownerId(savedJob.getJobOwner().getValue()).build());
 
 			return savedJob;
 		} else {

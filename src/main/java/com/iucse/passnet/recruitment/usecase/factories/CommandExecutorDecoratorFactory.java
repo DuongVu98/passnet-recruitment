@@ -10,30 +10,33 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CommandExecutorDecoratorFactory {
+	private final CompensatingCommandBackupService compensatingBackupService;
+	private final CompensatingCommandProvider compensatingCommandProvider;
 
-    private final CompensatingCommandBackupService compensatingBackupService;
-    private final CompensatingCommandProvider compensatingCommandProvider;
+	@Autowired
+	public CommandExecutorDecoratorFactory(
+		CompensatingCommandBackupService compensatingBackupService,
+		CompensatingCommandProvider compensatingCommandProvider
+	) {
+		this.compensatingBackupService = compensatingBackupService;
+		this.compensatingCommandProvider = compensatingCommandProvider;
+	}
 
-    @Autowired
-    public CommandExecutorDecoratorFactory(CompensatingCommandBackupService compensatingBackupService, CompensatingCommandProvider compensatingCommandProvider) {
-        this.compensatingBackupService = compensatingBackupService;
-        this.compensatingCommandProvider = compensatingCommandProvider;
-    }
+	public CommandExecutor produce(CommandExecutor commandExecutor, CommandExecutorDecoratorTypes decorator) {
+		switch (decorator) {
+			case COMPENSATING_COMMAND_BACKUP:
+				return this.produceCompensatingBackupDecorator(commandExecutor);
+			default:
+				return commandExecutor;
+		}
+	}
 
-    public CommandExecutor produce(CommandExecutor commandExecutor, CommandExecutorDecoratorTypes decorator) {
-        switch (decorator) {
-            case COMPENSATING_COMMAND_BACKUP:
-                return this.produceCompensatingBackupDecorator(commandExecutor);
-            default:
-                return commandExecutor;
-        }
-    }
-
-    private CommandExecutor produceCompensatingBackupDecorator(CommandExecutor commandExecutor){
-        return CompensatingBackupDecorator.builder()
-           .commandExecutor(commandExecutor)
-           .compensatingCommandProvider(this.compensatingCommandProvider)
-           .compensatingBackupService(this.compensatingBackupService)
-           .build();
-    }
+	private CommandExecutor produceCompensatingBackupDecorator(CommandExecutor commandExecutor) {
+		return CompensatingBackupDecorator
+			.builder()
+			.commandExecutor(commandExecutor)
+			.compensatingCommandProvider(this.compensatingCommandProvider)
+			.compensatingBackupService(this.compensatingBackupService)
+			.build();
+	}
 }
