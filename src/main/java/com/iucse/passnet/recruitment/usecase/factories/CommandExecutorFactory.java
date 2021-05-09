@@ -1,14 +1,18 @@
 package com.iucse.passnet.recruitment.usecase.factories;
 
+import com.iucse.passnet.recruitment.domain.annotation.Decorator;
 import com.iucse.passnet.recruitment.domain.commands.*;
 import com.iucse.passnet.recruitment.domain.compensating.AcceptJobApplicationCompensating;
 import com.iucse.passnet.recruitment.domain.compensating.CompensatingCommand;
 import com.iucse.passnet.recruitment.domain.compensating.RemoveJobApplicationCompensating;
 import com.iucse.passnet.recruitment.domain.exceptions.CommandExecutorNotFoundException;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
+import com.iucse.passnet.recruitment.usecase.decorators.CommandExecutorDecoratorTypes;
 import com.iucse.passnet.recruitment.usecase.executors.*;
 import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
 import org.springframework.stereotype.Service;
+
+import static com.iucse.passnet.recruitment.usecase.decorators.CommandExecutorDecoratorTypes.COMPENSATING_COMMAND_BACKUP;
 
 @Service("transaction-command-executor")
 public class CommandExecutorFactory {
@@ -54,6 +58,7 @@ public class CommandExecutorFactory {
 			.build();
 	}
 
+	@Decorator(decoratorType = COMPENSATING_COMMAND_BACKUP)
 	private CommandExecutor produceAcceptJobApplicationCommand() {
 		return AcceptJobApplicationCommandExecutor.builder().jobRepository(this.aggregateRepository).build();
 	}
@@ -66,6 +71,7 @@ public class CommandExecutorFactory {
 			.build();
 	}
 
+	@Decorator(decoratorType = COMPENSATING_COMMAND_BACKUP)
 	private CommandExecutor produceRemoveJobApplicationCommand() {
 		return RemoveJobApplicationCommandExecutor.builder().jobRepository(this.aggregateRepository).build();
 	}

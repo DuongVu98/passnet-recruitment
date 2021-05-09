@@ -21,7 +21,7 @@ public class ApplicatorController {
 	}
 
 	@CacheEvict(value = "job-view", key = "#jobId")
-	public void studentApplyJob(JobApplicationForm jobApplicationForm, String studentId, String jobId) throws Throwable {
+	public void studentApplyJob(JobApplicationForm jobApplicationForm, String studentId, String jobId) {
 		StudentApplyJobCommand command = StudentApplyJobCommand
 			.builder()
 			.jobId(jobId)
