@@ -27,11 +27,7 @@ public class RecruitmentSagaGateway {
 	public void on(PostNewJobEvent postNewJobEvent) {
 		log.info("post new job");
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.producePostNewJobEvent(
-			ProduceEvents
-				.PostNewJobEvent.newBuilder()
-				.setJobId(postNewJobEvent.getJobId())
-				.setOwnerId(postNewJobEvent.getOwnerId())
-				.build()
+			ProduceEvents.PostNewJobEvent.newBuilder().setJobId(postNewJobEvent.getJobId()).setOwnerId(postNewJobEvent.getOwnerId()).build()
 		);
 
 		log.info(response.getMessage());

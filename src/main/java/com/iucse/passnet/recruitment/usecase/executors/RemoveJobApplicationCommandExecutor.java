@@ -4,64 +4,83 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplication;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobApplicationId;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
-import com.iucse.passnet.recruitment.domain.commands.TeacherRemoveStudentJobApplicationCommand;
-import com.iucse.passnet.recruitment.domain.events.produce.AcceptStudentApplicationEvent;
+import com.iucse.passnet.recruitment.domain.commands.BaseCommand;
+import com.iucse.passnet.recruitment.domain.commands.RemoveJobApplicationCommand;
+import com.iucse.passnet.recruitment.domain.compensating.CompensatingCommand;
+import com.iucse.passnet.recruitment.domain.compensating.RemoveJobApplicationCompensating;
 import com.iucse.passnet.recruitment.domain.events.produce.RemoveStudentApplicationEvent;
 import com.iucse.passnet.recruitment.domain.exceptions.JobApplicationNotFound;
+import com.iucse.passnet.recruitment.domain.exceptions.WrongCommandTypeException;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
-import com.iucse.passnet.recruitment.usecase.grpc.RecruitmentSagaGateway;
 import java.util.Optional;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.greenrobot.eventbus.EventBus;
 
-@Slf4j(topic = "[TeacherRemoveStudentJobApplicationCommandExecutor]")
-public class TeacherRemoveStudentJobApplicationCommandExecutor
-	extends AbstractCommandExecutor<TeacherRemoveStudentJobApplicationCommand, Job> {
-	private final RecruitmentSagaGateway recruitmentSagaGateway;
+@Slf4j(topic = "[RemoveJobApplicationCommandExecutor]")
+public class RemoveJobApplicationCommandExecutor implements CommandExecutor, CompensatingHandler {
+	private final JobAggregateRepository jobRepository;
 
 	@Builder
-	public TeacherRemoveStudentJobApplicationCommandExecutor(
-		JobAggregateRepository aggregateRepository,
-		RecruitmentSagaGateway recruitmentSagaGateway
-	) {
-		super(aggregateRepository);
-		this.recruitmentSagaGateway = recruitmentSagaGateway;
+	public RemoveJobApplicationCommandExecutor(JobAggregateRepository jobRepository) {
+		this.jobRepository = jobRepository;
 	}
 
 	@Override
-	public Job execute(TeacherRemoveStudentJobApplicationCommand command) throws Throwable {
-		Job jobAggregate = this.aggregateRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
-		Optional<JobApplication> optional = jobAggregate
-			.getJobApplications()
-			.stream()
-			.filter(jobApplication -> jobApplication.getId().equal(new JobApplicationId(command.getJobApplicationId())))
-			.findAny();
+	public Job execute(BaseCommand baseCommand) {
+		if (baseCommand instanceof RemoveJobApplicationCommand) {
+			RemoveJobApplicationCommand command = (RemoveJobApplicationCommand) baseCommand;
+			Job jobAggregate = this.jobRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
 
-		if (optional.isPresent()) {
-			JobApplication jobApplication = optional.get();
+			Optional<JobApplication> optional = jobAggregate
+				.getJobApplications()
+				.stream()
+				.filter(jobApplication -> jobApplication.getId().equal(new JobApplicationId(command.getJobApplicationId())))
+				.findAny();
 
-			jobAggregate.removeJobApplication(jobApplication);
+			if (optional.isPresent()) {
+				JobApplication jobApplication = optional.get();
 
-			Job updatedJob = this.aggregateRepository.save(jobAggregate);
+				jobAggregate.removeJobApplication(jobApplication);
 
-//			recruitmentSagaGateway.produceRemoveStudentApplicationEvent(
-//				RemoveStudentApplicationEvent
-//					.builder()
-//					.jobId(updatedJob.getId().getValue())
-//					.taId(jobApplication.getApplicationOwner().getValue())
-//					.build()
-//			);
-			EventBus.getDefault().post(
-					RemoveStudentApplicationEvent.builder()
+				Job updatedJob = this.jobRepository.save(jobAggregate);
+				EventBus
+					.getDefault()
+					.post(
+						RemoveStudentApplicationEvent
+							.builder()
 							.jobId(updatedJob.getId().getValue())
 							.taId(jobApplication.getApplicationOwner().getValue())
 							.build()
-			);
+					);
 
-			return updatedJob;
+				return updatedJob;
+			} else {
+				throw new JobApplicationNotFound("application doesn't exit in job");
+			}
 		} else {
-			throw new JobApplicationNotFound("application doesn't exit in job");
+			throw new WrongCommandTypeException("command must be TeacherRemoveStudentJobApplicationCommand");
+		}
+	}
+
+	@Override
+	public void reverse(CompensatingCommand compensatingCommand) {
+		if (compensatingCommand instanceof RemoveJobApplicationCompensating) {
+			RemoveJobApplicationCompensating command = (RemoveJobApplicationCompensating) compensatingCommand;
+			Job jobAggregate = this.jobRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
+
+			Optional<JobApplication> optional = jobAggregate
+				.getJobApplications()
+				.stream()
+				.filter(jobApplication -> jobApplication.getId().equal(new JobApplicationId(command.getJobApplicationId())))
+				.findAny();
+
+			if (optional.isPresent()) {
+				JobApplication jobApplication = optional.get();
+				jobAggregate.acceptJobApplication(jobApplication);
+
+				Job updatedJob = this.jobRepository.save(jobAggregate);
+			}
 		}
 	}
 }

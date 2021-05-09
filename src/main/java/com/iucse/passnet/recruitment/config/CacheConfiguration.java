@@ -19,11 +19,12 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 //@EnableCaching
 @EnableRedisRepositories
 public class CacheConfiguration implements CachingConfigurer {
-//	@Value("${spring.redis.host}")
-//	private String redisHost;
-//
-//	@Value("${spring.redis.port}")
-//	private int redisPort;
+
+	//	@Value("${spring.redis.host}")
+	//	private String redisHost;
+	//
+	//	@Value("${spring.redis.port}")
+	//	private int redisPort;
 
 	@Override
 	public CacheManager cacheManager() {

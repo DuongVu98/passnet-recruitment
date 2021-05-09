@@ -90,19 +90,14 @@ public class Job {
 								log.info("change state!");
 
 								currentApplication.removed();
-								log.info(
-									"currentApplication after accepted: {}",
-									currentApplication.getApplicationState().getValue()
-								);
+								log.info("currentApplication after accepted: {}", currentApplication.getApplicationState().getValue());
 							}
 							return currentApplication;
 						}
 					)
 					.collect(Collectors.toList());
 		} else {
-			throw new JobApplicationNotFound(
-				String.format("job application with id: %s not found in this job", application.getId())
-			);
+			throw new JobApplicationNotFound(String.format("job application with id: %s not found in this job", application.getId()));
 		}
 	}
 }

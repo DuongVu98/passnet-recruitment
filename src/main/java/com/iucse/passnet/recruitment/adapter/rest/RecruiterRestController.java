@@ -22,10 +22,7 @@ public class RecruiterRestController extends BaseController {
 	}
 
 	@PostMapping(value = "/post-job")
-	public ResponseEntity<?> postNewJob(
-		@Valid @RequestBody JobCreationForm form,
-		@RequestParam("teacherId") String teacherId
-	) {
+	public ResponseEntity<?> postNewJob(@Valid @RequestBody JobCreationForm form, @RequestParam("teacherId") String teacherId) {
 		try {
 			this.recruiterController.postJob(form, teacherId);
 			return ok();
@@ -35,10 +32,7 @@ public class RecruiterRestController extends BaseController {
 	}
 
 	@PutMapping(value = "/accept-application")
-	public ResponseEntity<?> acceptJobApplication(
-		@RequestParam("jobApplicationId") String jobApplicationId,
-		@RequestParam("jobId") String jobId
-	) {
+	public ResponseEntity<?> acceptJobApplication(@RequestParam("jobApplicationId") String jobApplicationId, @RequestParam("jobId") String jobId) {
 		try {
 			this.recruiterController.acceptJobApplication(jobApplicationId, jobId);
 		} catch (Throwable throwable) {

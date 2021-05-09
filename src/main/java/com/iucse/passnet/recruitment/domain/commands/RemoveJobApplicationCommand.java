@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class TeacherRemoveStudentJobApplicationCommand extends BaseCommand {
+public class RemoveJobApplicationCommand extends BaseCommand {
 	private String jobId;
 	private String jobApplicationId;
 }

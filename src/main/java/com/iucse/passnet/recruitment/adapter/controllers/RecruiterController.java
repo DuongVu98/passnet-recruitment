@@ -1,17 +1,14 @@
 package com.iucse.passnet.recruitment.adapter.controllers;
 
 import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
-import com.iucse.passnet.recruitment.domain.commands.TeacherAcceptStudentJobApplicationCommand;
+import com.iucse.passnet.recruitment.domain.commands.AcceptJobApplicationCommand;
+import com.iucse.passnet.recruitment.domain.commands.RemoveJobApplicationCommand;
 import com.iucse.passnet.recruitment.domain.commands.TeacherDeleteJobCommand;
 import com.iucse.passnet.recruitment.domain.commands.TeacherPostJobCommand;
 import com.iucse.passnet.recruitment.domain.forms.JobCreationForm;
-import com.iucse.passnet.recruitment.domain.commands.TeacherRemoveStudentJobApplicationCommand;
-import com.iucse.passnet.recruitment.domain.exceptions.CommandExecutorNotFoundException;
-import com.iucse.passnet.recruitment.domain.helpers.ViewTypes;
-import com.iucse.passnet.recruitment.usecase.executors.AbstractCommandExecutor;
+import com.iucse.passnet.recruitment.usecase.executors.CommandExecutor;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,7 +20,7 @@ public class RecruiterController {
 		this.commandExecutorFactory = commandExecutorFactory;
 	}
 
-	public void postJob(JobCreationForm form, String teacherId) throws Throwable {
+	public void postJob(JobCreationForm form, String teacherId) {
 		TeacherPostJobCommand command = TeacherPostJobCommand
 			.builder()
 			.jobOwnerId(teacherId)
@@ -34,42 +31,29 @@ public class RecruiterController {
 			.semester(form.getSemester())
 			.build();
 
-		AbstractCommandExecutor<TeacherPostJobCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(
-			command
-		);
+		CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
 		Job aggregate = commandExecutor.execute(command);
 	}
 
-//	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
-	public void acceptJobApplication(String jobApplicationId, String jobId) throws Throwable {
-		TeacherAcceptStudentJobApplicationCommand command = TeacherAcceptStudentJobApplicationCommand
-			.builder()
-			.jobApplicationId(jobApplicationId)
-			.jobId(jobId)
-			.build();
+	//	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
+	public void acceptJobApplication(String jobApplicationId, String jobId) {
+		AcceptJobApplicationCommand command = AcceptJobApplicationCommand.builder().jobApplicationId(jobApplicationId).jobId(jobId).build();
 
-		AbstractCommandExecutor<TeacherAcceptStudentJobApplicationCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(
-			command
-		);
+		CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
 		Job aggregate = commandExecutor.execute(command);
 	}
 
-//	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
-	public void removeJobApplication(String jobApplicationId, String jobId) throws Throwable {
-		TeacherRemoveStudentJobApplicationCommand command = TeacherRemoveStudentJobApplicationCommand.builder()
-				.jobApplicationId(jobApplicationId)
-				.jobId(jobId)
-				.build();
-		AbstractCommandExecutor<TeacherRemoveStudentJobApplicationCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(command);
+	//	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
+	public void removeJobApplication(String jobApplicationId, String jobId) {
+		RemoveJobApplicationCommand command = RemoveJobApplicationCommand.builder().jobApplicationId(jobApplicationId).jobId(jobId).build();
+		CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
 		Job aggregate = commandExecutor.execute(command);
 	}
 
-//	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
-	public void deleteJob(String jobId) throws Throwable {
-		TeacherDeleteJobCommand command = TeacherDeleteJobCommand.builder()
-				.jobId(jobId)
-				.build();
-		AbstractCommandExecutor<TeacherDeleteJobCommand, Job> commandExecutor = commandExecutorFactory.produceCommandExecutor(command);
+	//	@CacheEvict(value = ViewTypes.JOB_VIEW, key = "#jobId")
+	public void deleteJob(String jobId) {
+		TeacherDeleteJobCommand command = TeacherDeleteJobCommand.builder().jobId(jobId).build();
+		CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
 		Job aggregate = commandExecutor.execute(command);
 	}
 }
