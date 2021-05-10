@@ -1,9 +1,11 @@
 package com.iucse.passnet.recruitment.config.aspects;
 
 import com.iucse.passnet.recruitment.domain.annotation.Decorator;
+import com.iucse.passnet.recruitment.usecase.decorators.CommandExecutorDecoratorTypes;
 import com.iucse.passnet.recruitment.usecase.executors.CommandExecutor;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorDecoratorFactory;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -34,6 +36,10 @@ public class CommandExecutorAspect {
 		Decorator decoratorAnnotation = AnnotationUtils.findAnnotation(method, Decorator.class);
 		CommandExecutor commandExecutor = (CommandExecutor) proceedingJoinPoint.proceed();
 
-		return this.decoratorFactory.produce(commandExecutor, decoratorAnnotation.decoratorType());
+		for (CommandExecutorDecoratorTypes type : decoratorAnnotation.decoratorType()) {
+			commandExecutor = this.decoratorFactory.produce(commandExecutor, type);
+		}
+		return commandExecutor;
+		//		return this.decoratorFactory.produce(commandExecutor, decoratorAnnotation.decoratorType());
 	}
 }

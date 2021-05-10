@@ -21,7 +21,7 @@ public class CommandExecutorFactory {
 		return this.commandExecutorProvider.produceStudentApplyJobCommandExecutor();
 	}
 
-	@Decorator(decoratorType = CommandExecutorDecoratorTypes.COMPENSATING_COMMAND_BACKUP)
+	@Decorator(decoratorType = { CommandExecutorDecoratorTypes.COMPENSATING_COMMAND_BACKUP, CommandExecutorDecoratorTypes.EVENT_PUBLISHER })
 	public CommandExecutor produce(AcceptJobApplicationCommand command) {
 		return this.commandExecutorProvider.produceAcceptJobApplicationCommandExecutor();
 	}
@@ -30,7 +30,7 @@ public class CommandExecutorFactory {
 		return this.commandExecutorProvider.produceTeacherPostJobCommandExecutor();
 	}
 
-	@Decorator(decoratorType = CommandExecutorDecoratorTypes.COMPENSATING_COMMAND_BACKUP)
+	@Decorator(decoratorType = { CommandExecutorDecoratorTypes.COMPENSATING_COMMAND_BACKUP, CommandExecutorDecoratorTypes.EVENT_PUBLISHER })
 	public CommandExecutor produce(RemoveJobApplicationCommand command) {
 		return this.commandExecutorProvider.produceRemoveJobApplicationCommandExecutor();
 	}

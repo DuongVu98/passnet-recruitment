@@ -9,18 +9,18 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CompensatingHandlerFactory {
-    private final CommandExecutorProvider commandExecutorProvider;
+	private final CommandExecutorProvider commandExecutorProvider;
 
-    @Autowired
-    public CompensatingHandlerFactory(CommandExecutorProvider commandExecutorProvider) {
-        this.commandExecutorProvider = commandExecutorProvider;
-    }
+	@Autowired
+	public CompensatingHandlerFactory(CommandExecutorProvider commandExecutorProvider) {
+		this.commandExecutorProvider = commandExecutorProvider;
+	}
 
-    public CompensatingHandler produce(AcceptJobApplicationCompensating compensating) {
-        return this.commandExecutorProvider.produceAcceptJobApplicationCommandExecutor();
-    }
+	public CompensatingHandler produce(AcceptJobApplicationCompensating compensating) {
+		return this.commandExecutorProvider.produceAcceptJobApplicationCommandExecutor();
+	}
 
-    public CompensatingHandler produce(RemoveJobApplicationCompensating compensating) {
-        return this.commandExecutorProvider.produceRemoveJobApplicationCommandExecutor();
-    }
+	public CompensatingHandler produce(RemoveJobApplicationCompensating compensating) {
+		return this.commandExecutorProvider.produceRemoveJobApplicationCommandExecutor();
+	}
 }
