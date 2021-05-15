@@ -11,11 +11,6 @@ service EventProducer {
     rpc ProduceDeleteJobEvent (DeleteJobEvent) returns (SagaResponse) {}
 }
 
-service ResponseProducer {
-    rpc produceSuccessResponse(SuccessResponse) returns (SagaResponse) {}
-    rpc produceFailureResponse(FailureResponse) returns (SagaResponse) {}
-}
-
 message SagaResponse {
     string message = 1;
 }
@@ -41,15 +36,4 @@ message RemoveStudentApplicationEvent {
 message DeleteJobEvent {
     string eventId = 1;
     string jobId = 2;
-}
-
-message SuccessResponse {
-    string eventId = 1;
-    string serviceName = 2;
-}
-
-
-message FailureResponse {
-    string eventId = 1;
-    string serviceName = 2;
 }
