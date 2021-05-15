@@ -27,7 +27,7 @@ public class RecruitmentSagaGateway {
 	public void on(PostNewJobEvent postNewJobEvent) {
 		log.info("post new job");
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.producePostNewJobEvent(
-			ProduceEvents.PostNewJobEvent.newBuilder().setJobId(postNewJobEvent.getJobId()).setOwnerId(postNewJobEvent.getOwnerId()).build()
+			ProduceEvents.PostNewJobEvent.newBuilder().setEventId(postNewJobEvent.getEventId()).setJobId(postNewJobEvent.getJobId()).setOwnerId(postNewJobEvent.getOwnerId()).build()
 		);
 
 		log.info(response.getMessage());
@@ -38,6 +38,7 @@ public class RecruitmentSagaGateway {
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.produceAcceptStudentApplicationEvent(
 			ProduceEvents
 				.AcceptStudentApplicationEvent.newBuilder()
+				.setEventId(acceptStudentApplicationEvent.getEventId())
 				.setJobId(acceptStudentApplicationEvent.getJobId())
 				.setTaId(acceptStudentApplicationEvent.getTaId())
 				.build()
@@ -51,6 +52,7 @@ public class RecruitmentSagaGateway {
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.produceRemoveStudentApplicationEvent(
 			ProduceEvents
 				.RemoveStudentApplicationEvent.newBuilder()
+				.setEventId(removeStudentApplicationEvent.getEventId())
 				.setJobId(removeStudentApplicationEvent.getJobId())
 				.setTaId(removeStudentApplicationEvent.getTaId())
 				.build()
@@ -62,7 +64,7 @@ public class RecruitmentSagaGateway {
 	@Subscribe
 	public void on(DeleteJobEvent deleteJobEvent) {
 		ProduceEvents.SagaResponse response = eventProducerBlockingStub.produceDeleteJobEvent(
-			ProduceEvents.DeleteJobEvent.newBuilder().setJobId(deleteJobEvent.getJobId()).build()
+			ProduceEvents.DeleteJobEvent.newBuilder().setEventId(deleteJobEvent.getEventId()).setJobId(deleteJobEvent.getJobId()).build()
 		);
 
 		log.info(response.getMessage());

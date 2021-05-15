@@ -19,12 +19,12 @@ repositories {
 sourceSets {
     main {
         proto {
-            srcDir 'src/main/proto'
+            srcDir 'src/main/resources/proto'
         }
         java {
             srcDirs 'src/main/java'
-            srcDirs 'generated-sources/main/java'
-            srcDirs 'generated-sources/main/grpc'
+            srcDirs 'src/generated/main/java'
+            srcDirs 'src/generated/main/grpc'
         }
     }
 }
@@ -42,7 +42,7 @@ protobuf {
             grpc {}
         }
     }
-    generateProtoTasks.generatedFilesBaseDir = 'generated-sources'
+    generateProtoTasks.generatedFilesBaseDir = 'src/generated'
 }
 
 spotless {

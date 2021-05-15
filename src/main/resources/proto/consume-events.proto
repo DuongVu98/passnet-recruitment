@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_package = "com.cseiu.passnet.saga.recruitmentsaga";
+
+package consumeEvents;
+
+service EventConsumer {
+
+}
+
+service CompensatingExecutor {
+    rpc rollback(EventId) returns (ServiceResponse) {}
+}
+
+message EventId {
+    string eventId = 1;
+}
+
+message ServiceResponse {
+    string message = 1;
+}

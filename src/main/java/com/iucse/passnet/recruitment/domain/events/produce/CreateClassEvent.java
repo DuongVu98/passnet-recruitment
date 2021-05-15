@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class CreateClassEvent {
+	private String eventId;
 	private String teacherId;
 	private List<String> taIdList;
 }
