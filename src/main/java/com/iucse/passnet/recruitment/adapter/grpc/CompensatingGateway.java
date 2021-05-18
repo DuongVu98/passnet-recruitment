@@ -14,6 +14,6 @@ public class CompensatingGateway extends CompensatingExecutorGrpc.CompensatingEx
     @Override
     public void rollback(ConsumeEvents.EventId request, StreamObserver<ConsumeEvents.ServiceResponse> responseObserver) {
         log.info("Receive compensating request with eventId [{}]", request.getEventId());
-        super.rollback(request, responseObserver);
+//        super.rollback(request, responseObserver);
     }
 }
