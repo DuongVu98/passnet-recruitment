@@ -8,14 +8,12 @@ import com.iucse.passnet.recruitment.domain.commands.BaseCommand;
 import com.iucse.passnet.recruitment.domain.commands.RemoveJobApplicationCommand;
 import com.iucse.passnet.recruitment.domain.compensating.CompensatingCommand;
 import com.iucse.passnet.recruitment.domain.compensating.RemoveJobApplicationCompensating;
-import com.iucse.passnet.recruitment.domain.events.produce.RemoveStudentApplicationEvent;
 import com.iucse.passnet.recruitment.domain.exceptions.JobApplicationNotFound;
 import com.iucse.passnet.recruitment.domain.exceptions.WrongCommandTypeException;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import java.util.Optional;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
-import org.greenrobot.eventbus.EventBus;
 
 @Slf4j(topic = "[RemoveJobApplicationCommandExecutor]")
 public class RemoveJobApplicationCommandExecutor implements CommandExecutor, CompensatingHandler {
@@ -43,18 +41,7 @@ public class RemoveJobApplicationCommandExecutor implements CommandExecutor, Com
 
 				jobAggregate.removeJobApplication(jobApplication);
 
-				Job updatedJob = this.jobRepository.save(jobAggregate);
-				//				EventBus
-				//					.getDefault()
-				//					.post(
-				//						RemoveStudentApplicationEvent
-				//							.builder()
-				//							.jobId(updatedJob.getId().getValue())
-				//							.taId(jobApplication.getApplicationOwner().getValue())
-				//							.build()
-				//					);
-
-				return updatedJob;
+				return this.jobRepository.save(jobAggregate);
 			} else {
 				throw new JobApplicationNotFound("application doesn't exit in job");
 			}

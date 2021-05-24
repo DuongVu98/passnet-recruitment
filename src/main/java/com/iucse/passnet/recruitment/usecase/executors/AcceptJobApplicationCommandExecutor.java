@@ -8,14 +8,12 @@ import com.iucse.passnet.recruitment.domain.commands.AcceptJobApplicationCommand
 import com.iucse.passnet.recruitment.domain.commands.BaseCommand;
 import com.iucse.passnet.recruitment.domain.compensating.AcceptJobApplicationCompensating;
 import com.iucse.passnet.recruitment.domain.compensating.CompensatingCommand;
-import com.iucse.passnet.recruitment.domain.events.produce.AcceptStudentApplicationEvent;
 import com.iucse.passnet.recruitment.domain.exceptions.JobApplicationNotFound;
 import com.iucse.passnet.recruitment.domain.exceptions.WrongCommandTypeException;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import java.util.Optional;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
-import org.greenrobot.eventbus.EventBus;
 
 @Slf4j(topic = "[AcceptJobApplicationCommandExecutor]")
 public class AcceptJobApplicationCommandExecutor implements CommandExecutor, CompensatingHandler {
@@ -42,19 +40,7 @@ public class AcceptJobApplicationCommandExecutor implements CommandExecutor, Com
 				JobApplication jobApplication = optional.get();
 				jobAggregate.acceptJobApplication(jobApplication);
 
-				Job updatedJob = this.jobRepository.save(jobAggregate);
-
-				//				EventBus
-				//					.getDefault()
-				//					.post(
-				//						AcceptStudentApplicationEvent
-				//							.builder()
-				//							.jobId(updatedJob.getId().getValue())
-				//							.taId(jobApplication.getApplicationOwner().getValue())
-				//							.build()
-				//					);
-
-				return updatedJob;
+				return this.jobRepository.save(jobAggregate);
 			} else {
 				throw new JobApplicationNotFound("application {} doesn't exit in job");
 			}

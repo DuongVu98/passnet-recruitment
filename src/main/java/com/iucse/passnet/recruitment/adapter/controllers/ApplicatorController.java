@@ -4,7 +4,6 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.commands.StudentApplyJobCommand;
 import com.iucse.passnet.recruitment.domain.forms.JobApplicationForm;
 import com.iucse.passnet.recruitment.usecase.executors.CommandExecutor;
-import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorDecoratorFactory;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,7 +6,6 @@ import com.iucse.passnet.recruitment.domain.commands.RemoveJobApplicationCommand
 import com.iucse.passnet.recruitment.domain.commands.TeacherDeleteJobCommand;
 import com.iucse.passnet.recruitment.domain.commands.TeacherPostJobCommand;
 import com.iucse.passnet.recruitment.domain.forms.JobCreationForm;
-import com.iucse.passnet.recruitment.usecase.decorators.CommandExecutorDecoratorTypes;
 import com.iucse.passnet.recruitment.usecase.executors.CommandExecutor;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorDecoratorFactory;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorFactory;

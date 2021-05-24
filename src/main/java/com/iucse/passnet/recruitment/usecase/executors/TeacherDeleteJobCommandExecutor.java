@@ -4,13 +4,11 @@ import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
 import com.iucse.passnet.recruitment.domain.commands.BaseCommand;
 import com.iucse.passnet.recruitment.domain.commands.TeacherDeleteJobCommand;
-import com.iucse.passnet.recruitment.domain.events.produce.DeleteJobEvent;
 import com.iucse.passnet.recruitment.domain.exceptions.JobNotFoundException;
 import com.iucse.passnet.recruitment.domain.exceptions.WrongCommandTypeException;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import java.util.Optional;
 import lombok.Builder;
-import org.greenrobot.eventbus.EventBus;
 
 public class TeacherDeleteJobCommandExecutor implements CommandExecutor {
 	private final JobAggregateRepository jobRepository;
@@ -31,9 +29,6 @@ public class TeacherDeleteJobCommandExecutor implements CommandExecutor {
 				Job aggregate = jobOptional.get();
 
 				this.jobRepository.delete(aggregate);
-
-				//				EventBus.getDefault().post(DeleteJobEvent.builder().jobId(aggregate.getId().getValue()).build());
-
 				return aggregate;
 			} else {
 				throw new JobNotFoundException("job not found");

@@ -5,7 +5,6 @@ import com.iucse.passnet.recruitment.domain.exceptions.JobNotFoundException;
 import com.iucse.passnet.recruitment.domain.exceptions.NullIdentifierException;
 import com.iucse.passnet.recruitment.domain.views.JobApplicationListView;
 import com.iucse.passnet.recruitment.domain.views.OwnedJobListView;
-import com.iucse.passnet.recruitment.domain.views.PostedJobsView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
