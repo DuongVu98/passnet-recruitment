@@ -11,10 +11,10 @@ import com.iucse.passnet.recruitment.usecase.factories.CompensatingHandlerFactor
 import com.iucse.passnet.recruitment.usecase.services.CompensatingCommandBackupService;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
-import org.lognet.springboot.grpc.GRpcService;
+import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@GRpcService
+@GrpcService
 @Slf4j(topic = "[CompensatingGateway]")
 public class CompensatingGateway extends CompensatingExecutorGrpc.CompensatingExecutorImplBase {
 	private final CompensatingCommandBackupService compensatingCommandBackupService;
@@ -33,9 +33,9 @@ public class CompensatingGateway extends CompensatingExecutorGrpc.CompensatingEx
 	public void rollback(ConsumeEvents.EventId request, StreamObserver<ConsumeEvents.ServiceResponse> responseObserver) {
 		log.info("Receive compensating request with eventId [{}]", request.getEventId());
 
-		CompensatingCommand compensatingCommand = compensatingCommandBackupService.getFromStore(request.getEventId());
+		var compensatingCommand = compensatingCommandBackupService.getFromStore(request.getEventId());
 		try {
-			CompensatingHandler compensatingHandler = buildHandle(compensatingCommand);
+			var compensatingHandler = buildHandle(compensatingCommand);
 			compensatingHandler.reverse(compensatingCommand);
 
 			responseObserver.onNext(ConsumeEvents.ServiceResponse.newBuilder().setMessage("SUCCESS").build());

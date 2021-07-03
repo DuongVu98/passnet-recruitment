@@ -7,6 +7,7 @@ import com.iucse.passnet.recruitment.domain.events.produce.DeleteJobEvent;
 import com.iucse.passnet.recruitment.domain.events.produce.PostNewJobEvent;
 import com.iucse.passnet.recruitment.domain.events.produce.RemoveStudentApplicationEvent;
 import lombok.extern.slf4j.Slf4j;
+import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,11 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j(topic = "[CommandGateway]")
 public class RecruitmentSagaGateway {
+	@GrpcClient("saga-recruitment")
 	private EventProducerGrpc.EventProducerBlockingStub eventProducerBlockingStub;
 
 	@Autowired
-	public RecruitmentSagaGateway(EventProducerGrpc.EventProducerBlockingStub eventProducerBlockingStub) {
-		this.eventProducerBlockingStub = eventProducerBlockingStub;
+	public RecruitmentSagaGateway() {
 		EventBus.getDefault().register(this);
 	}
 
@@ -54,7 +55,7 @@ public class RecruitmentSagaGateway {
 
 	@Subscribe
 	public void on(RemoveStudentApplicationEvent removeStudentApplicationEvent) {
-		ProduceEvents.SagaResponse response = eventProducerBlockingStub.produceRemoveStudentApplicationEvent(
+		var response = eventProducerBlockingStub.produceRemoveStudentApplicationEvent(
 			ProduceEvents
 				.RemoveStudentApplicationEvent.newBuilder()
 				.setEventId(removeStudentApplicationEvent.getEventId())
@@ -68,7 +69,7 @@ public class RecruitmentSagaGateway {
 
 	@Subscribe
 	public void on(DeleteJobEvent deleteJobEvent) {
-		ProduceEvents.SagaResponse response = eventProducerBlockingStub.produceDeleteJobEvent(
+		var response = eventProducerBlockingStub.produceDeleteJobEvent(
 			ProduceEvents.DeleteJobEvent.newBuilder().setEventId(deleteJobEvent.getEventId()).setJobId(deleteJobEvent.getJobId()).build()
 		);
 
