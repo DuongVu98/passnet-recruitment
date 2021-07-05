@@ -11,8 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/query")
 @CrossOrigin("*")
+@RequestMapping(value = "/query")
 @Slf4j(topic = "[QueryRestController]")
 public class QueryRestController extends BaseController {
 	private final QueryController queryController;

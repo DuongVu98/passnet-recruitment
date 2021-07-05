@@ -16,12 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @GrpcService
 @Slf4j(topic = "[CompensatingGateway]")
-public class CompensatingGateway extends CompensatingExecutorGrpc.CompensatingExecutorImplBase {
+public class CompensatingGrpcController extends CompensatingExecutorGrpc.CompensatingExecutorImplBase {
 	private final CompensatingCommandBackupService compensatingCommandBackupService;
 	private final CompensatingHandlerFactory compensatingHandlerFactory;
 
 	@Autowired
-	public CompensatingGateway(
+	public CompensatingGrpcController(
 		CompensatingCommandBackupService compensatingCommandBackupService,
 		CompensatingHandlerFactory compensatingHandlerFactory
 	) {

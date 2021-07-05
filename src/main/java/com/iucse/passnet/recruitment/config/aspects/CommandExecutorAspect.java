@@ -30,15 +30,14 @@ public class CommandExecutorAspect {
 	@Around("decoratorPointcut()")
 	public Object advice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
-		Method method = signature.getMethod();
+		var method = signature.getMethod();
 
-		Decorator decoratorAnnotation = AnnotationUtils.findAnnotation(method, Decorator.class);
-		CommandExecutor commandExecutor = (CommandExecutor) proceedingJoinPoint.proceed();
+		var decoratorAnnotation = AnnotationUtils.findAnnotation(method, Decorator.class);
+		var commandExecutor = (CommandExecutor) proceedingJoinPoint.proceed();
 
 		for (CommandExecutorDecoratorTypes type : decoratorAnnotation.decoratorType()) {
 			commandExecutor = this.decoratorFactory.produce(commandExecutor, type);
 		}
 		return commandExecutor;
-		//		return this.decoratorFactory.produce(commandExecutor, decoratorAnnotation.decoratorType());
 	}
 }

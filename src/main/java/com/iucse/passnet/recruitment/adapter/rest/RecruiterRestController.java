@@ -23,42 +23,25 @@ public class RecruiterRestController extends BaseController {
 
 	@PostMapping(value = "/post-job")
 	public ResponseEntity<?> postNewJob(@Valid @RequestBody JobCreationForm form, @RequestParam("teacherId") String teacherId) {
-		try {
-			this.recruiterController.postJob(form, teacherId);
-			return ok();
-		} catch (Throwable throwable) {
-			return badRequest(throwable);
-		}
+		this.recruiterController.postJob(form, teacherId);
+		return ok();
 	}
 
 	@PutMapping(value = "/accept-application")
 	public ResponseEntity<?> acceptJobApplication(@RequestParam("jobApplicationId") String jobApplicationId, @RequestParam("jobId") String jobId) {
-		try {
-			this.recruiterController.acceptJobApplication(jobApplicationId, jobId);
-		} catch (Throwable throwable) {
-			return badRequest(throwable);
-		}
+		this.recruiterController.acceptJobApplication(jobApplicationId, jobId);
 		return ok();
 	}
 
 	@PutMapping(value = "/remove-application")
 	public ResponseEntity<?> removeApplication(@RequestParam("jobApplicationId") String jobApplicationId, @RequestParam("jobId") String jobId) {
-		try {
-			recruiterController.removeJobApplication(jobApplicationId, jobId);
-		} catch (Throwable throwable) {
-			return badRequest(throwable);
-		}
+		recruiterController.removeJobApplication(jobApplicationId, jobId);
 		return ok();
 	}
 
 	@DeleteMapping(value = "/delete-job")
 	public ResponseEntity<?> deleteJob(@RequestParam("jobId") String jobId) {
-		log.debug("delete job with jobId --> {}", jobId);
-		try {
-			recruiterController.deleteJob(jobId);
-		} catch (Throwable throwable) {
-			return badRequest(throwable);
-		}
+		recruiterController.deleteJob(jobId);
 		return ok();
 	}
 }

@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +22,7 @@ public class ViewQuery {
 	private final JobAggregateRepository jobEntityRepository;
 	private final JobApplicationRepository jobApplicationEntityRepository;
 
-	@Autowired
-	@Qualifier("posted-jobs-view-id")
+	@Value("${view.posted-jobs.id}")
 	private String postedJobsViewId;
 
 	@Autowired
@@ -31,14 +31,12 @@ public class ViewQuery {
 		this.jobApplicationEntityRepository = jobApplicationEntityRepository;
 	}
 
-	//	@Cached(ViewTypes.JOB_VIEW)
 	@Cacheable(value = ViewTypes.JOB_VIEW, key = "#id", sync = true)
 	public JobView queryJobView(String id) throws NullPointerException {
 		Job aggregate = this.jobEntityRepository.findByIdWithJobApplications(new JobId(id));
 		return new JobView(aggregate, id);
 	}
 
-	//	@Cached(ViewTypes.JOB_APPLICATION_VIEW)
 	@Cacheable(value = ViewTypes.JOB_APPLICATION_VIEW, key = "#id", sync = true)
 	public JobApplicationView queryJobApplicationView(String id) {
 		Optional<JobApplication> optional = this.jobApplicationEntityRepository.findById(new JobApplicationId(id));
@@ -57,7 +55,6 @@ public class ViewQuery {
 		}
 	}
 
-	//	@Cached(ViewTypes.POSTED_JOBS_VIEW)
 	@Cacheable(value = ViewTypes.POSTED_JOBS_VIEW, sync = true)
 	public PostedJobsView queryPostedJobsView() {
 		List<LiteJobView> liteJobViewList =
@@ -80,7 +77,6 @@ public class ViewQuery {
 		return PostedJobsView.builder().id(this.postedJobsViewId).litePostedJobs(liteJobViewList).build();
 	}
 
-	//	@Cached(ViewTypes.USER_OWN_JOB_VIEW)
 	@Cacheable(value = ViewTypes.USER_OWN_JOB_VIEW, key = "#uid")
 	public OwnedJobListView queryUserOwnJob(String uid) {
 		List<LiteJobView> liteJobViewList =
@@ -103,7 +99,6 @@ public class ViewQuery {
 		return OwnedJobListView.builder().id(uid).teacherId(uid).litePostedJobs(liteJobViewList).build();
 	}
 
-	//	@Cached(ViewTypes.JOB_APPLICATION_LIST_VIEW)
 	@Cacheable(value = ViewTypes.JOB_APPLICATION_LIST_VIEW, key = "#jobId")
 	public JobApplicationListView queryJobApplicationListView(String jobId) {
 		Job aggregate = this.jobEntityRepository.findByIdWithJobApplications(new JobId(jobId));

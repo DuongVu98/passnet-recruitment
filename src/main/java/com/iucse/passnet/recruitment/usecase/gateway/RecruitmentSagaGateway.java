@@ -1,4 +1,4 @@
-package com.iucse.passnet.recruitment.usecase.grpc;
+package com.iucse.passnet.recruitment.usecase.gateway;
 
 import com.cseiu.passnet.saga.recruitmentsaga.EventProducerGrpc;
 import com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents;
