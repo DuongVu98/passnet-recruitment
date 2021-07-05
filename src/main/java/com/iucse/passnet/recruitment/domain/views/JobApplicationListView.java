@@ -1,6 +1,6 @@
 package com.iucse.passnet.recruitment.domain.views;
 
-import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
+import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Builder;

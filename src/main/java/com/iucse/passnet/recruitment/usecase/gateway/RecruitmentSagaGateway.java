@@ -2,10 +2,10 @@ package com.iucse.passnet.recruitment.usecase.gateway;
 
 import com.cseiu.passnet.saga.recruitmentsaga.EventProducerGrpc;
 import com.cseiu.passnet.saga.recruitmentsaga.ProduceEvents;
-import com.iucse.passnet.recruitment.domain.events.produce.AcceptStudentApplicationEvent;
-import com.iucse.passnet.recruitment.domain.events.produce.DeleteJobEvent;
-import com.iucse.passnet.recruitment.domain.events.produce.PostNewJobEvent;
-import com.iucse.passnet.recruitment.domain.events.produce.RemoveStudentApplicationEvent;
+import com.iucse.passnet.recruitment.domain.events.AcceptStudentApplicationEvent;
+import com.iucse.passnet.recruitment.domain.events.DeleteJobEvent;
+import com.iucse.passnet.recruitment.domain.events.PostNewJobEvent;
+import com.iucse.passnet.recruitment.domain.events.RemoveStudentApplicationEvent;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.greenrobot.eventbus.EventBus;

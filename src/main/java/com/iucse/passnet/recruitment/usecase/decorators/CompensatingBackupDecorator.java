@@ -1,6 +1,6 @@
 package com.iucse.passnet.recruitment.usecase.decorators;
 
-import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
+import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
 import com.iucse.passnet.recruitment.domain.commands.BaseCommand;
 import com.iucse.passnet.recruitment.domain.compensating.CompensatingCommand;
 import com.iucse.passnet.recruitment.usecase.executors.CommandExecutor;

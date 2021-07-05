@@ -1,7 +1,7 @@
 package com.iucse.passnet.recruitment.usecase.executors;
 
-import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
-import com.iucse.passnet.recruitment.domain.aggregate.job.vos.*;
+import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
+import com.iucse.passnet.recruitment.domain.aggregate.vos.*;
 import com.iucse.passnet.recruitment.domain.commands.BaseCommand;
 import com.iucse.passnet.recruitment.domain.commands.TeacherPostJobCommand;
 import com.iucse.passnet.recruitment.domain.exceptions.WrongCommandTypeException;

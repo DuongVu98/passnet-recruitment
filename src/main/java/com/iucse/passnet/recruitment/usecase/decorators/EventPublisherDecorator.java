@@ -1,13 +1,13 @@
 package com.iucse.passnet.recruitment.usecase.decorators;
 
-import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
-import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplication;
-import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobApplicationId;
+import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
+import com.iucse.passnet.recruitment.domain.aggregate.entities.JobApplication;
+import com.iucse.passnet.recruitment.domain.aggregate.vos.JobApplicationId;
 import com.iucse.passnet.recruitment.domain.commands.AcceptJobApplicationCommand;
 import com.iucse.passnet.recruitment.domain.commands.BaseCommand;
 import com.iucse.passnet.recruitment.domain.commands.RemoveJobApplicationCommand;
-import com.iucse.passnet.recruitment.domain.events.produce.AcceptStudentApplicationEvent;
-import com.iucse.passnet.recruitment.domain.events.produce.RemoveStudentApplicationEvent;
+import com.iucse.passnet.recruitment.domain.events.AcceptStudentApplicationEvent;
+import com.iucse.passnet.recruitment.domain.events.RemoveStudentApplicationEvent;
 import com.iucse.passnet.recruitment.domain.repositories.JobApplicationRepository;
 import com.iucse.passnet.recruitment.usecase.executors.CommandExecutor;
 import java.util.Optional;

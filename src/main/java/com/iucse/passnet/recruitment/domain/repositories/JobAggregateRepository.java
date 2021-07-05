@@ -1,8 +1,8 @@
 package com.iucse.passnet.recruitment.domain.repositories;
 
-import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
-import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
-import com.iucse.passnet.recruitment.domain.aggregate.job.vos.UserId;
+import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
+import com.iucse.passnet.recruitment.domain.aggregate.vos.JobId;
+import com.iucse.passnet.recruitment.domain.aggregate.vos.UserId;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

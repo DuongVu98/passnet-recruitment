@@ -1,7 +1,7 @@
 package com.iucse.passnet.recruitment.usecase.executors;
 
-import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
-import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
+import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
+import com.iucse.passnet.recruitment.domain.aggregate.vos.JobId;
 import com.iucse.passnet.recruitment.domain.commands.BaseCommand;
 import com.iucse.passnet.recruitment.domain.commands.TeacherDeleteJobCommand;
 import com.iucse.passnet.recruitment.domain.exceptions.JobNotFoundException;

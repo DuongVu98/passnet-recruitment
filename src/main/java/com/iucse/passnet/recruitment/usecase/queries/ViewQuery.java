@@ -1,9 +1,9 @@
 package com.iucse.passnet.recruitment.usecase.queries;
 
-import com.iucse.passnet.recruitment.domain.aggregate.job.entities.Job;
-import com.iucse.passnet.recruitment.domain.aggregate.job.entities.JobApplication;
-import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobApplicationId;
-import com.iucse.passnet.recruitment.domain.aggregate.job.vos.JobId;
+import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
+import com.iucse.passnet.recruitment.domain.aggregate.entities.JobApplication;
+import com.iucse.passnet.recruitment.domain.aggregate.vos.JobApplicationId;
+import com.iucse.passnet.recruitment.domain.aggregate.vos.JobId;
 import com.iucse.passnet.recruitment.domain.helpers.ViewTypes;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.domain.repositories.JobApplicationRepository;
@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
