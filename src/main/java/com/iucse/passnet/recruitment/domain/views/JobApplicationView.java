@@ -31,7 +31,7 @@ public class JobApplicationView extends CacheableView {
 		Optional<JobApplication> optional = aggregate
 			.getJobApplications()
 			.stream()
-			.filter(jobApplication -> jobApplication.getId().equal(new JobApplicationId(id)))
+			.filter(jobApplication -> jobApplication.getId().equals(new JobApplicationId(id)))
 			.findAny();
 		if (optional.isPresent()) {
 			JobApplication jobApplication = optional.get();

@@ -38,3 +38,5 @@ grpc:
       enableKeepAlive: true
       keepAliveWithoutCalls: true
       negotiationType: plaintext
+server:
+  port: ${SERVER_PORT_LISTENER}

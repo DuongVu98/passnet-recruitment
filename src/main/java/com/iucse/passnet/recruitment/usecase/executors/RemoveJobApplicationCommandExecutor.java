@@ -33,7 +33,7 @@ public class RemoveJobApplicationCommandExecutor implements CommandExecutor, Com
 			Optional<JobApplication> optional = jobAggregate
 				.getJobApplications()
 				.stream()
-				.filter(jobApplication -> jobApplication.getId().equal(new JobApplicationId(command.getJobApplicationId())))
+				.filter(jobApplication -> jobApplication.getId().equals(new JobApplicationId(command.getJobApplicationId())))
 				.findAny();
 
 			if (optional.isPresent()) {
@@ -59,7 +59,7 @@ public class RemoveJobApplicationCommandExecutor implements CommandExecutor, Com
 			Optional<JobApplication> optional = jobAggregate
 				.getJobApplications()
 				.stream()
-				.filter(jobApplication -> jobApplication.getId().equal(new JobApplicationId(command.getJobApplicationId())))
+				.filter(jobApplication -> jobApplication.getId().equals(new JobApplicationId(command.getJobApplicationId())))
 				.findAny();
 
 			if (optional.isPresent()) {

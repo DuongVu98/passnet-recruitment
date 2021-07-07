@@ -33,11 +33,11 @@ public class AcceptJobApplicationCommandExecutor implements CommandExecutor, Com
 			Optional<JobApplication> optional = jobAggregate
 				.getJobApplications()
 				.stream()
-				.filter(jobApplication -> jobApplication.getId().equal(new JobApplicationId(command.getJobApplicationId())))
+				.filter(jobApplication -> jobApplication.getId().equals(new JobApplicationId(command.getJobApplicationId())))
 				.findAny();
 
 			if (optional.isPresent()) {
-				JobApplication jobApplication = optional.get();
+				var jobApplication = optional.get();
 				jobAggregate.acceptJobApplication(jobApplication);
 
 				return this.jobRepository.save(jobAggregate);
@@ -54,19 +54,19 @@ public class AcceptJobApplicationCommandExecutor implements CommandExecutor, Com
 		if (compensatingCommand instanceof AcceptJobApplicationCompensating) {
 			AcceptJobApplicationCompensating command = (AcceptJobApplicationCompensating) compensatingCommand;
 
-			Job jobAggregate = this.jobRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
+			var jobAggregate = this.jobRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
 
 			Optional<JobApplication> optional = jobAggregate
 				.getJobApplications()
 				.stream()
-				.filter(jobApplication -> jobApplication.getId().equal(new JobApplicationId(command.getJobApplicationId())))
+				.filter(jobApplication -> jobApplication.getId().equals(new JobApplicationId(command.getJobApplicationId())))
 				.findAny();
 
 			if (optional.isPresent()) {
-				JobApplication jobApplication = optional.get();
+				var jobApplication = optional.get();
 				jobAggregate.removeJobApplication(jobApplication);
 
-				Job updatedJob = this.jobRepository.save(jobAggregate);
+				this.jobRepository.save(jobAggregate);
 			}
 		}
 	}
