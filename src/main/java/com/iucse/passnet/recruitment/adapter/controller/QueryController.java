@@ -40,13 +40,13 @@ public class QueryController extends BaseController {
 
 	@GetMapping(value = "/owned-jobs")
 	public ResponseEntity<List<LiteJobView>> getOwnPostedJobs(@RequestParam("teacherId") String teacherId) {
-		OwnedJobListView ownedJobListView = this.queryGateway.getPostedJobsByUserView(teacherId);
+		var ownedJobListView = this.queryGateway.getPostedJobsByUserView(teacherId);
 		return ResponseEntity.ok(ownedJobListView.getLitePostedJobs());
 	}
 
 	@GetMapping(value = "/job-application-list-view")
 	public ResponseEntity<JobApplicationListView> getJobApplicationListView(@RequestParam("jobId") String jobId) {
-		JobApplicationListView jobApplicationListView = this.queryGateway.getJobApplicationListView(jobId);
+		var jobApplicationListView = this.queryGateway.getJobApplicationListView(jobId);
 		return ResponseEntity.ok(jobApplicationListView);
 	}
 }
