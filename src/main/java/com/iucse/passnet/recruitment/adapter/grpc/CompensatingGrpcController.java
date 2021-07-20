@@ -39,11 +39,11 @@ public class CompensatingGrpcController extends CompensatingExecutorGrpc.Compens
 			compensatingHandler.reverse(compensatingCommand);
 
 			responseObserver.onNext(ConsumeEvents.ServiceResponse.newBuilder().setMessage("SUCCESS").build());
-			responseObserver.onCompleted();
 		} catch (CompensatingHandlerNorFoundException exception) {
 			log.error("CompensatingHandlerNorFound: {}", exception.getMessage());
 		} finally {
 			compensatingCommandBackupService.removeFromStore(request.getEventId());
+			responseObserver.onCompleted();
 		}
 	}
 
