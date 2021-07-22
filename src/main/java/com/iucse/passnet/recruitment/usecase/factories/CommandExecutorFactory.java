@@ -26,7 +26,7 @@ public class CommandExecutorFactory {
 		return this.commandExecutorProvider.produceAcceptJobApplicationCommandExecutor();
 	}
 
-	public CommandExecutor produce(TeacherPostJobCommand command) {
+	public CommandExecutor produce(PostJobCommand command) {
 		return this.commandExecutorProvider.produceTeacherPostJobCommandExecutor();
 	}
 

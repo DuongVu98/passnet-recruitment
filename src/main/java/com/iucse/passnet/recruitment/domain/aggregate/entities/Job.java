@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "jobs")
 @Slf4j(topic = "[Job]")
-public class Job {
+public class Job extends BaseEntity{
 
     @EmbeddedId
     @AttributeOverride(name = "value", column = @Column(name = "id"))
@@ -25,7 +25,7 @@ public class Job {
 
     @Embedded
     @AttributeOverride(name = "value", column = @Column(name = "job_owner"))
-    private UserId jobOwner;
+    private ProfileId jobOwner;
 
     @Embedded
     @AttributeOverride(name = "value", column = @Column(name = "job_name"))
@@ -46,6 +46,10 @@ public class Job {
     @Embedded
     @AttributeOverride(name = "value", column = @Column(name = "job_content"))
     private Content content;
+
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "organization_id"))
+    private OrganizationId organizationId;
 
     @Setter
     @Builder.Default
@@ -68,7 +72,7 @@ public class Job {
                        log.info("change state!");
 
                        currentApplication.accepted();
-                       log.info("currentApplication after accepted: {}", currentApplication.getApplicationState().getValue());
+                       log.info("currentApplication after accepted: {}", currentApplication.getApplicationState());
                    }
                }
             );
@@ -88,7 +92,7 @@ public class Job {
                           log.info("change state!");
 
                           currentApplication.removed();
-                          log.info("currentApplication after accepted: {}", currentApplication.getApplicationState().getValue());
+                          log.info("currentApplication after accepted: {}", currentApplication.getApplicationState());
                       }
                   }
                );

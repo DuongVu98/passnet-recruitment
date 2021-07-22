@@ -22,13 +22,14 @@ public class CommandGateway {
     }
 
     public void postJob(JobCreationForm form, String teacherId) {
-        TeacherPostJobCommand command = TeacherPostJobCommand.builder()
+        PostJobCommand command = PostJobCommand.builder()
            .jobOwnerId(teacherId)
            .content(form.getContent())
            .jobName(form.getJobTitle())
            .courseName(form.getCourseName())
            .requirement(form.getRequirement())
            .semester(form.getSemester())
+           .organizationId(form.getOrganizationId())
            .build();
 
         var commandExecutor = commandExecutorFactory.produce(command);

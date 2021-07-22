@@ -23,4 +23,6 @@ public class JobCreationForm {
 
 	@NotBlank(message = "semester should not be empty")
 	private String semester;
+
+	private String organizationId;
 }

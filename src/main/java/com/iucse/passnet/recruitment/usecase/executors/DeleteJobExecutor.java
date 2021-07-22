@@ -10,11 +10,11 @@ import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import java.util.Optional;
 import lombok.Builder;
 
-public class TeacherDeleteJobCommandExecutor implements CommandExecutor {
+public class DeleteJobExecutor implements CommandExecutor {
 	private final JobAggregateRepository jobRepository;
 
 	@Builder
-	public TeacherDeleteJobCommandExecutor(JobAggregateRepository jobRepository) {
+	public DeleteJobExecutor(JobAggregateRepository jobRepository) {
 		this.jobRepository = jobRepository;
 	}
 

@@ -16,31 +16,31 @@ public class CommandExecutorProvider {
 		this.uuidGeneratorService = uuidGeneratorService;
 	}
 
-	public StudentApplyJobCommandExecutor produceStudentApplyJobCommandExecutor() {
-		return StudentApplyJobCommandExecutor
+	public ApplyJobExecutor produceStudentApplyJobCommandExecutor() {
+		return ApplyJobExecutor
 			.builder()
 			.jobRepository(this.aggregateRepository)
 			.uuidGeneratorService(this.uuidGeneratorService)
 			.build();
 	}
 
-	public AcceptJobApplicationCommandExecutor produceAcceptJobApplicationCommandExecutor() {
-		return AcceptJobApplicationCommandExecutor.builder().jobRepository(this.aggregateRepository).build();
+	public AcceptJobApplicationExecutor produceAcceptJobApplicationCommandExecutor() {
+		return AcceptJobApplicationExecutor.builder().jobRepository(this.aggregateRepository).build();
 	}
 
-	public TeacherPostJobCommandExecutor produceTeacherPostJobCommandExecutor() {
-		return TeacherPostJobCommandExecutor
+	public PostJobExecutor produceTeacherPostJobCommandExecutor() {
+		return PostJobExecutor
 			.builder()
 			.jobRepository(this.aggregateRepository)
 			.uuidGeneratorService(this.uuidGeneratorService)
 			.build();
 	}
 
-	public RemoveJobApplicationCommandExecutor produceRemoveJobApplicationCommandExecutor() {
-		return RemoveJobApplicationCommandExecutor.builder().jobRepository(this.aggregateRepository).build();
+	public RemoveJobApplicationExecutor produceRemoveJobApplicationCommandExecutor() {
+		return RemoveJobApplicationExecutor.builder().jobRepository(this.aggregateRepository).build();
 	}
 
-	public TeacherDeleteJobCommandExecutor produceTeacherDeleteJobCommandExecutor() {
-		return TeacherDeleteJobCommandExecutor.builder().jobRepository(aggregateRepository).build();
+	public DeleteJobExecutor produceTeacherDeleteJobCommandExecutor() {
+		return DeleteJobExecutor.builder().jobRepository(aggregateRepository).build();
 	}
 }

@@ -1,8 +1,6 @@
 package com.iucse.passnet.recruitment.adapter.controller;
 
 import com.iucse.passnet.recruitment.adapter.gateway.QueryGateway;
-import com.iucse.passnet.recruitment.domain.exceptions.JobNotFoundException;
-import com.iucse.passnet.recruitment.domain.exceptions.NullIdentifierException;
 import com.iucse.passnet.recruitment.domain.views.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,28 +23,28 @@ public class QueryController extends BaseController {
 
 	@GetMapping(value = "/job-view")
 	public ResponseEntity<JobView> getJobView(@RequestParam("jobId") String id) {
-		return ResponseEntity.ok(this.queryGateway.getJobView(id));
+		return ok(this.queryGateway.getJobView(id));
 	}
 
 	@GetMapping(value = "/job-application-view")
 	public ResponseEntity<JobApplicationView> getJobApplicationView(@RequestParam("jobApplicationId") String id) {
-		return ResponseEntity.ok(this.queryGateway.getJobApplicationView(id));
+		return ok(this.queryGateway.getJobApplicationView(id));
 	}
 
 	@GetMapping(value = "/posted-jobs")
 	public ResponseEntity<?> getPostedJobsView() {
-		return ResponseEntity.ok(this.queryGateway.getPostedJobsView().getLitePostedJobs());
+		return ok(this.queryGateway.getPostedJobsView().getLitePostedJobs());
 	}
 
 	@GetMapping(value = "/owned-jobs")
-	public ResponseEntity<List<LiteJobView>> getOwnPostedJobs(@RequestParam("teacherId") String teacherId) {
+	public ResponseEntity<List<JobLiteView>> getOwnPostedJobs(@RequestParam("teacherId") String teacherId) {
 		var ownedJobListView = this.queryGateway.getPostedJobsByUserView(teacherId);
-		return ResponseEntity.ok(ownedJobListView.getLitePostedJobs());
+		return ok(ownedJobListView.getLitePostedJobs());
 	}
 
 	@GetMapping(value = "/job-application-list-view")
 	public ResponseEntity<JobApplicationListView> getJobApplicationListView(@RequestParam("jobId") String jobId) {
 		var jobApplicationListView = this.queryGateway.getJobApplicationListView(jobId);
-		return ResponseEntity.ok(jobApplicationListView);
+		return ok(jobApplicationListView);
 	}
 }

@@ -1,24 +1,20 @@
 package com.iucse.passnet.recruitment.domain.views;
 
 import java.util.List;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.data.redis.core.RedisHash;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 @Getter
-@RedisHash(value = "owned_job_list_view", timeToLive = 10)
-public class OwnedJobListView extends CacheableView {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class OwnedJobListView {
 	@Setter
-	private List<LiteJobView> litePostedJobs;
+	@JsonProperty("jobs")
+	private List<JobLiteView> litePostedJobs;
 
 	@Setter
+	@JsonProperty("jobOwner")
 	private String teacherId;
-
-	@Builder
-	public OwnedJobListView(String id, List<LiteJobView> litePostedJobs, String teacherId) {
-		super(id);
-		this.litePostedJobs = litePostedJobs;
-		this.teacherId = teacherId;
-	}
 }

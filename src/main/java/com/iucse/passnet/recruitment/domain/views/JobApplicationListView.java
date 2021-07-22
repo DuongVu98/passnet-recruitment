@@ -1,35 +1,35 @@
 package com.iucse.passnet.recruitment.domain.views;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.iucse.passnet.recruitment.usecase.mapper.JobApplicationMapper;
+import com.iucse.passnet.recruitment.usecase.mapper.JobMapper;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.springframework.data.redis.core.RedisHash;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-@RedisHash(value = "job_application_list_view", timeToLive = 1)
-public class JobApplicationListView extends CacheableView {
-	private JobView jobView;
-	private List<JobApplicationView> jobApplicationViewList;
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class JobApplicationListView {
+    @JsonProperty("job")
+    private JobView jobView;
 
-	@Builder
-	public JobApplicationListView(String id, JobView jobView, List<JobApplicationView> jobApplicationViewList) {
-		super(id);
-		this.jobView = jobView;
-		this.jobApplicationViewList = jobApplicationViewList;
-	}
+    @JsonProperty("applications")
+    private List<JobApplicationView> jobApplicationViewList;
 
-	public JobApplicationListView(Job aggregate) {
-		this.id = aggregate.getId().getValue();
-		this.jobView = new JobView(aggregate, aggregate.getId().getValue());
-		this.jobApplicationViewList =
-			aggregate
-				.getJobApplications()
-				.stream()
-				.map(jobApplication -> new JobApplicationView(aggregate, jobApplication.getId().getValue()))
-				.collect(Collectors.toList());
-	}
+    public JobApplicationListView(Job aggregate) {
+        this.jobView = new JobMapper(aggregate).toJobView();
+        this.jobApplicationViewList =
+           aggregate
+              .getJobApplications()
+              .stream()
+              .map(jobApplication -> new JobApplicationMapper(jobApplication).toApplicationView())
+              .collect(Collectors.toList());
+    }
 }

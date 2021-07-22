@@ -4,10 +4,10 @@ import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.entities.JobApplication;
 import com.iucse.passnet.recruitment.domain.aggregate.vos.JobApplicationId;
 import com.iucse.passnet.recruitment.domain.aggregate.vos.JobId;
-import com.iucse.passnet.recruitment.domain.commands.AcceptJobApplicationCommand;
 import com.iucse.passnet.recruitment.domain.commands.BaseCommand;
-import com.iucse.passnet.recruitment.domain.compensating.AcceptJobApplicationCompensating;
+import com.iucse.passnet.recruitment.domain.commands.RemoveJobApplicationCommand;
 import com.iucse.passnet.recruitment.domain.compensating.CompensatingCommand;
+import com.iucse.passnet.recruitment.domain.compensating.RemoveJobApplicationCompensating;
 import com.iucse.passnet.recruitment.domain.exceptions.JobApplicationNotFound;
 import com.iucse.passnet.recruitment.domain.exceptions.WrongCommandTypeException;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
@@ -15,19 +15,19 @@ import java.util.Optional;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j(topic = "[AcceptJobApplicationCommandExecutor]")
-public class AcceptJobApplicationCommandExecutor implements CommandExecutor, CompensatingHandler {
+@Slf4j(topic = "[RemoveJobApplicationCommandExecutor]")
+public class RemoveJobApplicationExecutor implements CommandExecutor, CompensatingHandler {
 	private final JobAggregateRepository jobRepository;
 
 	@Builder
-	public AcceptJobApplicationCommandExecutor(JobAggregateRepository jobRepository) {
+	public RemoveJobApplicationExecutor(JobAggregateRepository jobRepository) {
 		this.jobRepository = jobRepository;
 	}
 
 	@Override
 	public Job execute(BaseCommand baseCommand) {
-		if (baseCommand instanceof AcceptJobApplicationCommand) {
-			AcceptJobApplicationCommand command = (AcceptJobApplicationCommand) baseCommand;
+		if (baseCommand instanceof RemoveJobApplicationCommand) {
+			RemoveJobApplicationCommand command = (RemoveJobApplicationCommand) baseCommand;
 			Job jobAggregate = this.jobRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
 
 			Optional<JobApplication> optional = jobAggregate
@@ -37,24 +37,24 @@ public class AcceptJobApplicationCommandExecutor implements CommandExecutor, Com
 				.findAny();
 
 			if (optional.isPresent()) {
-				var jobApplication = optional.get();
-				jobAggregate.acceptJobApplication(jobApplication);
+				JobApplication jobApplication = optional.get();
+
+				jobAggregate.removeJobApplication(jobApplication);
 
 				return this.jobRepository.save(jobAggregate);
 			} else {
-				throw new JobApplicationNotFound("application {} doesn't exit in job");
+				throw new JobApplicationNotFound("application doesn't exit in job");
 			}
 		} else {
-			throw new WrongCommandTypeException("command must be TeacherAcceptStudentJobApplicationCommand");
+			throw new WrongCommandTypeException("command must be TeacherRemoveStudentJobApplicationCommand");
 		}
 	}
 
 	@Override
 	public void reverse(CompensatingCommand compensatingCommand) {
-		if (compensatingCommand instanceof AcceptJobApplicationCompensating) {
-			AcceptJobApplicationCompensating command = (AcceptJobApplicationCompensating) compensatingCommand;
-
-			var jobAggregate = this.jobRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
+		if (compensatingCommand instanceof RemoveJobApplicationCompensating) {
+			RemoveJobApplicationCompensating command = (RemoveJobApplicationCompensating) compensatingCommand;
+			Job jobAggregate = this.jobRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
 
 			Optional<JobApplication> optional = jobAggregate
 				.getJobApplications()
@@ -63,10 +63,10 @@ public class AcceptJobApplicationCommandExecutor implements CommandExecutor, Com
 				.findAny();
 
 			if (optional.isPresent()) {
-				var jobApplication = optional.get();
-				jobAggregate.removeJobApplication(jobApplication);
+				JobApplication jobApplication = optional.get();
+				jobAggregate.acceptJobApplication(jobApplication);
 
-				this.jobRepository.save(jobAggregate);
+				Job updatedJob = this.jobRepository.save(jobAggregate);
 			}
 		}
 	}

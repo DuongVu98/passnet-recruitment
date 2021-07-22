@@ -11,12 +11,12 @@ import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
 import javax.transaction.Transactional;
 import lombok.Builder;
 
-public class StudentApplyJobCommandExecutor implements CommandExecutor {
+public class ApplyJobExecutor implements CommandExecutor {
 	private final JobAggregateRepository jobRepository;
 	private final UUIDGeneratorService uuidGeneratorService;
 
 	@Builder
-	public StudentApplyJobCommandExecutor(JobAggregateRepository jobRepository, UUIDGeneratorService uuidGeneratorService) {
+	public ApplyJobExecutor(JobAggregateRepository jobRepository, UUIDGeneratorService uuidGeneratorService) {
 		this.jobRepository = jobRepository;
 		this.uuidGeneratorService = uuidGeneratorService;
 	}
@@ -32,10 +32,10 @@ public class StudentApplyJobCommandExecutor implements CommandExecutor {
 			JobApplication newJobApplication = JobApplication
 				.builder()
 				.id(new JobApplicationId(this.uuidGeneratorService.generate().toString()))
-				.applicationOwner(new UserId(studentApplyJobCommand.getStudentId()))
+				.applicationOwner(new ProfileId(studentApplyJobCommand.getStudentId()))
 				.letter(new ApplicationLetter(studentApplyJobCommand.getLetter()))
 				.content(new Content(studentApplyJobCommand.getContent()))
-				.applicationState(new ApplicationState(ApplicationStates.PENDING))
+				.applicationState(ApplicationStates.PENDING)
 				.build();
 
 			job.receiveJobApplication(newJobApplication);
