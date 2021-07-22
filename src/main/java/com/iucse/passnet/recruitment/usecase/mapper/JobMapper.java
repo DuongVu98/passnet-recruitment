@@ -1,7 +1,6 @@
 package com.iucse.passnet.recruitment.usecase.mapper;
 
 import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
-import com.iucse.passnet.recruitment.domain.views.JobApplicationLiteView;
 import com.iucse.passnet.recruitment.domain.views.JobLiteView;
 import com.iucse.passnet.recruitment.domain.views.JobView;
 import lombok.AccessLevel;
