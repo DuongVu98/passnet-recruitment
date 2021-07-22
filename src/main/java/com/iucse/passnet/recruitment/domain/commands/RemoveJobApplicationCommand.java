@@ -8,6 +8,6 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class RemoveJobApplicationCommand extends BaseCommand {
-	private String jobId;
-	private String jobApplicationId;
+    private String jobId;
+    private String jobApplicationId;
 }

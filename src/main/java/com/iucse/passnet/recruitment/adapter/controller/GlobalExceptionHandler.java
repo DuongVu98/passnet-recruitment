@@ -36,17 +36,17 @@ public class GlobalExceptionHandler extends BaseController {
     }
 
     @ExceptionHandler(JobApplicationNotFound.class)
-    public ResponseEntity<ErrorView> handle(JobApplicationNotFound exception){
+    public ResponseEntity<ErrorView> handle(JobApplicationNotFound exception) {
         return notFound(exception.getMessage());
     }
 
     @ExceptionHandler(JobNotFoundException.class)
-    public ResponseEntity<ErrorView> handle(JobNotFoundException exception){
+    public ResponseEntity<ErrorView> handle(JobNotFoundException exception) {
         return notFound(exception.getMessage());
     }
 
     @ExceptionHandler(NullIdentifierException.class)
-    public ResponseEntity<ErrorView> handle(NullIdentifierException exception){
+    public ResponseEntity<ErrorView> handle(NullIdentifierException exception) {
         return badRequest(exception.getMessage());
     }
 }

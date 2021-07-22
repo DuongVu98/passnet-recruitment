@@ -10,17 +10,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.cors()
-			.and()
-			.csrf()
-			.disable()
-			.authorizeRequests()
-			.antMatchers(HttpMethod.POST, "/**")
-			.permitAll()
-			.antMatchers(HttpMethod.GET, "/**")
-			.permitAll();
-	}
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+           .cors()
+           .and()
+           .csrf()
+           .disable()
+           .authorizeRequests()
+           .antMatchers(HttpMethod.POST, "/**")
+           .permitAll()
+           .antMatchers(HttpMethod.GET, "/**")
+           .permitAll();
+    }
 }

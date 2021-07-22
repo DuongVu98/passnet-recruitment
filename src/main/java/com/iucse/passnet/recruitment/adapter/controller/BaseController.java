@@ -18,7 +18,7 @@ public class BaseController {
         return ResponseEntity.ok().build();
     }
 
-    protected <T> ResponseEntity<T> ok(T body){
+    protected <T> ResponseEntity<T> ok(T body) {
         return ResponseEntity.ok(body);
     }
 }

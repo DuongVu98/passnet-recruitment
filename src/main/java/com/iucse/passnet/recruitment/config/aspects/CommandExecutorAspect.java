@@ -4,7 +4,6 @@ import com.iucse.passnet.recruitment.domain.annotation.Decorator;
 import com.iucse.passnet.recruitment.usecase.decorators.CommandExecutorDecoratorTypes;
 import com.iucse.passnet.recruitment.usecase.executors.CommandExecutor;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorDecoratorFactory;
-import java.lang.reflect.Method;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,27 +16,28 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class CommandExecutorAspect {
-	private final CommandExecutorDecoratorFactory decoratorFactory;
+    private final CommandExecutorDecoratorFactory decoratorFactory;
 
-	@Autowired
-	public CommandExecutorAspect(CommandExecutorDecoratorFactory decoratorFactory) {
-		this.decoratorFactory = decoratorFactory;
-	}
+    @Autowired
+    public CommandExecutorAspect(CommandExecutorDecoratorFactory decoratorFactory) {
+        this.decoratorFactory = decoratorFactory;
+    }
 
-	@Pointcut("@annotation(com.iucse.passnet.recruitment.domain.annotation.Decorator)")
-	public void decoratorPointcut() {}
+    @Pointcut("@annotation(com.iucse.passnet.recruitment.domain.annotation.Decorator)")
+    public void decoratorPointcut() {
+    }
 
-	@Around("decoratorPointcut()")
-	public Object advice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-		MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
-		var method = signature.getMethod();
+    @Around("decoratorPointcut()")
+    public Object advice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
+        var method = signature.getMethod();
 
-		var decoratorAnnotation = AnnotationUtils.findAnnotation(method, Decorator.class);
-		var commandExecutor = (CommandExecutor) proceedingJoinPoint.proceed();
+        var decoratorAnnotation = AnnotationUtils.findAnnotation(method, Decorator.class);
+        var commandExecutor = (CommandExecutor) proceedingJoinPoint.proceed();
 
-		for (CommandExecutorDecoratorTypes type : decoratorAnnotation.decoratorType()) {
-			commandExecutor = this.decoratorFactory.produce(commandExecutor, type);
-		}
-		return commandExecutor;
-	}
+        for (CommandExecutorDecoratorTypes type : decoratorAnnotation.decoratorType()) {
+            commandExecutor = this.decoratorFactory.produce(commandExecutor, type);
+        }
+        return commandExecutor;
+    }
 }

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/")
 public class HomeRestController {
 
-	@GetMapping(value = "")
-	public String getHomePage() {
-		return "Welcome to Passnet Recruitment service";
-	}
+    @GetMapping(value = "")
+    public String getHomePage() {
+        return "Welcome to Passnet Recruitment service";
+    }
 }

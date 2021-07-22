@@ -9,18 +9,18 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class JobLiteView {
-	@JsonProperty("id")
-	private String id;
+    @JsonProperty("id")
+    private String id;
 
-	@JsonProperty("courseName")
-	private String courseName;
+    @JsonProperty("courseName")
+    private String courseName;
 
-	@JsonProperty("jobTitle")
-	private String jobTitle;
+    @JsonProperty("jobTitle")
+    private String jobTitle;
 
-	@JsonProperty("semester")
-	private String semester;
+    @JsonProperty("semester")
+    private String semester;
 
-	@JsonProperty("appliedAmount")
-	private Integer appliedAmount;
+    @JsonProperty("appliedAmount")
+    private Integer appliedAmount;
 }

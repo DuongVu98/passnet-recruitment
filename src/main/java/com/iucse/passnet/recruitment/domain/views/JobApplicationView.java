@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class JobApplicationView {
-	@JsonProperty("studentId")
+    @JsonProperty("studentId")
     private String studentId;
 
-	@JsonProperty("letter")
+    @JsonProperty("letter")
     private String letter;
 
-	@JsonProperty("content")
+    @JsonProperty("content")
     private String content;
 
-	@JsonProperty("state")
+    @JsonProperty("state")
     private String state;
 }

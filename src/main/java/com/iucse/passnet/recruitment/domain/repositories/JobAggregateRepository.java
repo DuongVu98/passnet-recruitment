@@ -24,9 +24,8 @@ public interface JobAggregateRepository extends JpaRepository<Job, JobId> {
     @Query("select j from Job j where upper(j.courseName.value) like upper(:value) and j.organizationId = :organizationId order by j.createdAt DESC")
     List<Job> searchByCourse(@Param("value") String value, @Param("organizationId") OrganizationId organizationId);
 
-	@Query("select j from Job j where j.semester = :semester and j.organizationId = :organizationId order by j.createdAt DESC")
-	List<Job> searchBySemester(@Param("semester") Semester semester, @Param("organizationId") OrganizationId organizationId);
-
+    @Query("select j from Job j where j.semester = :semester and j.organizationId = :organizationId order by j.createdAt DESC")
+    List<Job> searchBySemester(@Param("semester") Semester semester, @Param("organizationId") OrganizationId organizationId);
 
 
 }

@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 @Builder
 public class TeacherDeleteJobCommand extends BaseCommand {
-	private String jobId;
+    private String jobId;
 }

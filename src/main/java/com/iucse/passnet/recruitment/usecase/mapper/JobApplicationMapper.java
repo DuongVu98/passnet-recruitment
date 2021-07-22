@@ -14,7 +14,7 @@ public class JobApplicationMapper {
     @NonNull
     JobApplication instance;
 
-    public JobApplicationView toApplicationView(){
+    public JobApplicationView toApplicationView() {
         return JobApplicationView.builder()
            .letter(instance.getLetter().getValue())
            .content(instance.getContent().getValue())
@@ -23,7 +23,7 @@ public class JobApplicationMapper {
            .build();
     }
 
-    public JobApplicationLiteView toLiteView(){
+    public JobApplicationLiteView toLiteView() {
         return JobApplicationLiteView.builder()
            .studentId(instance.getApplicationOwner().getValue())
            .applicationState(instance.getApplicationState().name())

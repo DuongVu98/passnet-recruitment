@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CompensatingCommand {
-	protected String eventId;
+    protected String eventId;
 }

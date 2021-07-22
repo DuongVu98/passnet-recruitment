@@ -14,19 +14,19 @@ import java.util.Objects;
 @AllArgsConstructor
 @Embeddable
 public class JobApplicationId implements Serializable {
-	private String value;
+    private String value;
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-		JobApplicationId that = (JobApplicationId) o;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        JobApplicationId that = (JobApplicationId) o;
 
-		return Objects.equals(value, that.value);
-	}
+        return Objects.equals(value, that.value);
+    }
 
-	@Override
-	public int hashCode() {
-		return 1015828324;
-	}
+    @Override
+    public int hashCode() {
+        return 1015828324;
+    }
 }

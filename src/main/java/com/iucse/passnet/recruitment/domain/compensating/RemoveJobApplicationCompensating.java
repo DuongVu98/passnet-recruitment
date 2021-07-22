@@ -4,12 +4,12 @@ import lombok.Getter;
 
 @Getter
 public class RemoveJobApplicationCompensating extends CompensatingCommand {
-	private String jobId;
-	private String jobApplicationId;
+    private String jobId;
+    private String jobApplicationId;
 
-	public RemoveJobApplicationCompensating(String eventId, String jobId, String jobApplicationId) {
-		super(eventId);
-		this.jobId = jobId;
-		this.jobApplicationId = jobApplicationId;
-	}
+    public RemoveJobApplicationCompensating(String eventId, String jobId, String jobApplicationId) {
+        super(eventId);
+        this.jobId = jobId;
+        this.jobApplicationId = jobApplicationId;
+    }
 }

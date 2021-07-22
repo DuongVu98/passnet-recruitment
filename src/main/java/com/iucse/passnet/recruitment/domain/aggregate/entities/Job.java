@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "jobs")
 @Slf4j(topic = "[Job]")
-public class Job extends BaseEntity{
+public class Job extends BaseEntity {
 
     @EmbeddedId
     @AttributeOverride(name = "value", column = @Column(name = "id"))

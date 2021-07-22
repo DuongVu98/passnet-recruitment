@@ -11,63 +11,64 @@ import com.iucse.passnet.recruitment.domain.compensating.RemoveJobApplicationCom
 import com.iucse.passnet.recruitment.domain.exceptions.JobApplicationNotFound;
 import com.iucse.passnet.recruitment.domain.exceptions.WrongCommandTypeException;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
-import java.util.Optional;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Optional;
+
 @Slf4j(topic = "[RemoveJobApplicationCommandExecutor]")
 public class RemoveJobApplicationExecutor implements CommandExecutor, CompensatingHandler {
-	private final JobAggregateRepository jobRepository;
+    private final JobAggregateRepository jobRepository;
 
-	@Builder
-	public RemoveJobApplicationExecutor(JobAggregateRepository jobRepository) {
-		this.jobRepository = jobRepository;
-	}
+    @Builder
+    public RemoveJobApplicationExecutor(JobAggregateRepository jobRepository) {
+        this.jobRepository = jobRepository;
+    }
 
-	@Override
-	public Job execute(BaseCommand baseCommand) {
-		if (baseCommand instanceof RemoveJobApplicationCommand) {
-			RemoveJobApplicationCommand command = (RemoveJobApplicationCommand) baseCommand;
-			Job jobAggregate = this.jobRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
+    @Override
+    public Job execute(BaseCommand baseCommand) {
+        if (baseCommand instanceof RemoveJobApplicationCommand) {
+            RemoveJobApplicationCommand command = (RemoveJobApplicationCommand) baseCommand;
+            Job jobAggregate = this.jobRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
 
-			Optional<JobApplication> optional = jobAggregate
-				.getJobApplications()
-				.stream()
-				.filter(jobApplication -> jobApplication.getId().equals(new JobApplicationId(command.getJobApplicationId())))
-				.findAny();
+            Optional<JobApplication> optional = jobAggregate
+               .getJobApplications()
+               .stream()
+               .filter(jobApplication -> jobApplication.getId().equals(new JobApplicationId(command.getJobApplicationId())))
+               .findAny();
 
-			if (optional.isPresent()) {
-				JobApplication jobApplication = optional.get();
+            if (optional.isPresent()) {
+                JobApplication jobApplication = optional.get();
 
-				jobAggregate.removeJobApplication(jobApplication);
+                jobAggregate.removeJobApplication(jobApplication);
 
-				return this.jobRepository.save(jobAggregate);
-			} else {
-				throw new JobApplicationNotFound("application doesn't exit in job");
-			}
-		} else {
-			throw new WrongCommandTypeException("command must be TeacherRemoveStudentJobApplicationCommand");
-		}
-	}
+                return this.jobRepository.save(jobAggregate);
+            } else {
+                throw new JobApplicationNotFound("application doesn't exit in job");
+            }
+        } else {
+            throw new WrongCommandTypeException("command must be TeacherRemoveStudentJobApplicationCommand");
+        }
+    }
 
-	@Override
-	public void reverse(CompensatingCommand compensatingCommand) {
-		if (compensatingCommand instanceof RemoveJobApplicationCompensating) {
-			RemoveJobApplicationCompensating command = (RemoveJobApplicationCompensating) compensatingCommand;
-			Job jobAggregate = this.jobRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
+    @Override
+    public void reverse(CompensatingCommand compensatingCommand) {
+        if (compensatingCommand instanceof RemoveJobApplicationCompensating) {
+            RemoveJobApplicationCompensating command = (RemoveJobApplicationCompensating) compensatingCommand;
+            Job jobAggregate = this.jobRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
 
-			Optional<JobApplication> optional = jobAggregate
-				.getJobApplications()
-				.stream()
-				.filter(jobApplication -> jobApplication.getId().equals(new JobApplicationId(command.getJobApplicationId())))
-				.findAny();
+            Optional<JobApplication> optional = jobAggregate
+               .getJobApplications()
+               .stream()
+               .filter(jobApplication -> jobApplication.getId().equals(new JobApplicationId(command.getJobApplicationId())))
+               .findAny();
 
-			if (optional.isPresent()) {
-				JobApplication jobApplication = optional.get();
-				jobAggregate.acceptJobApplication(jobApplication);
+            if (optional.isPresent()) {
+                JobApplication jobApplication = optional.get();
+                jobAggregate.acceptJobApplication(jobApplication);
 
-				Job updatedJob = this.jobRepository.save(jobAggregate);
-			}
-		}
-	}
+                Job updatedJob = this.jobRepository.save(jobAggregate);
+            }
+        }
+    }
 }

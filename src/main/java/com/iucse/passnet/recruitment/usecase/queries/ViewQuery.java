@@ -57,7 +57,7 @@ public class ViewQuery {
     }
 
     public JobApplicationListView queryJobApplicationListView(String jobId) {
-		var aggregate = this.jobEntityRepository.findByIdWithJobApplications(new JobId(jobId));
+        var aggregate = this.jobEntityRepository.findByIdWithJobApplications(new JobId(jobId));
         return new JobApplicationListView(aggregate);
     }
 }

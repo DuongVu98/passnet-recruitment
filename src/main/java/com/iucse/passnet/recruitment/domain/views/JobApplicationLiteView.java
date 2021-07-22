@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class JobApplicationLiteView {
-	@JsonProperty("studentId")
-	private String studentId;
+    @JsonProperty("studentId")
+    private String studentId;
 
-	@JsonProperty("applicationState")
-	private String applicationState;
+    @JsonProperty("applicationState")
+    private String applicationState;
 }

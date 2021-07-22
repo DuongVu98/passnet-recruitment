@@ -11,10 +11,11 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @Slf4j(topic = "[PassnetRecruitmentApplication]")
 public class PassnetRecruitmentApplication implements CommandLineRunner {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PassnetRecruitmentApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PassnetRecruitmentApplication.class, args);
+    }
 
-	@Override
-	public void run(String... args) throws Exception {}
+    @Override
+    public void run(String... args) throws Exception {
+    }
 }
