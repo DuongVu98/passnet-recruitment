@@ -1,6 +1,7 @@
 package com.iucse.passnet.recruitment.adapter.controller;
 
 import com.iucse.passnet.recruitment.adapter.gateway.QueryGateway;
+import com.iucse.passnet.recruitment.domain.forms.GetJobListQuery;
 import com.iucse.passnet.recruitment.domain.views.JobApplicationListView;
 import com.iucse.passnet.recruitment.domain.views.JobApplicationView;
 import com.iucse.passnet.recruitment.domain.views.JobLiteView;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,6 +29,11 @@ public class QueryController extends BaseController {
     @GetMapping(value = "/job-view")
     public ResponseEntity<JobView> getJobView(@RequestParam("jobId") String id) {
         return ok(this.queryGateway.getJobView(id));
+    }
+
+    @GetMapping(value = "/job-list")
+    public ResponseEntity<List<JobLiteView>> getJobList(@Valid @RequestBody GetJobListQuery query) {
+        return ok(this.queryGateway.getJobList(query.getJobIds()));
     }
 
     @GetMapping(value = "/job-application-view")

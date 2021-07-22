@@ -7,6 +7,8 @@ import com.iucse.passnet.recruitment.usecase.queries.ViewQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class QueryGateway {
     private final ViewQuery viewQuery;
@@ -18,6 +20,9 @@ public class QueryGateway {
 
     public JobView getJobView(String id) throws NullIdentifierException, JobNotFoundException {
         return this.viewQuery.queryJobView(id);
+    }
+    public List<JobLiteView> getJobList(List<String> ids) {
+        return this.viewQuery.queryJobList(ids);
     }
 
     public JobApplicationView getJobApplicationView(String id) {

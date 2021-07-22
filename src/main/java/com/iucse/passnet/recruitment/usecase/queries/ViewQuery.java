@@ -60,4 +60,13 @@ public class ViewQuery {
         var aggregate = this.jobEntityRepository.findByIdWithJobApplications(new JobId(jobId));
         return new JobApplicationListView(aggregate);
     }
+
+    public List<JobLiteView> queryJobList(List<String> ids) {
+        return ids.stream()
+           .map(id -> jobEntityRepository.findById(new JobId(id)))
+           .filter(Optional::isPresent)
+           .map(Optional::get)
+           .map(job -> new JobMapper(job).toLiteView())
+           .collect(Collectors.toList());
+    }
 }
