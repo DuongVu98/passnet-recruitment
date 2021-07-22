@@ -17,10 +17,10 @@ public class CompensatingHandlerFactory {
     }
 
     public CompensatingHandler produce(AcceptJobApplicationCompensating compensating) {
-        return this.commandExecutorProvider.produceAcceptJobApplicationCommandExecutor();
+        return this.commandExecutorProvider.produceAcceptJobApplicationExecutor();
     }
 
     public CompensatingHandler produce(RemoveJobApplicationCompensating compensating) {
-        return this.commandExecutorProvider.produceRemoveJobApplicationCommandExecutor();
+        return this.commandExecutorProvider.produceJobApplicationExecutor();
     }
 }

@@ -18,24 +18,23 @@ public class CommandExecutorFactory {
     }
 
     public CommandExecutor produce(StudentApplyJobCommand command) {
-        return this.commandExecutorProvider.produceStudentApplyJobCommandExecutor();
+        return this.commandExecutorProvider.produceApplyJobExecutor();
     }
 
-    @Decorator(decoratorType = {CommandExecutorDecoratorTypes.COMPENSATING_COMMAND_BACKUP, CommandExecutorDecoratorTypes.EVENT_PUBLISHER})
     public CommandExecutor produce(AcceptJobApplicationCommand command) {
-        return this.commandExecutorProvider.produceAcceptJobApplicationCommandExecutor();
+        return this.commandExecutorProvider.produceAcceptJobApplicationExecutor();
     }
 
     public CommandExecutor produce(PostJobCommand command) {
-        return this.commandExecutorProvider.produceTeacherPostJobCommandExecutor();
+        return this.commandExecutorProvider.producePostJobExecutor();
     }
 
     @Decorator(decoratorType = {CommandExecutorDecoratorTypes.COMPENSATING_COMMAND_BACKUP, CommandExecutorDecoratorTypes.EVENT_PUBLISHER})
     public CommandExecutor produce(RemoveJobApplicationCommand command) {
-        return this.commandExecutorProvider.produceRemoveJobApplicationCommandExecutor();
+        return this.commandExecutorProvider.produceJobApplicationExecutor();
     }
 
     public CommandExecutor produce(TeacherDeleteJobCommand command) {
-        return this.commandExecutorProvider.produceTeacherDeleteJobCommandExecutor();
+        return this.commandExecutorProvider.produceDeleteJobExecutor();
     }
 }

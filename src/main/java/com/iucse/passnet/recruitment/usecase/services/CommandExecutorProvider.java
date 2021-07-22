@@ -16,7 +16,7 @@ public class CommandExecutorProvider {
         this.uuidGeneratorService = uuidGeneratorService;
     }
 
-    public ApplyJobExecutor produceStudentApplyJobCommandExecutor() {
+    public ApplyJobExecutor produceApplyJobExecutor() {
         return ApplyJobExecutor
            .builder()
            .jobRepository(this.aggregateRepository)
@@ -24,11 +24,11 @@ public class CommandExecutorProvider {
            .build();
     }
 
-    public AcceptJobApplicationExecutor produceAcceptJobApplicationCommandExecutor() {
+    public AcceptJobApplicationExecutor produceAcceptJobApplicationExecutor() {
         return AcceptJobApplicationExecutor.builder().jobRepository(this.aggregateRepository).build();
     }
 
-    public PostJobExecutor produceTeacherPostJobCommandExecutor() {
+    public PostJobExecutor producePostJobExecutor() {
         return PostJobExecutor
            .builder()
            .jobRepository(this.aggregateRepository)
@@ -36,11 +36,11 @@ public class CommandExecutorProvider {
            .build();
     }
 
-    public RemoveJobApplicationExecutor produceRemoveJobApplicationCommandExecutor() {
+    public RemoveJobApplicationExecutor produceJobApplicationExecutor() {
         return RemoveJobApplicationExecutor.builder().jobRepository(this.aggregateRepository).build();
     }
 
-    public DeleteJobExecutor produceTeacherDeleteJobCommandExecutor() {
+    public DeleteJobExecutor produceDeleteJobExecutor() {
         return DeleteJobExecutor.builder().jobRepository(aggregateRepository).build();
     }
 }

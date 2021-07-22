@@ -8,6 +8,9 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class JobApplicationMapper {
@@ -20,6 +23,7 @@ public class JobApplicationMapper {
            .content(instance.getContent().getValue())
            .state(instance.getApplicationState().name())
            .studentId(instance.getApplicationOwner().getValue())
+           .postedDate(LocalDate.ofInstant(instance.getCreatedAt(), ZoneOffset.UTC))
            .build();
     }
 
@@ -27,6 +31,7 @@ public class JobApplicationMapper {
         return JobApplicationLiteView.builder()
            .studentId(instance.getApplicationOwner().getValue())
            .applicationState(instance.getApplicationState().name())
+           .postedDate(LocalDate.ofInstant(instance.getCreatedAt(), ZoneOffset.UTC))
            .build();
     }
 }

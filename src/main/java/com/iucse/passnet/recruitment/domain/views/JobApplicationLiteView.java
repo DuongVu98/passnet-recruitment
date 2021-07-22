@@ -1,10 +1,13 @@
 package com.iucse.passnet.recruitment.domain.views;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Getter
 @Builder
@@ -16,4 +19,8 @@ public class JobApplicationLiteView {
 
     @JsonProperty("applicationState")
     private String applicationState;
+
+    @JsonProperty("postedDate")
+    @JsonFormat(pattern = "dd-MM-yyy")
+    private LocalDate postedDate;
 }

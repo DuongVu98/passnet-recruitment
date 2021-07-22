@@ -1,8 +1,10 @@
 package com.iucse.passnet.recruitment.domain.views;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -27,6 +29,13 @@ public class JobView {
 
     @JsonProperty("semester")
     private String semester;
+
+    @JsonProperty("postedDate")
+    @JsonFormat(pattern = "dd-MM-yyy")
+    private LocalDate postedDate;
+
+    @JsonProperty("daysAgo")
+    private Long daysAgo;
 
     @Setter
     @JsonProperty("jobApplications")
