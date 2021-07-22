@@ -3,7 +3,7 @@ package com.iucse.passnet.recruitment.usecase.executors;
 import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.vos.JobId;
 import com.iucse.passnet.recruitment.domain.commands.BaseCommand;
-import com.iucse.passnet.recruitment.domain.commands.TeacherDeleteJobCommand;
+import com.iucse.passnet.recruitment.domain.commands.DeleteJobCommand;
 import com.iucse.passnet.recruitment.domain.exceptions.JobNotFoundException;
 import com.iucse.passnet.recruitment.domain.exceptions.WrongCommandTypeException;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
@@ -21,8 +21,8 @@ public class DeleteJobExecutor implements CommandExecutor {
 
     @Override
     public Job execute(BaseCommand baseCommand) {
-        if (baseCommand instanceof TeacherDeleteJobCommand) {
-            TeacherDeleteJobCommand command = (TeacherDeleteJobCommand) baseCommand;
+        if (baseCommand instanceof DeleteJobCommand) {
+            DeleteJobCommand command = (DeleteJobCommand) baseCommand;
 
             Optional<Job> jobOptional = this.jobRepository.findById(new JobId(command.getJobId()));
 

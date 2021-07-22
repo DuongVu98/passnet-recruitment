@@ -3,8 +3,8 @@ package com.iucse.passnet.recruitment.usecase.executors;
 import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
 import com.iucse.passnet.recruitment.domain.aggregate.entities.JobApplication;
 import com.iucse.passnet.recruitment.domain.aggregate.vos.*;
+import com.iucse.passnet.recruitment.domain.commands.ApplyJobCommand;
 import com.iucse.passnet.recruitment.domain.commands.BaseCommand;
-import com.iucse.passnet.recruitment.domain.commands.StudentApplyJobCommand;
 import com.iucse.passnet.recruitment.domain.exceptions.WrongCommandTypeException;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
@@ -25,17 +25,17 @@ public class ApplyJobExecutor implements CommandExecutor {
     @Override
     @Transactional
     public Job execute(BaseCommand command) {
-        if (command instanceof StudentApplyJobCommand) {
-            StudentApplyJobCommand studentApplyJobCommand = (StudentApplyJobCommand) command;
+        if (command instanceof ApplyJobCommand) {
+            ApplyJobCommand applyJobCommand = (ApplyJobCommand) command;
 
-            Job job = this.jobRepository.findByIdWithJobApplications(new JobId(studentApplyJobCommand.getJobId()));
+            Job job = this.jobRepository.findByIdWithJobApplications(new JobId(applyJobCommand.getJobId()));
 
             JobApplication newJobApplication = JobApplication
                .builder()
                .id(new JobApplicationId(this.uuidGeneratorService.generate().toString()))
-               .applicationOwner(new ProfileId(studentApplyJobCommand.getStudentId()))
-               .letter(new ApplicationLetter(studentApplyJobCommand.getLetter()))
-               .content(new Content(studentApplyJobCommand.getContent()))
+               .applicationOwner(new ProfileId(applyJobCommand.getStudentId()))
+               .letter(new ApplicationLetter(applyJobCommand.getLetter()))
+               .content(new Content(applyJobCommand.getContent()))
                .applicationState(ApplicationStates.PENDING)
                .build();
 

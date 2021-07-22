@@ -37,7 +37,7 @@ public class CommandGateway {
     }
 
     public void studentApplyJob(JobApplicationForm jobApplicationForm, String studentId, String jobId) {
-        StudentApplyJobCommand command = StudentApplyJobCommand
+        ApplyJobCommand command = ApplyJobCommand
            .builder()
            .jobId(jobId)
            .studentId(studentId)
@@ -62,7 +62,7 @@ public class CommandGateway {
     }
 
     public void deleteJob(String jobId) {
-        TeacherDeleteJobCommand command = TeacherDeleteJobCommand.builder().jobId(jobId).build();
+        DeleteJobCommand command = DeleteJobCommand.builder().jobId(jobId).build();
         var commandExecutor = commandExecutorFactory.produce(command);
         var aggregate = commandExecutor.execute(command);
     }

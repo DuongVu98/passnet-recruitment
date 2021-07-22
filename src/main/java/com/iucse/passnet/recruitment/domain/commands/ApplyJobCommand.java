@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RemoveJobApplicationCommand extends BaseCommand {
+public class ApplyJobCommand extends BaseCommand {
+    private String studentId;
     private String jobId;
-    private String jobApplicationId;
+    private String letter;
+    private String content;
 }

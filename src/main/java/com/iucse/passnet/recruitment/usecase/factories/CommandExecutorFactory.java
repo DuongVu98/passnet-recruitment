@@ -17,7 +17,7 @@ public class CommandExecutorFactory {
         this.commandExecutorProvider = commandExecutorProvider;
     }
 
-    public CommandExecutor produce(StudentApplyJobCommand command) {
+    public CommandExecutor produce(ApplyJobCommand command) {
         return this.commandExecutorProvider.produceApplyJobExecutor();
     }
 
@@ -34,7 +34,7 @@ public class CommandExecutorFactory {
         return this.commandExecutorProvider.produceJobApplicationExecutor();
     }
 
-    public CommandExecutor produce(TeacherDeleteJobCommand command) {
+    public CommandExecutor produce(DeleteJobCommand command) {
         return this.commandExecutorProvider.produceDeleteJobExecutor();
     }
 }

@@ -21,6 +21,7 @@ public class QueryGateway {
     public JobView getJobView(String id) throws NullIdentifierException, JobNotFoundException {
         return this.viewQuery.queryJobView(id);
     }
+
     public List<JobLiteView> getJobList(List<String> ids) {
         return this.viewQuery.queryJobList(ids);
     }
