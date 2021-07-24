@@ -16,19 +16,12 @@ spring:
         generate_statistics: false
         enable_lazy_load_no_trans: true
     show-sql: false
-  redis:
-    host: ${REDIS_HOST}
-    port: ${REDIS_PORT}
 springdoc:
   api-docs:
     path: /api-docs
   pathsToMatch: /**
   swagger-ui:
     path: /swagger-ui.html
-
-view:
-  posted-jobs:
-    id: ${VIEW_CACHE_ID}
 grpc:
   server:
     port: ${GRPC_PORT_LISTENER}
