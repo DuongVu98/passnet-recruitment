@@ -36,6 +36,7 @@ public class JobMapper {
 
     public JobView toJobView() {
         return JobView.builder()
+           .jobId(instance.getId().getValue())
            .jobTitle(instance.getJobName().getValue())
            .courseName(instance.getCourseName().getValue())
            .content(instance.getContent().getValue())

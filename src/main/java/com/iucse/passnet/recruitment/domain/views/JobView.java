@@ -12,6 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class JobView {
+    @JsonProperty("id")
+    private String jobId;
+
     @JsonProperty("jobTitle")
     private String jobTitle;
 

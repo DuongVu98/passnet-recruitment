@@ -19,6 +19,7 @@ public class JobApplicationMapper {
 
     public JobApplicationView toApplicationView() {
         return JobApplicationView.builder()
+           .id(instance.getId().getValue())
            .letter(instance.getLetter().getValue())
            .content(instance.getContent().getValue())
            .state(instance.getApplicationState().name())
@@ -29,6 +30,7 @@ public class JobApplicationMapper {
 
     public JobApplicationLiteView toLiteView() {
         return JobApplicationLiteView.builder()
+           .id(instance.getId().getValue())
            .studentId(instance.getApplicationOwner().getValue())
            .applicationState(instance.getApplicationState().name())
            .postedDate(LocalDate.ofInstant(instance.getCreatedAt(), ZoneOffset.UTC))

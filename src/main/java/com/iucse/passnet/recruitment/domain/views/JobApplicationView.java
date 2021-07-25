@@ -14,6 +14,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class JobApplicationView {
+    @JsonProperty("id")
+    private String id;
+
     @JsonProperty("studentId")
     private String studentId;
 
