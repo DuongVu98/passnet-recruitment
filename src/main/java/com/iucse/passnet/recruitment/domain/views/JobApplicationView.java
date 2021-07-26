@@ -20,11 +20,17 @@ public class JobApplicationView {
     @JsonProperty("studentId")
     private String studentId;
 
+    @JsonProperty("jobId")
+    private String jobId;
+
     @JsonProperty("letter")
     private String letter;
 
     @JsonProperty("content")
     private String content;
+
+    @JsonProperty("course")
+    private String course;
 
     @JsonProperty("state")
     private String state;

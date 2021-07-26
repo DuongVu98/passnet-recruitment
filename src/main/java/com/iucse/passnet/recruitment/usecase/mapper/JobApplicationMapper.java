@@ -20,6 +20,8 @@ public class JobApplicationMapper {
     public JobApplicationView toApplicationView() {
         return JobApplicationView.builder()
            .id(instance.getId().getValue())
+           .jobId(instance.getJob().getId().getValue())
+           .course(instance.getJob().getCourseName().getValue())
            .letter(instance.getLetter().getValue())
            .content(instance.getContent().getValue())
            .state(instance.getApplicationState().name())

@@ -3,6 +3,7 @@ package com.iucse.passnet.recruitment.usecase.queries;
 import com.iucse.passnet.recruitment.domain.aggregate.entities.JobApplication;
 import com.iucse.passnet.recruitment.domain.aggregate.vos.JobApplicationId;
 import com.iucse.passnet.recruitment.domain.aggregate.vos.JobId;
+import com.iucse.passnet.recruitment.domain.aggregate.vos.ProfileId;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.domain.repositories.JobApplicationRepository;
 import com.iucse.passnet.recruitment.domain.views.*;
@@ -67,6 +68,12 @@ public class ViewQuery {
            .filter(Optional::isPresent)
            .map(Optional::get)
            .map(job -> new JobMapper(job).toLiteView())
+           .collect(Collectors.toList());
+    }
+
+    public List<JobApplicationView> queryApplicationsByProfile(String profileId) {
+        return jobApplicationEntityRepository.findByOwner(new ProfileId(profileId)).stream()
+           .map(jobApplication -> new JobApplicationMapper(jobApplication).toApplicationView())
            .collect(Collectors.toList());
     }
 }

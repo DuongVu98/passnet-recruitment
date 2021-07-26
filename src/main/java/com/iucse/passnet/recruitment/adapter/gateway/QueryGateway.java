@@ -41,4 +41,8 @@ public class QueryGateway {
     public JobApplicationListView getJobApplicationListView(String jobId) {
         return this.viewQuery.queryJobApplicationListView(jobId);
     }
+
+    public List<JobApplicationView> getOwnedApplications(String profileId){
+        return this.viewQuery.queryApplicationsByProfile(profileId);
+    }
 }
