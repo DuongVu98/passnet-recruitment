@@ -1,69 +1,47 @@
 package com.iucse.passnet.recruitment.adapter.gateway;
 
-import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
 import com.iucse.passnet.recruitment.domain.commands.*;
-import com.iucse.passnet.recruitment.domain.forms.JobApplicationForm;
-import com.iucse.passnet.recruitment.domain.forms.JobCreationForm;
 import com.iucse.passnet.recruitment.usecase.executors.CommandExecutor;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorDecoratorFactory;
 import com.iucse.passnet.recruitment.usecase.factories.CommandExecutorFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class CommandGateway {
+
     private final CommandExecutorFactory commandExecutorFactory;
     private final CommandExecutorDecoratorFactory commandExecutorDecoratorFactory;
 
-    @Autowired
-    public CommandGateway(CommandExecutorFactory commandExecutorFactory, CommandExecutorDecoratorFactory commandExecutorDecoratorFactory) {
-        this.commandExecutorFactory = commandExecutorFactory;
-        this.commandExecutorDecoratorFactory = commandExecutorDecoratorFactory;
-    }
-
-    public void postJob(JobCreationForm form, String teacherId) {
-        PostJobCommand command = PostJobCommand.builder()
-           .jobOwnerId(teacherId)
-           .content(form.getContent())
-           .jobName(form.getJobTitle())
-           .courseName(form.getCourseName())
-           .requirement(form.getRequirement())
-           .semester(form.getSemester())
-           .organizationId(form.getOrganizationId())
-           .build();
-
-        var commandExecutor = commandExecutorFactory.produce(command);
-        var aggregate = commandExecutor.execute(command);
-    }
-
-    public void studentApplyJob(JobApplicationForm jobApplicationForm, String studentId, String jobId) {
-        ApplyJobCommand command = ApplyJobCommand
-           .builder()
-           .jobId(jobId)
-           .studentId(studentId)
-           .content(jobApplicationForm.getContent())
-           .letter(jobApplicationForm.getLetter())
-           .build();
-
+    @Async
+    public void sendCommand(PostJobCommand command) {
         CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
-        Job aggregate = commandExecutor.execute(command);
+        commandExecutor.execute(command);
     }
 
-    public void acceptJobApplication(String jobApplicationId, String jobId) {
-        AcceptJobApplicationCommand command = AcceptJobApplicationCommand.builder().jobApplicationId(jobApplicationId).jobId(jobId).build();
-        var commandExecutor = commandExecutorFactory.produce(command);
-        var aggregate = commandExecutor.execute(command);
+    @Async
+    public void sendCommand(ApplyJobCommand command){
+        CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
+        commandExecutor.execute(command);
     }
 
-    public void removeJobApplication(String jobApplicationId, String jobId) {
-        RemoveJobApplicationCommand command = RemoveJobApplicationCommand.builder().jobApplicationId(jobApplicationId).jobId(jobId).build();
-        var commandExecutor = commandExecutorFactory.produce(command);
-        var aggregate = commandExecutor.execute(command);
+    @Async
+    public void sendCommand(AcceptJobApplicationCommand command){
+        CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
+        commandExecutor.execute(command);
     }
 
-    public void deleteJob(String jobId) {
-        DeleteJobCommand command = DeleteJobCommand.builder().jobId(jobId).build();
-        var commandExecutor = commandExecutorFactory.produce(command);
-        var aggregate = commandExecutor.execute(command);
+    @Async
+    public void sendCommand(RemoveJobApplicationCommand command){
+        CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
+        commandExecutor.execute(command);
+    }
+
+    @Async
+    public void sendCommand(DeleteJobCommand command){
+        CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
+        commandExecutor.execute(command);
     }
 }
