@@ -6,10 +6,11 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
+
 @Data
+@Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
-@Embeddable
 public class CourseName {
     private String value;
 }

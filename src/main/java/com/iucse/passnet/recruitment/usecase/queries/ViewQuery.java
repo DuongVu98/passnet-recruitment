@@ -9,6 +9,7 @@ import com.iucse.passnet.recruitment.domain.repositories.JobApplicationRepositor
 import com.iucse.passnet.recruitment.domain.views.*;
 import com.iucse.passnet.recruitment.usecase.mapper.JobApplicationMapper;
 import com.iucse.passnet.recruitment.usecase.mapper.JobMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,15 +18,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class ViewQuery {
     private final JobAggregateRepository jobEntityRepository;
     private final JobApplicationRepository jobApplicationEntityRepository;
-
-    @Autowired
-    public ViewQuery(JobAggregateRepository jobEntityRepository, JobApplicationRepository jobApplicationEntityRepository) {
-        this.jobEntityRepository = jobEntityRepository;
-        this.jobApplicationEntityRepository = jobApplicationEntityRepository;
-    }
 
     public JobView queryJobView(String id) throws NullPointerException {
         var aggregate = this.jobEntityRepository.findByIdWithJobApplications(new JobId(id));
@@ -49,9 +45,8 @@ public class ViewQuery {
 
     public OwnedJobListView queryUserOwnJob(String uid) {
         List<JobLiteView> jobLiteViewList =
-           this.jobEntityRepository.findAll()
+           this.jobEntityRepository.findByOwner(new ProfileId(uid))
               .stream()
-              .filter(job -> job.getJobOwner().getValue().equals(uid))
               .map(job -> new JobMapper(job).toLiteView())
               .collect(Collectors.toList());
         return OwnedJobListView.builder().teacherId(uid).litePostedJobs(jobLiteViewList).build();
