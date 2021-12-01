@@ -8,16 +8,14 @@ import com.iucse.passnet.recruitment.domain.exceptions.WrongCommandTypeException
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import com.iucse.passnet.recruitment.usecase.services.UUIDGeneratorService;
 import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 
+
+@Builder
+@RequiredArgsConstructor
 public class PostJobExecutor implements CommandExecutor {
     private final JobAggregateRepository jobRepository;
     private final UUIDGeneratorService uuidGeneratorService;
-
-    @Builder
-    public PostJobExecutor(JobAggregateRepository jobRepository, UUIDGeneratorService uuidGeneratorService) {
-        this.jobRepository = jobRepository;
-        this.uuidGeneratorService = uuidGeneratorService;
-    }
 
     @Override
     public Job execute(BaseCommand baseCommand) {

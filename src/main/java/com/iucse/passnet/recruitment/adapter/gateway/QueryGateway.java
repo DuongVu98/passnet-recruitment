@@ -42,7 +42,7 @@ public class QueryGateway {
         return this.viewQuery.queryJobApplicationListView(jobId);
     }
 
-    public List<JobApplicationView> getOwnedApplications(String profileId){
+    public List<JobApplicationView> getOwnedApplications(String profileId) {
         return this.viewQuery.queryApplicationsByProfile(profileId);
     }
 }

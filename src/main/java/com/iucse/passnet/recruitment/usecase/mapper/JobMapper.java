@@ -3,10 +3,7 @@ package com.iucse.passnet.recruitment.usecase.mapper;
 import com.iucse.passnet.recruitment.domain.aggregate.entities.Job;
 import com.iucse.passnet.recruitment.domain.views.JobLiteView;
 import com.iucse.passnet.recruitment.domain.views.JobView;
-import lombok.AccessLevel;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -15,11 +12,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class JobMapper {
 
-    @NonNull
-    Job instance;
+    private final Job instance;
 
     public JobLiteView toLiteView() {
         return JobLiteView

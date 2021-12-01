@@ -22,25 +22,25 @@ public class CommandGateway {
     }
 
     @Async
-    public void sendCommand(ApplyJobCommand command){
+    public void sendCommand(ApplyJobCommand command) {
         CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
         commandExecutor.execute(command);
     }
 
     @Async
-    public void sendCommand(AcceptJobApplicationCommand command){
+    public void sendCommand(AcceptJobApplicationCommand command) {
         CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
         commandExecutor.execute(command);
     }
 
     @Async
-    public void sendCommand(RemoveJobApplicationCommand command){
+    public void sendCommand(RemoveJobApplicationCommand command) {
         CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
         commandExecutor.execute(command);
     }
 
     @Async
-    public void sendCommand(DeleteJobCommand command){
+    public void sendCommand(DeleteJobCommand command) {
         CommandExecutor commandExecutor = commandExecutorFactory.produce(command);
         commandExecutor.execute(command);
     }

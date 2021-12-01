@@ -1,16 +1,16 @@
 package com.iucse.passnet.recruitment.domain.forms;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Getter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class GetJobListQuery {
-    @NonNull
-    List<String> jobIds;
+    private List<String> jobIds;
 }

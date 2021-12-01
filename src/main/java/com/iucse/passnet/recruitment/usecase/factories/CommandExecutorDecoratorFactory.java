@@ -7,30 +7,20 @@ import com.iucse.passnet.recruitment.usecase.decorators.EventPublisherDecorator;
 import com.iucse.passnet.recruitment.usecase.executors.CommandExecutor;
 import com.iucse.passnet.recruitment.usecase.services.CompensatingCommandBackupService;
 import com.iucse.passnet.recruitment.usecase.services.CompensatingCommandProvider;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Component
+@RequiredArgsConstructor
 public class CommandExecutorDecoratorFactory {
     private final CompensatingCommandBackupService compensatingBackupService;
     private final CompensatingCommandProvider compensatingCommandProvider;
     private final JobApplicationRepository jobApplicationRepository;
     private final HttpServletRequest request;
-
-    @Autowired
-    public CommandExecutorDecoratorFactory(
-       CompensatingCommandBackupService compensatingBackupService,
-       CompensatingCommandProvider compensatingCommandProvider,
-       JobApplicationRepository jobApplicationRepository,
-       HttpServletRequest request
-    ) {
-        this.compensatingBackupService = compensatingBackupService;
-        this.compensatingCommandProvider = compensatingCommandProvider;
-        this.jobApplicationRepository = jobApplicationRepository;
-        this.request = request;
-    }
+    private final ApplicationEventPublisher eventPublisher;
 
     public CommandExecutor produce(CommandExecutor commandExecutor, CommandExecutorDecoratorTypes decorator) {
         switch (decorator) {
@@ -59,6 +49,7 @@ public class CommandExecutorDecoratorFactory {
            .request(this.request)
            .commandExecutor(commandExecutor)
            .jobApplicationRepository(this.jobApplicationRepository)
+           .eventPublisher(this.eventPublisher)
            .build();
     }
 }

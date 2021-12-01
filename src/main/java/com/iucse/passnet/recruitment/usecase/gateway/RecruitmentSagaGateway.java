@@ -8,23 +8,17 @@ import com.iucse.passnet.recruitment.domain.events.PostNewJobEvent;
 import com.iucse.passnet.recruitment.domain.events.RemoveStudentApplicationEvent;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j(topic = "[CommandGateway]")
 public class RecruitmentSagaGateway {
+
     @GrpcClient("saga-recruitment")
     private EventProducerGrpc.EventProducerBlockingStub eventProducerBlockingStub;
 
-    @Autowired
-    public RecruitmentSagaGateway() {
-        EventBus.getDefault().register(this);
-    }
-
-    @Subscribe
+    @EventListener
     public void on(PostNewJobEvent postNewJobEvent) {
         log.info("post new job");
         ProduceEvents.SagaResponse response = eventProducerBlockingStub.producePostNewJobEvent(
@@ -39,7 +33,7 @@ public class RecruitmentSagaGateway {
         log.info(response.getMessage());
     }
 
-    @Subscribe
+    @EventListener
     public void on(AcceptStudentApplicationEvent acceptStudentApplicationEvent) {
         ProduceEvents.SagaResponse response = eventProducerBlockingStub.produceAcceptStudentApplicationEvent(
            ProduceEvents
@@ -53,7 +47,7 @@ public class RecruitmentSagaGateway {
         log.info(response.getMessage());
     }
 
-    @Subscribe
+    @EventListener
     public void on(RemoveStudentApplicationEvent removeStudentApplicationEvent) {
         var response = eventProducerBlockingStub.produceRemoveStudentApplicationEvent(
            ProduceEvents
@@ -67,7 +61,7 @@ public class RecruitmentSagaGateway {
         log.info(response.getMessage());
     }
 
-    @Subscribe
+    @EventListener
     public void on(DeleteJobEvent deleteJobEvent) {
         var response = eventProducerBlockingStub.produceDeleteJobEvent(
            ProduceEvents.DeleteJobEvent.newBuilder().setEventId(deleteJobEvent.getEventId()).setJobId(deleteJobEvent.getJobId()).build()

@@ -1,19 +1,18 @@
 package com.iucse.passnet.recruitment.domain.commands;
 
 import lombok.*;
-import lombok.experimental.FieldDefaults;
 
-@Getter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@EqualsAndHashCode(callSuper = true)
 public class PostJobCommand extends BaseCommand {
-    String courseName;
-    String jobName;
-    String jobOwnerId;
-    String requirement;
-    String semester;
-    String content;
-    String organizationId;
+    private String courseName;
+    private String jobName;
+    private String jobOwnerId;
+    private String requirement;
+    private String semester;
+    private String content;
+    private String organizationId;
 }

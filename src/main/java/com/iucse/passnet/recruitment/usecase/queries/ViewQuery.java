@@ -10,7 +10,6 @@ import com.iucse.passnet.recruitment.domain.views.*;
 import com.iucse.passnet.recruitment.usecase.mapper.JobApplicationMapper;
 import com.iucse.passnet.recruitment.usecase.mapper.JobMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

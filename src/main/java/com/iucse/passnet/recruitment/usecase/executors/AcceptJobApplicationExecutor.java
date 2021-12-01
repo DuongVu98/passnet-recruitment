@@ -12,18 +12,17 @@ import com.iucse.passnet.recruitment.domain.exceptions.JobApplicationNotFound;
 import com.iucse.passnet.recruitment.domain.exceptions.WrongCommandTypeException;
 import com.iucse.passnet.recruitment.domain.repositories.JobAggregateRepository;
 import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 
+
+@Builder
+@RequiredArgsConstructor
 @Slf4j(topic = "[AcceptJobApplicationCommandExecutor]")
 public class AcceptJobApplicationExecutor implements CommandExecutor, CompensatingHandler {
     private final JobAggregateRepository jobRepository;
-
-    @Builder
-    public AcceptJobApplicationExecutor(JobAggregateRepository jobRepository) {
-        this.jobRepository = jobRepository;
-    }
 
     @Override
     public Job execute(BaseCommand baseCommand) {
@@ -31,20 +30,20 @@ public class AcceptJobApplicationExecutor implements CommandExecutor, Compensati
             AcceptJobApplicationCommand command = (AcceptJobApplicationCommand) baseCommand;
             Job jobAggregate = this.jobRepository.findByIdWithJobApplications(new JobId(command.getJobId()));
 
-            Optional<JobApplication> optional = jobAggregate
+            jobAggregate
                .getJobApplications()
                .stream()
                .filter(jobApplication -> jobApplication.getId().equals(new JobApplicationId(command.getJobApplicationId())))
-               .findAny();
+               .findAny()
+               .ifPresentOrElse(
+                  jobAggregate::acceptJobApplication,
+                  () -> {
+                      throw new JobApplicationNotFound("application {} doesn't exit in job");
+                  }
+               );
 
-            if (optional.isPresent()) {
-                var jobApplication = optional.get();
-                jobAggregate.acceptJobApplication(jobApplication);
+            return this.jobRepository.save(jobAggregate);
 
-                return this.jobRepository.save(jobAggregate);
-            } else {
-                throw new JobApplicationNotFound("application {} doesn't exit in job");
-            }
         } else {
             throw new WrongCommandTypeException("command must be TeacherAcceptStudentJobApplicationCommand");
         }

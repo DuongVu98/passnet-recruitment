@@ -1,14 +1,12 @@
 package com.iucse.passnet.recruitment.domain.commands;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Getter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class ApplyJobCommand extends BaseCommand {
     private String studentId;
     private String jobId;

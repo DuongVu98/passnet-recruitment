@@ -9,25 +9,19 @@ import com.iucse.passnet.recruitment.domain.commands.RemoveJobApplicationCommand
 import com.iucse.passnet.recruitment.domain.events.AcceptStudentApplicationEvent;
 import com.iucse.passnet.recruitment.domain.events.RemoveStudentApplicationEvent;
 import com.iucse.passnet.recruitment.domain.repositories.JobApplicationRepository;
-import com.iucse.passnet.recruitment.usecase.executors.CommandExecutor;
-import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
-import org.greenrobot.eventbus.EventBus;
+import org.springframework.context.ApplicationEventPublisher;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+@SuperBuilder
 @Slf4j(topic = "EventPublisherDecorator")
 public class EventPublisherDecorator extends CommandExecutorDecorator {
     private final HttpServletRequest request;
     private final JobApplicationRepository jobApplicationRepository;
-
-    @Builder
-    public EventPublisherDecorator(CommandExecutor commandExecutor, HttpServletRequest request, JobApplicationRepository jobApplicationRepository) {
-        super(commandExecutor);
-        this.request = request;
-        this.jobApplicationRepository = jobApplicationRepository;
-    }
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     public Job execute(BaseCommand command) {
@@ -44,7 +38,7 @@ public class EventPublisherDecorator extends CommandExecutorDecorator {
                new JobApplicationId(command.getJobApplicationId())
             );
 
-            this.publish(
+            eventPublisher.publishEvent(
                AcceptStudentApplicationEvent
                   .builder()
                   .eventId(eventId)
@@ -58,7 +52,7 @@ public class EventPublisherDecorator extends CommandExecutorDecorator {
                new JobApplicationId(command.getJobApplicationId())
             );
 
-            this.publish(
+            eventPublisher.publishEvent(
                RemoveStudentApplicationEvent
                   .builder()
                   .eventId(eventId)
@@ -69,9 +63,5 @@ public class EventPublisherDecorator extends CommandExecutorDecorator {
         } else {
             log.warn("base command is in wrong type for publishing event");
         }
-    }
-
-    private void publish(Object event) {
-        EventBus.getDefault().post(event);
     }
 }
